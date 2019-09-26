@@ -1,0 +1,49 @@
+﻿
+<div class="container" ng-controller="FormController as vm">
+    <div class="breadcrumb text-info">
+        <h3 ng-if="!vm.id">Thêm sản phẩm</h3>
+        <h3 ng-if="vm.id">Sửa sản phẩm</h3>
+    </div>
+
+
+    <form class="form-horizontal" action="" method="post" id="frmAdd" name="frmAdd" novalidate>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tên sản phẩm:</label>
+            <div class="col-sm-4">
+                <input type="text" ng-model="vm.product.Name" name="name" id="name" class="form-control" placeholder="Tên sản phẩm" value="{{product.Name}}" required />
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-check text-success" ng-show="frmAdd.name.$dirty && frmAdd.name.$valid"></i>
+                <span ng-show="frmAdd.name.$touched && frmAdd.name.$invalid" class="text-danger">Tên không được để trống!!!.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Danh mục:</label>
+            <div class="col-sm-4">
+                <input type="text" ng-model="vm.product.Description" name="descriptiondescription" id="description" class="form-control" placeholder="Danh mục" value="{{product.Description}}" required />
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-check text-success" ng-show="frmAdd.descriptiondescription.$dirty && frmAdd.descriptiondescription.$valid"></i>
+                <span ng-show="frmAdd.descriptiondescription.$touched && frmAdd.descriptiondescription.$invalid" class="text-danger">Danh mục không được để trống!!!.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">Giá</label>
+            <div class="col-sm-4">
+                <input type="text" ng-model="vm.product.Price" name="price" id="price" class="form-control" placeholder="Giá" value="{{product.Price}}" required />
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-check text-success" ng-show="frmAdd.price.$dirty && frmAdd.price.$valid"></i>
+                <span ng-show="frmAdd.price.$touched && frmAdd.price.$invalid" class="text-danger">Giá không được để trống!!!.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
+                <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
+            </div>
+        </div>
+    </form>
+
+</div>

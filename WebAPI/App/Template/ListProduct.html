@@ -1,0 +1,35 @@
+﻿
+<style>
+    th {
+        text-align: center;
+    }
+    .mg-b-10{
+        margin-bottom:10px;
+    }
+</style>
+<div class="breadcrumb">
+    <h3 class="text-primary">Danh sách sản phẩm</h3>
+</div>
+<div ng-controller="ListProductController as vm">
+    <button class="btn btn-sm btn-primary mg-b-10" ng-click="vm.add()">Thêm</button>
+    <table class="table table-striped table-bordered text-center">
+        <tr>
+            <th>Id</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Giá</th>
+            <th>
+            </th>
+        </tr>
+        <tr ng-repeat="item in vm.products">
+            <td>{{item.Id}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Category}}</td>
+            <td>{{item.Price}}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" type="button" ng-click="vm.edit(item)">Sửa</button>
+                <button class="btn btn-danger btn-sm" type="button" ng-click="remove()">Xóa</button>
+            </td>
+        </tr>
+    </table>
+</div>
