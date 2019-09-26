@@ -11,7 +11,8 @@
         $http({
 
             method: "GET",
-            url: "api/Product/GetAllProduct"
+            //url: "api/Product/GetAllProduct"
+            url:"api/Products"
         }).then(function (result) {
             vm.products = result.data;
 
@@ -30,7 +31,8 @@
         debugger;
         $http({
             method: 'delete',
-            url: 'api/Product/RemoveProduct?id=' + item.Id,
+            //url: 'api/Product/RemoveProduct?id=' + item.Id,
+            url:"api/Products/"+item.Id
         }).then(function (response) {
 
             alert(response.data);

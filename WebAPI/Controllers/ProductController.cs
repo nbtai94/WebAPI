@@ -11,12 +11,11 @@ namespace WebAPI.Controllers
 {
     public class ProductController : ApiController
     {
-
         WebAPIContext db = new WebAPIContext();
 
         //Gett: api/Product/GetAllProduct
         [HttpGet]
-        public IEnumerable<ProductViewModel> GetAllEmployee()
+        public IEnumerable<ProductViewModel> GetAllProduct()
         {
 
 
@@ -30,6 +29,7 @@ namespace WebAPI.Controllers
             });
             return result.ToList();
         }
+
         //POST: api/Product/AddProduct
         [HttpPost]
         public HttpResponseMessage AddProduct(ProductViewModel model)
@@ -70,11 +70,42 @@ namespace WebAPI.Controllers
 
         public HttpResponseMessage RemoveProduct(int Id)
         {
-            var product = db.Products.Where(i => i.Id == Id).SingleOrDefault();
-            db.Products.Remove(product);
-            db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK, "Đã xóa thành công!");
+            Product product = db.Products.Where(i => i.Id == Id).SingleOrDefault();
+
+            if (product != null)
+            {
+                db.Products.Remove(product);
+                db.SaveChanges();
+                 return Request.CreateResponse(HttpStatusCode.OK, "Đã xóa thành công!");
+            }
+            else
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+           
         }
+
+        //////Get 1 product
+        //[HttpGet]
+        //public ProductViewModel GetProduct(int Id)
+        //{
+        //    var data = db.Products.Where(x => x.Id == Id).FirstOrDefault();
+        //    if (data != null)
+        //    {
+        //        ProductViewModel product = new ProductViewModel();
+        //        product.Id = data.Id;
+        //        product.Name = data.Name;
+        //        product.Category = data.Category;
+        //        product.Price = data.Price;
+        //        return product;
+        //    }
+        //    else
+        //    {
+        //        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+        //    }
+        //}
+
+
 
 
     }
