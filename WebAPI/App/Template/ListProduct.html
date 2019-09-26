@@ -25,10 +25,10 @@
             <td>{{item.Id}}</td>
             <td>{{item.Name}}</td>
             <td>{{item.Category}}</td>
-            <td>{{item.Price}}</td>
+            <td>{{item.Price|currency}}</td>
             <td>
                 <button class="btn btn-warning btn-sm" type="button" ng-click="vm.edit(item)">Sửa</button>
-                <button class="btn btn-danger btn-sm" type="button" ng-click="remove()">Xóa</button>
+                <button class="btn btn-danger btn-sm" type="button" ng-click="vm.remove(item)">Xóa</button>
             </td>
         </tr>
     </table>

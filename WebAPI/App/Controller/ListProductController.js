@@ -1,7 +1,8 @@
-﻿app.controller('ListProductController', function ($scope, $http,$state) {
+﻿app.controller('ListProductController', function ($scope, $http, $state) {
     var vm = this;
     vm.add = add;
     vm.edit = edit;
+    vm.remove = remove;
     vm.products = {};
     vm.getAllProduct = getAllProduct;
     getAllProduct();
@@ -9,8 +10,8 @@
         debugger;
         $http({
 
-            method: "get",
-            url:"api/Products"
+            method: "GET",
+            url: "api/Product/GetAllProduct"
         }).then(function (result) {
             vm.products = result.data;
 
@@ -22,8 +23,23 @@
     }
     function edit(item) {
         debugger;
-        $state.go("form", {id:item.Id});
+        $state.go("form", { id: item.Id });
     }
+
+    function remove(item) {
+        debugger;
+        $http({
+            method: 'delete',
+            url: 'api/Product/RemoveProduct?id=' + item.Id,
+        }).then(function (response) {
+
+            alert(response.data);
+            getAllProduct();
+        }, function (error) {
+        });
+    }
+
+
 
 
 });
