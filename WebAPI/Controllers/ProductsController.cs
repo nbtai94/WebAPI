@@ -10,19 +10,36 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAPI.Models;
+using WebAPI.ViewModels;
 
 namespace WebAPI.Controllers
 {
     public class ProductsController : ApiController
     {
-        private WebAPIContext db = new WebAPIContext();
+        private readonly WebAPIContext db = new WebAPIContext();
 
-        // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        //GET: api/Products
+        public IHttpActionResult GetProducts(int skip   , int take)
         {
-            return db.Products;
+            var total = db.Products.Count();
+            var result = db.Products.OrderBy(x=>x.Id)
+                .Skip(skip)
+                .Take(take)
+                .Select(s => new ProductViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    Category=s.Category
+                });
+            return Ok(new {
+                data = result,
+                total = total,
+                skip = skip,
+                take = take
+            });
         }
-
+            
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public async Task<IHttpActionResult> GetProduct(int id)
@@ -32,7 +49,6 @@ namespace WebAPI.Controllers
             {
                 return NotFound();
             }
-
             return Ok(product);
         }
 
@@ -98,7 +114,6 @@ namespace WebAPI.Controllers
 
             db.Products.Remove(product);
             await db.SaveChangesAsync();
-
             return Ok(product);
         }
 

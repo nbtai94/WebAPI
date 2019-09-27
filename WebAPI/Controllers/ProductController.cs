@@ -12,100 +12,30 @@ namespace WebAPI.Controllers
     public class ProductController : ApiController
     {
         WebAPIContext db = new WebAPIContext();
-
-        //Gett: api/Product/GetAllProduct
-        [HttpGet]
-        public IEnumerable<ProductViewModel> GetAllProduct()
+        //Get: api/Product/GetProducts
+        public IHttpActionResult GetProducts()
         {
-
-
-            var data = db.Products.ToList().OrderBy(x => x.Id);
-            var result = data.Select(x => new ProductViewModel()
+            var result = db.Products.ToList().Select(x => new ProductViewModel
             {
-                Id = x.Id,
                 Name = x.Name,
                 Category = x.Category,
-                Price = x.Price,
+                Price = x.Price
+
             });
-            return result.ToList();
+            return Ok(new { data = result });
         }
-
-        //POST: api/Product/AddProduct
-        [HttpPost]
-        public HttpResponseMessage AddProduct(ProductViewModel model)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Product product = new Product();
-                    product.Id = model.Id;
-                    product.Name = model.Name;
-                    product.Price = model.Price;
-                    product.Category = model.Category;
-                    db.Products.Add(product);
-                    var result = db.SaveChanges();
-                    if (result > 0)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.Created, "Thêm thành công!");
-                    }
-                    else
-                    {
-                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Đã xảy ra lỗi vui lòng thử lại !");
-                    }
-                }
-                else
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Đã xảy ra lỗi vui lòng thử lại !");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Đã xảy ra lỗi vui lòng thử lại !", ex);
-            }
-        }
-        //DELETE api/Product/RemoveProduct/5
-        [HttpDelete]
-
-        public HttpResponseMessage RemoveProduct(int Id)
-        {
-            Product product = db.Products.Where(i => i.Id == Id).SingleOrDefault();
-
-            if (product != null)
-            {
-                db.Products.Remove(product);
-                db.SaveChanges();
-                 return Request.CreateResponse(HttpStatusCode.OK, "Đã xóa thành công!");
-            }
-            else
-            {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-            }
-           
-        }
-
-        //////Get 1 product
-        //[HttpGet]
+        //GET: api/Product/GetProduct/Id
         //public ProductViewModel GetProduct(int Id)
         //{
-        //    var data = db.Products.Where(x => x.Id == Id).FirstOrDefault();
-        //    if (data != null)
+        //    var product = db.Products.Where(i => i.Id == Id).Select(x => new ProductViewModel
         //    {
-        //        ProductViewModel product = new ProductViewModel();
-        //        product.Id = data.Id;
-        //        product.Name = data.Name;
-        //        product.Category = data.Category;
-        //        product.Price = data.Price;
-        //        return product;
-        //    }
-        //    else
-        //    {
-        //        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
-        //    }
+        //        Name = x.Name,
+        //        Category = x.Category,
+        //        Price = x.Price,
+        //    }).SingleOrDefault();
+        //    return product;
+
         //}
-
-
 
 
     }
