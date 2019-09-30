@@ -8,6 +8,6 @@ namespace WebAPI.ViewModels
 {
     public class SearchViewModel
     {
-        public string q { get; set; }
+        public string k { get; set; }
     }
 }

@@ -15,10 +15,10 @@
             debugger;
             $http({
                 method: "Put",
-                url: "api/Products/" + vm.id,
+                url: "api/Products?id=" + vm.id,
                 data: JSON.stringify(vm.product)
             }).then(function (res) {
-                alert(res.data)
+                alert("Chỉnh sửa thành công!")
             })
         }
         else {
@@ -31,7 +31,7 @@
                 data: JSON.stringify(vm.product)
             }).then(function (response) {
                 debugger;
-                alert(response.data);
+                alert("Thêm thành công!");
                 vm.product = {};
             })
         }
@@ -40,7 +40,7 @@
         debugger;
         $http({
             method: "GET",
-            url: "api/Products/" + vm.id,
+            url: "api/Products?id=" + vm.id,
         }).then(function (res) {
             vm.product = res.data
         })

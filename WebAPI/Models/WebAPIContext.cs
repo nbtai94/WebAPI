@@ -20,5 +20,8 @@ namespace WebAPI.Models
         }
 
         public System.Data.Entity.DbSet<WebAPI.Models.Product> Products { get; set; }
+        DbSet<Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<WebAPI.Models.Customer> Customers { get; set; }
     }
 }

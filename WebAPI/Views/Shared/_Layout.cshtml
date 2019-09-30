@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,10 +21,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a ui-sref="home">Trang chủ</a>
+                        <a ui-sref="home" class="active">Trang chủ</a>
                     </li>
                     <li>
                         <a ui-sref="list">Sản phẩm</a>
+                    </li>
+                    <li>
+                        <a ui-sref="customer">Khách hàng</a>
+                    </li>
+                    <li>
+                        <a ui-sref="order">Đơn hàng</a>
                     </li>
                     <li>
                         <a ui-sref="contact">Liên hệ</a>
@@ -34,6 +40,9 @@
             </div>
         </div>
     </div>
+
+
+
     <div class="container body-content" ui-view>
         @RenderBody()
         <hr />
@@ -48,12 +57,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+
+    <link href="~/Content/toaster.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-animate.js"></script>
 
     <script src="~/Scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
-
     <script src="~/App/app.js"></script>
     <script src="~/App/Controller/ListProductController.js"></script>
     <script src="~/App/Controller/FormController.js"></script>
+    <script src="~/App/Controller/ListCustomer.js"></script>
+    <script src="~/App/Controller/CustomerFormController.js"></script>
+    <script src="~/App/Controller/OrderController.js"></script>
+
 
 
 

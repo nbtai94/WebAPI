@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Models
 {
@@ -10,5 +11,6 @@ namespace WebAPI.Models
         public string Name { get; set; }
         public string Category { get; set; }
         public decimal Price { get; set; }
+        public ICollection<Order>Orders { get; set; }
     }
 }

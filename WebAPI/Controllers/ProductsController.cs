@@ -19,10 +19,10 @@ namespace WebAPI.Controllers
         private readonly WebAPIContext db = new WebAPIContext();
 
         //GET: api/Products
-        public IHttpActionResult GetProducts(int skip   , int take)
+        public IHttpActionResult GetProducts(int skip, int take)
         {
             var total = db.Products.Count();
-            var result = db.Products.OrderBy(x=>x.Id)
+            var result = db.Products.OrderBy(x => x.Id)
                 .Skip(skip)
                 .Take(take)
                 .Select(s => new ProductViewModel
@@ -30,16 +30,37 @@ namespace WebAPI.Controllers
                     Id = s.Id,
                     Name = s.Name,
                     Price = s.Price,
-                    Category=s.Category
+                    Category = s.Category
                 });
-            return Ok(new {
+            return Ok(new
+            {
                 data = result,
                 total = total,
                 skip = skip,
                 take = take
             });
         }
+        //GET: api/Product/SearchProduct
+        [HttpGet]
+        public IHttpActionResult SearchProduct(/*SearchViewModel model*/ string k)
+        {
             
+            var result = db.Products.OrderBy(x => x.Id).Where(x =>  x.Name.Contains(k) || x.Category.Contains(k)||k==null)
+                .Select(s => new ProductViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    Category = s.Category
+                });
+            var total = result.Count();
+            return Ok(new
+            {
+                data = result,
+                total = total,
+            });
+        }
+
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public async Task<IHttpActionResult> GetProduct(int id)
@@ -104,9 +125,9 @@ namespace WebAPI.Controllers
 
         // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> DeleteProduct(int id)
+        public async Task<IHttpActionResult> DeleteProduct(int key)
         {
-            Product product = await db.Products.FindAsync(id);
+            Product product = await db.Products.FindAsync(key);
             if (product == null)
             {
                 return NotFound();

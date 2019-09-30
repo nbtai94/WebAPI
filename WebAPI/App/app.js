@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap']);
+﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap', 'toaster', 'ngAnimate']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -12,16 +12,32 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('list', {
             url: '/ListProduct',
-            templateUrl:'App/Template/ListProduct.html'      
+            templateUrl: 'App/Template/ListProduct.html'
         })
         .state('contact', {
             url: '/Contact',
             templateUrl: 'home/contact'
         })
+        .state('customer', {
+            url: '/ListCustomer',
+            templateUrl: 'App/Template/ListCustomer.html'
+        })
+
         .state('form', {
             url: '/Form?id',
             templateUrl: 'App/Template/ProductForm.html'
         })
-     
+        .state('cusForm', {
+            url: '/CusForm?id',
+            templateUrl: 'App/Template/CustomerForm.html'
+        })
+        .state('order', {
+            url: '/Order',
+            templateUrl:'App/Template/ListOrder.html'
+        })
+        
    
 })
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
