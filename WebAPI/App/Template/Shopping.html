@@ -1,0 +1,70 @@
+﻿
+
+
+<style>
+    .box {
+        padding: 10px;
+        transition: 1s ease-in;
+    }
+
+    .box-item:hover {
+        background-color: aqua;
+        transition: 1s ease-out;
+    }
+
+    .box img {
+        border-bottom: 1px solid;
+    }
+
+    .box-item {
+        border: 1px solid #808080;
+        padding: 5px;
+    }
+</style>
+<div class="container">
+
+
+    <div class="breadcrumb">
+        <h3 class="text-primary">Danh sách sản phẩm</h3>
+    </div>
+
+
+
+    <div ng-controller="ListProductController as vm">
+        <div class="row">
+            <form class="form-group form-inline search pull-right">
+                <div>                
+                    <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
+                    <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <h3 class="text-center text-primary">Sản phẩm nổi bật </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3 box" ng-repeat="item in vm.products">
+                <div class="box-item">
+                   
+                    <img ng-src="../../Content/Images/{{item.Id}}/product.jpg"  class="img-responsive"/>
+                    <h3 class="text-primary text-center">{{item.Name}}</h3>
+                    <h4 class="text-danger text-center">Giá: {{item.Price|currency}}</h4>
+                    <div class="text-center">
+                        <button class="btn btn-sm btn-primary">Mua</button>
+                        <button class="btn btn-sm btn-info">Xem chi tiết</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
+            </div>
+            <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">
+                <div class="breadcrumb small">Total record: {{vm.total}}</div>
+            </div>
+        </div>
+    </div>
+</div>

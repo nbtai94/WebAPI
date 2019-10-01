@@ -1,60 +1,63 @@
 ﻿
-<div class="container" ng-controller="CustomerFormController as vm">
-    <div class="breadcrumb text-info">
-        <h3 ng-if="!vm.id">Thêm khách hàng</h3>
-        <h3 ng-if="vm.id">Sửa thông tin khách hàng</h3>
+<div class="container">
+
+
+    <div ng-controller="CustomerFormController as vm">
+        <div class="breadcrumb text-info">
+            <h3 ng-if="!vm.id">Thêm khách hàng</h3>
+            <h3 ng-if="vm.id">Sửa thông tin khách hàng</h3>
+        </div>
+
+        <form class="form-horizontal" action="" method="post" id="frmAdd" name="frmAdd" novalidate>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Tên khách hàng:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="vm.customers.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng" value="{{customers.Name}}" required />
+                </div>
+                <div class="col-sm-6">
+                    <i class="fa fa-check text-success" ng-show="frmAdd.name.$dirty && frmAdd.name.$valid"></i>
+                    <span ng-show="frmAdd.name.$touched && frmAdd.name.$invalid" class="text-danger">Tên không được để trống!!!.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="vm.customers.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
+                </div>
+                <div class="col-sm-6">
+                    <i class="fa fa-check text-success" ng-show="frmAdd.email.$dirty && frmAdd.email.$valid"></i>
+                    <span ng-show="frmAdd.email.$touched && frmAdd.email.$invalid" class="text-danger">Email không được để trống!!!.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">Địa chỉ:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="vm.customers.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ" value="{{customers.Address}}" required />
+                </div>
+                <div class="col-sm-6">
+                    <i class="fa fa-check text-success" ng-show="frmAdd.address.$dirty && frmAdd.address.$valid"></i>
+                    <span ng-show="frmAdd.address.$touched && frmAdd.address.$invalid" class="text-danger">Địa chỉ không được để trống!!!.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="price" class="col-sm-2 control-label">Số điện thoại:</label>
+                <div class="col-sm-4">
+                    <input type="text" ng-model="vm.customers.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại" value="{{customers.Phone}}" required />
+                </div>
+                <div class="col-sm-6">
+                    <i class="fa fa-check text-success" ng-show="frmAdd.phone.$dirty && frmAdd.phone.$valid"></i>
+                    <span ng-show="frmAdd.phone.$touched && frmAdd.phone.$invalid" class="text-danger">Số điện thoại không được để trống!!!.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
+                    <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
+                </div>
+            </div>
+        </form>
+
     </div>
-
-
-    <form class="form-horizontal" action="" method="post" id="frmAdd" name="frmAdd" novalidate>
-        <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Tên khách hàng:</label>
-            <div class="col-sm-4">
-                <input type="text" ng-model="vm.customers.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng" value="{{customers.Name}}" required />
-            </div>
-            <div class="col-sm-6">
-                <i class="fa fa-check text-success" ng-show="frmAdd.name.$dirty && frmAdd.name.$valid"></i>
-                <span ng-show="frmAdd.name.$touched && frmAdd.name.$invalid" class="text-danger">Tên không được để trống!!!.</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Email:</label>
-            <div class="col-sm-4">
-                <input type="text" ng-model="vm.customers.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
-            </div>
-            <div class="col-sm-6">
-                <i class="fa fa-check text-success" ng-show="frmAdd.email.$dirty && frmAdd.email.$valid"></i>
-                <span ng-show="frmAdd.email.$touched && frmAdd.email.$invalid" class="text-danger">Email không được để trống!!!.</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="price" class="col-sm-2 control-label">Địa chỉ:</label>
-            <div class="col-sm-4">
-                <input type="text" ng-model="vm.customers.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ" value="{{customers.Address}}" required />
-            </div>
-            <div class="col-sm-6">
-                <i class="fa fa-check text-success" ng-show="frmAdd.address.$dirty && frmAdd.address.$valid"></i>
-                <span ng-show="frmAdd.address.$touched && frmAdd.address.$invalid" class="text-danger">Địa chỉ không được để trống!!!.</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="price" class="col-sm-2 control-label">Số điện thoại:</label>
-            <div class="col-sm-4">
-                <input type="text" ng-model="vm.customers.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại" value="{{customers.Phone}}" required />
-            </div>
-            <div class="col-sm-6">s
-                <i class="fa fa-check text-success" ng-show="frmAdd.phone.$dirty && frmAdd.phone.$valid"></i>
-                <span ng-show="frmAdd.phone.$touched && frmAdd.phone.$invalid" class="text-danger">Số điện thoại không được để trống!!!.</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
-                <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
-            </div>
-        </div>
-    </form>
-
 </div>

@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         //GET: api/Products
         public IHttpActionResult GetProducts(int skip, int take)
         {
-            var total = db.Products.Count();
+            int total = db.Products.Count();
             var result = db.Products.OrderBy(x => x.Id)
                 .Skip(skip)
                 .Take(take)
@@ -30,8 +30,9 @@ namespace WebAPI.Controllers
                     Id = s.Id,
                     Name = s.Name,
                     Price = s.Price,
-                    Category = s.Category
+                    Category = s.Category   
                 });
+          
             return Ok(new
             {
                 data = result,

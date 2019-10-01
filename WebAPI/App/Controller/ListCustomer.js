@@ -1,4 +1,4 @@
-﻿app.controller('ListCustomer', function ($scope, $http, $state, toaster) {
+﻿app.controller('ListCustomer', function ($scope, $http, $state) {
 
     var vm = this;
     vm.add = add;

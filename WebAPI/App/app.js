@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap', 'toaster', 'ngAnimate']);
+﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap','ngAnimate']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -35,6 +35,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/Order',
             templateUrl:'App/Template/ListOrder.html'
         })
+        .state('shopping', {
+            url: '/Order',
+            templateUrl: 'App/Template/Shopping.html'
+        })
+        .state('orderform', {
+            url: '/Order/Form',
+            templateUrl: 'App/Template/OrderForm.html'
+        })
+
         
    
 })

@@ -1,4 +1,4 @@
-﻿app.controller('ListProductController', function ($scope, $http, $state, toaster) {
+﻿app.controller('ListProductController', function ($scope, $http, $state) {
 
     var vm = this;
     vm.add = add;
@@ -7,7 +7,7 @@
     vm.search = search;
     vm.products = {};   
     vm.currentPage = 1;
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = 8;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
     vm.take = vm.itemsPerPage;
     vm.onChangePagination = onChangePagination;
@@ -33,9 +33,9 @@
         debugger;
         $http({
             method: "GET",
-            url: "api/Products/SearchProduct?key=" + vm.k
+            url: "api/Products/SearchProduct?k=" + vm.k
         }).then(function (result) {
-            vm.products = result.data;;
+            vm.products = result.data.data;
             vm.total = result.data.total;
         })
     } 
@@ -73,7 +73,6 @@
 
         })
     }
-
     function add() {
         $state.go("form", {});
     }
@@ -95,5 +94,10 @@
         }, function (error) {
         });
     }
+
+
+
+
+
 });
 
