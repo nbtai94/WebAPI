@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap','ngAnimate']);
+﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -12,7 +12,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('list', {
             url: '/ListProduct',
-            templateUrl: 'App/Template/ListProduct.html'
+            templateUrl: 'App/View/Product/ListProduct.html'
         })
         .state('contact', {
             url: '/Contact',
@@ -20,33 +20,33 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('customer', {
             url: '/ListCustomer',
-            templateUrl: 'App/Template/ListCustomer.html'
+            templateUrl: 'App/View/Customer/ListCustomer.html'
         })
 
         .state('form', {
             url: '/Form?id',
-            templateUrl: 'App/Template/ProductForm.html'
+            templateUrl: 'App/View/Product/ProductForm.html'
         })
         .state('cusForm', {
             url: '/CusForm?id',
-            templateUrl: 'App/Template/CustomerForm.html'
+            templateUrl: 'App/View/Customer/CustomerForm.html'
         })
         .state('order', {
             url: '/Order',
-            templateUrl:'App/Template/ListOrder.html'
+            templateUrl: 'App/View/Order/ListOrder.html'
         })
         .state('shopping', {
             url: '/Order',
-            templateUrl: 'App/Template/Shopping.html'
+            templateUrl: 'App/View/Shopping.html'
         })
         .state('orderform', {
             url: '/Order/Form',
-            templateUrl: 'App/Template/OrderForm.html'
+            templateUrl: 'App/View/Order/OrderForm.html'
         })
 
-        
-   
-})
+
+
+});
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);

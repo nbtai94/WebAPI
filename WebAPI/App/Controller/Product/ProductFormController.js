@@ -1,4 +1,4 @@
-﻿app.controller('FormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+﻿app.controller('ProductFormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
     var vm = this;
     vm.back = back;
     vm.save = save;

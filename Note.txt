@@ -1,0 +1,49 @@
+Mở file ngoài ~Views
+Thêm dòng <add key="webpages:Enabled" value="true" /> vào Webcon.fig
+
+Gọi $HTTP
+app.controller('MainCtrl', function ($scope, $http){
+   $http({
+      method: 'GET',
+      url: 'api/url-api'
+   }).then(function (response){
+
+   },function (error){
+
+   });
+}
+
+Gọi dịch vụ $HTTP với ID
+
+function remove(item) {
+        debugger;
+        $http({
+            method: 'delete',
+            url: 'api/Product/RemoveProduct?id=' + item.Id,
+        }).then(function (response) {
+
+            alert(response.data);
+            getAllProduct();
+        }, function (error) {
+        });
+}
+
+
+Sử dụng nhiều Action trong 1 API controller:
+thêm vào appstart/web.config
+
+    config.Routes.MapHttpRoute(
+               name: "MapByAction",
+               routeTemplate: "api/{controller}/{action}/{id}", defaults: new { id = RouteParameter.Optional});
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+
+
+
+
+Cách căn nội dung trong table vào giữa: Thêm: CSS
+.table > tbody > tr > td {
+     vertical-align: middle;
+}

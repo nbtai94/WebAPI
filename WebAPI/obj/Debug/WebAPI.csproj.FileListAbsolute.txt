@@ -176,3 +176,6 @@ C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F1.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F2.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F3.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F4.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F5.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F6.resources

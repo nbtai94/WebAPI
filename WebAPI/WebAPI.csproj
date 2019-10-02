@@ -188,6 +188,18 @@
     <Compile Include="Migrations\201910010853101_F3.Designer.cs">
       <DependentUpon>201910010853101_F3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910020333584_F4.cs" />
+    <Compile Include="Migrations\201910020333584_F4.Designer.cs">
+      <DependentUpon>201910020333584_F4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910020349128_F5.cs" />
+    <Compile Include="Migrations\201910020349128_F5.Designer.cs">
+      <DependentUpon>201910020349128_F5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910020415367_F6.cs" />
+    <Compile Include="Migrations\201910020415367_F6.Designer.cs">
+      <DependentUpon>201910020415367_F6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Order.cs" />
@@ -202,19 +214,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\Controller\CustomerFormController.js" />
-    <Content Include="App\Controller\FormController.js" />
-    <Content Include="App\Controller\ListCustomer.js" />
-    <Content Include="App\Controller\ListProductController.js" />
-    <Content Include="App\Controller\OrderController.js" />
-    <Content Include="App\Controller\OrderFormController.js" />
-    <Content Include="App\Template\CustomerForm.html" />
-    <Content Include="App\Template\ListCustomer.html" />
-    <Content Include="App\Template\ListOrder.html" />
-    <Content Include="App\Template\ListProduct.html" />
-    <Content Include="App\Template\OrderForm.html" />
-    <Content Include="App\Template\ProductForm.html" />
-    <Content Include="App\Template\Shopping.html" />
+    <Content Include="App\Controller\Customer\CustomerFormController.js" />
+    <Content Include="App\Controller\Product\ProductFormController.js" />
+    <Content Include="App\Controller\Customer\ListCustomer.js" />
+    <Content Include="App\Controller\Product\ListProductController.js" />
+    <Content Include="App\Controller\Order\OrderController.js" />
+    <Content Include="App\Controller\Order\OrderFormController.js" />
+    <Content Include="App\View\Customer\CustomerForm.html" />
+    <Content Include="App\View\Customer\ListCustomer.html" />
+    <Content Include="App\View\Order\ListOrder.html" />
+    <Content Include="App\View\Product\ListProduct.html" />
+    <Content Include="App\View\Order\OrderForm.html" />
+    <Content Include="App\View\Product\ProductForm.html" />
+    <Content Include="App\View\Shopping.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -230,6 +242,7 @@
     <Content Include="Content\Images\60\product.jpg" />
     <Content Include="Content\Images\63\product.jpg" />
     <Content Include="Content\Images\64\product.jpg" />
+    <Content Include="Content\Images\65\product.jpg" />
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toaster.min.css" />
     <Content Include="favicon.ico" />
@@ -341,6 +354,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910010853101_F3.resx">
       <DependentUpon>201910010853101_F3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910020333584_F4.resx">
+      <DependentUpon>201910020333584_F4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910020349128_F5.resx">
+      <DependentUpon>201910020349128_F5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910020415367_F6.resx">
+      <DependentUpon>201910020415367_F6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

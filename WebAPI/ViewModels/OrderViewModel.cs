@@ -18,6 +18,14 @@ namespace WebAPI.Models
         public DateTime DateCreated { get; set; }
         public string Note { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public List<ListItem> Items { get; set; }
         ///list detail
+    }
+    public class ListItem
+    {
+        public int ProductId { get; set; }
+        public decimal Price { get; set; }
+        public decimal TotalPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -41,6 +41,23 @@ namespace WebAPI.Controllers
                 take = take
             });
         }
+        [HttpGet]
+        public IHttpActionResult GetAllProducts()
+        {
+            var result = db.Products.OrderBy(x => x.Id)
+                .Select(s => new ProductViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Price = s.Price,
+                    Category = s.Category
+                });
+
+            return Ok(new
+            {
+                data = result,
+            });
+        }
         //GET: api/Product/SearchProduct
         [HttpGet]
         public IHttpActionResult SearchProduct(/*SearchViewModel model*/ string k)

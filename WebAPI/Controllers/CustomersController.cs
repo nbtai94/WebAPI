@@ -40,6 +40,25 @@ namespace WebAPI.Controllers
                 take = take
             });
         }
+
+        [HttpGet]
+        public IHttpActionResult GetAllCustomers()
+        {
+            var result = db.Customers.OrderBy(x => x.Id)
+               .Select(s => new CustomerViewModel
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Address = s.Address,
+                   Email = s.Address,
+                   Phone = s.Phone
+               });
+            return Ok(new
+            {
+                data = result,
+            });
+        }
+
         [HttpGet]
         public IHttpActionResult SearchCustomer(string key)
         {

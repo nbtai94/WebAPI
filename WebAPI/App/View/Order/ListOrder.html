@@ -29,6 +29,8 @@
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Tổng tiền</th>
+                <th>Ngày đặt hàng</th>
+                <th>Ngày tạo</th>
                 <th>
                 </th>
             </tr>
@@ -38,6 +40,8 @@
                 <td>{{item.Customer.Address}}</td>
                 <td>{{item.Customer.Phone}}</td>
                 <td>{{item.TotalMoney|currency}}</td>
+                <td>{{item.DateOrder}}</td>
+                <td>{{item.CreateDate}}</td>
                 <td>
                     <button class="btn btn-sm btn-info" type="button" ng-click="vm.info()">Xem</button>
                 </td>
