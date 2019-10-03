@@ -1,11 +1,10 @@
 ﻿app.controller('ListProductController', function ($scope, $http, $state) {
-
     var vm = this;
     vm.add = add;
     vm.edit = edit;
     vm.remove = remove;
     vm.search = search;
-    vm.products = {};   
+    vm.products = {};
     vm.currentPage = 1;
     vm.itemsPerPage = 8;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
@@ -13,9 +12,9 @@
     vm.onChangePagination = onChangePagination;
     vm.getAllProduct = getAllProduct;
     getAllProduct();
-    
+
     vm.changeItemPerPage = changeItemPerPage;
-    
+
     function getAllProduct() {
         debugger;
         $http({
@@ -28,7 +27,6 @@
         })
     }
 
-
     function search() {
         debugger;
         $http({
@@ -38,9 +36,7 @@
             vm.products = result.data.data;
             vm.total = result.data.total;
         })
-    } 
-
-
+    }
 
     function changeItemPerPage() {
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
@@ -52,13 +48,9 @@
             debugger;
             vm.products = result.data.data;
             vm.total = result.data.total;
-
         })
-
     }
 
-
-    
     function onChangePagination() {
         debugger;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
@@ -70,7 +62,6 @@
             debugger;
             vm.products = result.data.data;
             vm.total = result.data.total;
-
         })
     }
     function add() {
@@ -94,10 +85,4 @@
         }, function (error) {
         });
     }
-
-
-
-
-
 });
-

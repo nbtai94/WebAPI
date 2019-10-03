@@ -5,7 +5,6 @@
     vm.product = {};
     vm.id = $stateParams.id;
 
-
     function back() {
         history.back();
     }

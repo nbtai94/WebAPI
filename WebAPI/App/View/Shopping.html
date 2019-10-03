@@ -1,7 +1,4 @@
-﻿
-
-
-<style>
+﻿<style>
     .box {
         padding: 10px;
         transition: 1s ease-in;
@@ -23,17 +20,14 @@
 </style>
 <div class="container">
 
-
     <div class="breadcrumb">
         <h3 class="text-primary">Danh sách sản phẩm</h3>
     </div>
 
-
-
     <div ng-controller="ListProductController as vm">
         <div class="row">
             <form class="form-group form-inline search pull-right">
-                <div>                
+                <div>
                     <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
                     <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
                 </div>
@@ -46,8 +40,8 @@
         <div class="row">
             <div class="col-md-3 box" ng-repeat="item in vm.products">
                 <div class="box-item">
-                   
-                    <img ng-src="../../Content/Images/{{item.Id}}/product.jpg"  class="img-responsive"/>
+
+                    <img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" />
                     <h3 class="text-primary text-center">{{item.Name}}</h3>
                     <h4 class="text-danger text-center">Giá: {{item.Price|currency}}</h4>
                     <div class="text-center">
@@ -55,7 +49,6 @@
                         <button class="btn btn-sm btn-info">Xem chi tiết</button>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row">

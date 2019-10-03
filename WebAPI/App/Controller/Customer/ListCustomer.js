@@ -1,5 +1,4 @@
 ﻿app.controller('ListCustomer', function ($scope, $http, $state) {
-
     var vm = this;
     vm.add = add;
     vm.edit = edit;
@@ -28,7 +27,6 @@
         })
     }
 
-
     function search() {
         debugger;
         $http({
@@ -39,8 +37,6 @@
             vm.total = result.data.total;
         })
     }
-
-
 
     function changeItemPerPage() {
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
@@ -53,10 +49,7 @@
             vm.customers = result.data.data;
             vm.total = result.data.total;
         })
-       
     }
-
-
 
     function onChangePagination() {
         debugger;
@@ -69,7 +62,6 @@
             debugger;
             vm.customers = result.data.data;
             vm.total = result.data.total;
-
         })
     }
 
@@ -95,4 +87,3 @@
         });
     }
 });
-

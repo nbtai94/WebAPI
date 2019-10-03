@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using WebAPI.Models;
-using WebAPI.ViewModels;
 
 namespace WebAPI.Controllers
 {
@@ -27,15 +20,11 @@ namespace WebAPI.Controllers
                 .Select(s => new OrderViewModel
                 {
                     Id = s.Id,
-                    Customer = s.Customer,
                     CustomerId = s.CustomerId,
                     DateCreated = s.DateCreated,
                     DateOrder = s.DateOrder,
                     TotalMoney = s.TotalMoney,
-                    TotalQuantity = s.TotalQuantity,
                     Note = s.Note,
-                    OrderDetails = s.OrderDetails
-
                 });
             return Ok(new
             {
@@ -46,9 +35,34 @@ namespace WebAPI.Controllers
             });
         }
 
-        public IHttpActionResult AddOrder()
+        public IHttpActionResult AddOrder(OrderViewModel model)
         {
-            return Ok();
+            if (model != null)
+            {
+                Order order = new Order();
+                order.DateOrder = model.DateOrder;
+                order.DateCreated = DateTime.Now;
+                order.TotalMoney = model.TotalMoney;
+                order.CustomerId = model.CustomerId;
+               
+
+                foreach (var item in model.Items)
+                {
+                    OrderDetail ord = new OrderDetail();
+                    ord.ProductId = item.Id;
+                    ord.Price = item.Price;
+                    ord.Quantity = item.Quantity;
+                    order.Items.Add(ord);
+
+                }
+
+                db.Orders.Add(order);
+
+                db.SaveChanges();
+
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

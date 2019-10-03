@@ -1,17 +1,19 @@
-﻿
-<style>
+﻿<style>
     .form-group {
         margin-left: 10px;
     }
-    th{
-        text-align:center;
+
+    th {
+        text-align: center;
     }
-  .table > tbody > tr > td {
-     vertical-align: middle;
-}
-  .form-group{
-      margin:0;
-  }
+
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+
+    .form-group {
+        margin: 0;
+    }
 </style>
 
 <div class="breadcrumb">
@@ -19,25 +21,35 @@
 </div>
 <div class="container" ng-controller="OrderFormController as vm">
     <div class="row">
-        <div class="breadcrumb">
-            <button type="button" class="btn btn-sm btn-primary">Lưu</button>
-            <button type="button" class="btn btn-default btn-sm " ng-click="vm.back()">Bỏ qua</button>
-        </div>
-        <div class="form-group form-inline col-md-12">
-            <h3 class="text-primary">Khách hàng:</h3>
+        <form id="frmAdd" name="frmAdd" novalidate>         
+            <div class="breadcrumb">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="vm.save()" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
+                <button type="button" class="btn btn-default btn-sm " ng-click="vm.back()">Bỏ qua</button>
+            </div>
 
-            <div class="form-group">
-                <label>Khách hàng: </label>
-                <select class="form-control">
-                    <option value="" disabled selected hidden>Chọn khách hàng... </option>
-                    <option value="value" ng-repeat="item in vm.customers" class="text-warning">{{item.Name}} ({{item.Phone}})</option>
-                </select>
+            <div class="form-group form-inline col-md-12">
+                <h3 class="text-primary">Khách hàng:</h3>
+
+                <div class="form-group">
+                    <label>Khách hàng: </label>
+                    <select class="form-control" ng-model="vm.customerId" name="customer" id="customer" required>
+                        <option disabled selected hidden>Chọn khách hàng... </option>
+                        <option ng-selected="item" value="{{item.Id}}" ng-repeat="item in vm.customers" class="text-warning">{{item.Name}} ({{item.Phone}})</option>
+
+                    </select>
+                    <i class="fa fa-check text-success" ng-show="frmAdd.customer.$dirty && frmAdd.customer.$valid"></i>
+                    <span ng-show="frmAdd.customer.$touched && frmAdd.customer.$invalid" class="text-danger">Vui lòng chọn khách hàng!!!.</span>
+                </div>
+                <div class="form-group">
+                    <label>Ngày đặt hàng:</label>
+                    <input id="datepicker" name="datepicker" width="300" ng-model="vm.datepicker" required />
+                    <i class="fa fa-check text-success" ng-show="frmAdd.datepicker.$dirty && frmAdd.datepicker.$valid"></i>
+                    <span ng-show="frmAdd.datepicker.$touched && frmAdd.datepicker.$invalid" class="text-danger">Vui lòng chọn ngày đặt hàng!.</span>
+                </div>
+                {{datepicker}}
+
             </div>
-            <div class="form-group">
-                <label>Ngày đặt hàng:</label>
-                <input id="datepicker" width="300" />
-            </div>
-        </div>
+        </form>
     </div>
     <hr />
     <div class="row">
@@ -50,10 +62,9 @@
                 </tr>
                 <tr ng-repeat="item in vm.products" ng-click="vm.select(item)">
                     <td width="20%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
-                    <td >{{item.Name}}</td>
+                    <td>{{item.Name}}</td>
                     <td>{{item.Price|currency}}</td>
                 </tr>
-
             </table>
         </div>
         <div class="col-md-8">
@@ -71,24 +82,18 @@
                     <td>{{$index+1}}</td>
                     <td width="10%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
                     <td>{{item.Name}}</td>
-                    <td width="15%"><input type="number" name="quantity" ng-model="item.Quantity" value="" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>
-                    <td width="15%"><input type="text" name="price" ng-model="item.Price"  value="{{item.Price}}" class="form-control" ng-model-options="{updateOn:'blur'}"/></td>
-                    <td >{{(item.Quantity*item.Price|currency)}}</td>
+                    <td width="15%"><input type="number" min="1" name="quantity" ng-model="item.Quantity" value="" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>
+                    <td width="15%"><input type="text" name="price" ng-model="item.Price" value="{{item.Price}}" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>
+                    <td>{{(item.Quantity*item.Price|currency)}}</td>
                     <td><button type="button" class="btn btn-sm btn-danger" ng-click="vm.remove($index)">Xóa</button></td>
-                   
                 </tr>
                 <tr>
-                    <th colspan="3" >Tổng tiền</th>
-                    <td colspan="4" align="center">{{vm.totalMoney}}</td>
+                    <th colspan="3" class="info">Tổng tiền</th>
+                    <th colspan="4" align="center" class="danger">{{vm.getTotal()|currency}}</th>
                 </tr>
             </table>
-
-
-
         </div>
-
     </div>
-
 </div>
 
 <script>

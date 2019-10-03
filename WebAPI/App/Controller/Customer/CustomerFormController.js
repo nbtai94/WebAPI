@@ -5,7 +5,6 @@
     vm.customers = {};
     vm.id = $stateParams.id;
 
-
     function back() {
         history.back();
     }

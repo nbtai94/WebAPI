@@ -14,25 +14,21 @@
             method: "GET",
             url: "api/Customers/GetAllCustomers"
         }).then(function (result) {
-            debugger;
             vm.customers = result.data.data;
         })
     }
     function getAllProduct() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Products/GetAllProducts"
         }).then(function (result) {
-            debugger;
             vm.products = result.data.data;
             vm.total = result.data.total;
         })
     }
-    
+
     vm.select = select;
     function select(item) {
-        debugger;
         var data = {
             Id: item.Id,
             Name: item.Name,
@@ -49,31 +45,47 @@
         }
         else {
             isExist.Quantity++;
-            ++isExist.Quantity;
-        } 
+            //++isExist.Quantity;
+        }
     }
-
-
- 
-    
+    vm.getTotal = getTotal;
+    function getTotal() {
+        var sum = 0;
+        for (var i = 0; i < vm.listItems.length; i++) {
+            sum += vm.listItems[i].Price * vm.listItems[i].Quantity;
+        }
+        return sum;
+    }
 
     vm.back = back;
     function back() {
-        debugger;
         history.back();
     }
     vm.remove = remove;
     function remove(index) {
-        debugger;
         vm.listItems.splice(index, 1);
-
     }
-
-
-
-
-
-
-
-
+    vm.customer;
+    vm.datepicker;
+    vm.save = save;
+ 
+    function save() {
+        debugger;
+        vm.totalMoney = getTotal();
+        vm.data = {
+            CustomerId: vm.customerId,
+            TotalMoney: vm.totalMoney,
+            DateOrder: vm.datepicker,
+            DateCreate: vm.datecreate,         
+            Items: vm.listItems,
+        }
+        $http({
+            method: "POST",
+            url: "api/Orders/AddOrder",
+            datatype: "Json",
+            data: JSON.stringify(vm.data)
+        }).then(function (res) {
+            alert("Đã thêm thành công");
+        });
+    }
 });

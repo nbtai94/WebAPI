@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAPI.Models;
-using WebAPI.ViewModels;
 
 namespace WebAPI.Controllers
 {
@@ -30,9 +26,9 @@ namespace WebAPI.Controllers
                     Id = s.Id,
                     Name = s.Name,
                     Price = s.Price,
-                    Category = s.Category   
+                    Category = s.Category
                 });
-          
+
             return Ok(new
             {
                 data = result,
@@ -41,6 +37,7 @@ namespace WebAPI.Controllers
                 take = take
             });
         }
+
         [HttpGet]
         public IHttpActionResult GetAllProducts()
         {
@@ -58,12 +55,12 @@ namespace WebAPI.Controllers
                 data = result,
             });
         }
+
         //GET: api/Product/SearchProduct
         [HttpGet]
         public IHttpActionResult SearchProduct(/*SearchViewModel model*/ string k)
         {
-            
-            var result = db.Products.OrderBy(x => x.Id).Where(x =>  x.Name.Contains(k) || x.Category.Contains(k)||k==null)
+            var result = db.Products.OrderBy(x => x.Id).Where(x => x.Name.Contains(k) || x.Category.Contains(k) || k == null)
                 .Select(s => new ProductViewModel
                 {
                     Id = s.Id,

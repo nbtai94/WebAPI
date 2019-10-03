@@ -1,4 +1,4 @@
-﻿app.controller("OrderController", function ($scope, $stateParams,$state, $http) {
+﻿app.controller("OrderController", function ($scope, $stateParams, $state, $http) {
     var vm = this;
     vm.orders = {};
     vm.add = add;
@@ -22,7 +22,7 @@
             vm.total = result.data.total;
         })
     }
-  
+
     function add() {
         $state.go("orderform", {});
     }

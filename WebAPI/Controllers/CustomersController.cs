@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -62,7 +55,6 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult SearchCustomer(string key)
         {
-
             var result = db.Customers.OrderBy(x => x.Id).Where(x => x.Name.Contains(key) || x.Address.Contains(key) || x.Email.Contains(key) || key == null)
                 .Select(s => new CustomerViewModel
                 {
@@ -94,7 +86,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         [HttpGet]
@@ -106,7 +97,7 @@ namespace WebAPI.Controllers
 
         //PUT api/Customers/Edit
         [HttpPut]
-        public IHttpActionResult EditCustomer(int Id,Customer customer)
+        public IHttpActionResult EditCustomer(int Id, Customer customer)
         {
             var cus = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
             cus.Name = customer.Name;
@@ -116,13 +107,10 @@ namespace WebAPI.Controllers
             db.SaveChanges();
             return Ok();
         }
-     
-
-
 
         // DELETE: api/Customers/5
-      [HttpDelete]
-      public IHttpActionResult RemoveCustomer(int Id)
+        [HttpDelete]
+        public IHttpActionResult RemoveCustomer(int Id)
         {
             Customer cus = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
             if (cus != null)

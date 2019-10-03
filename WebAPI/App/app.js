@@ -1,7 +1,6 @@
 ﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
-
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -43,9 +42,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/Order/Form',
             templateUrl: 'App/View/Order/OrderForm.html'
         })
-
-
-
 });
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);

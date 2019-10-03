@@ -112,7 +112,7 @@
                     }
 
                     $rootScope.$emit('toaster-newToast', toasterId, this.toast.toastId);
-                    
+
                     return {
                         toasterId: toasterId,
                         toastId: this.toast.toastId
@@ -239,7 +239,6 @@
                                 ' e.g. directive-name not directiveName.');
                         }
 
-
                         var directiveDetails = directive[0];
 
                         if (directiveDetails.scope !== true && directiveDetails.scope) {
@@ -330,11 +329,10 @@
                                             break;
                                         }
                                     }
-                                    
+
                                     if (dupFound) return;
                                 }
                             }
-
 
                             // set the showCloseButton property on the toast so that
                             // each template can bind directly to the property to show/hide
@@ -344,7 +342,6 @@
                             // if toast.showCloseButton is a boolean value,
                             // it was specifically overriden in the pop arguments
                             if (typeof toast.showCloseButton === "boolean") {
-
                             } else if (typeof closeButton === "boolean") {
                                 toast.showCloseButton = closeButton;
                             } else if (typeof closeButton === "object") {
@@ -489,8 +486,8 @@
                             $scope.click = function(event, toast, isCloseButton) {
                                 event.stopPropagation();
 
-                                var tapToDismiss = typeof toast.tapToDismiss === "boolean" 
-                                                        ? toast.tapToDismiss 
+                                var tapToDismiss = typeof toast.tapToDismiss === "boolean"
+                                                        ? toast.tapToDismiss
                                                         : $scope.config.tap;
                                 if (tapToDismiss === true || (toast.showCloseButton === true && isCloseButton === true)) {
                                     var removeToast = true;
