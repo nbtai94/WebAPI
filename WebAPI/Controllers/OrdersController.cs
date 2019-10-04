@@ -116,7 +116,7 @@ namespace WebAPI.Controllers
             foreach (var item in order.Items)
             {
                 OrderDetailViewModel ord = new OrderDetailViewModel();
-                ord.ProductId = item.Id;
+                ord.ProductId = item.Product.Id;
                 ord.Price = item.Price;
                 ord.Quantity = item.Quantity;
                 ord.ProductName = item.Product.Name;

@@ -226,6 +226,7 @@
     <Content Include="Content\Images\63\product.jpg" />
     <Content Include="Content\Images\64\product.jpg" />
     <Content Include="Content\Images\65\product.jpg" />
+    <Content Include="Content\Images\66\product.jpg" />
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toaster.min.css" />
     <Content Include="favicon.ico" />
