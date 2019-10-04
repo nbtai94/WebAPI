@@ -31,16 +31,20 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'App/View/Customer/CustomerForm.html'
         })
         .state('order', {
-            url: '/Order',
+            url: '/ListOrder',
             templateUrl: 'App/View/Order/ListOrder.html'
         })
         .state('shopping', {
-            url: '/Order',
+            url: '/Shopping',
             templateUrl: 'App/View/Shopping.html'
         })
         .state('orderform', {
-            url: '/Order/Form',
+            url: '/CreateOrder',
             templateUrl: 'App/View/Order/OrderForm.html'
+        })
+        .state('orderdetail', {
+            url: '/OrderInfo?id',
+            templateUrl: 'App/View/Order/OrderDetail.html'
         })
 });
 app.config(['$qProvider', function ($qProvider) {

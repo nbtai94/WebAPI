@@ -12,7 +12,7 @@
         <h3 class="text-primary">Danh sách đơn hàng</h3>
     </div>
 
-    <div ng-controller="OrderController as vm">
+    <div ng-controller="ListOrderController as vm">
         <form class="form-group form-inline search pull-right">
             <div>
                 <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
@@ -34,18 +34,18 @@
             </tr>
             <tr ng-repeat="item in vm.orders" class="warning">
                 <td>{{item.Id}}</td>
-                <td>{{item.Customer.Name}}</td>
-                <td>{{item.Customer.Address}}</td>
-                <td>{{item.Customer.Phone}}</td>
+                <td>{{item.CustomerName}}</td>
+                <td>{{item.CustomerAddress}}</td>
+                <td>{{item.CustomerPhone}}</td>
                 <td>{{item.TotalMoney|currency}}</td>
-                <td>{{item.DateOrder}}</td>
-                <td>{{item.CreateDate}}</td>
+                <td>{{item.DateOrder|date:"dd/MM/yyyy"}}</td>
+                <td>{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
                 <td>
-                    <button class="btn btn-sm btn-info" type="button" ng-click="vm.info()">Xem</button>
+                    <button class="btn btn-sm btn-info" type="button" ng-click="vm.info(item)">Xem</button>
                 </td>
             </tr>
             <tr ng-if="!vm.orders||(vm.orders).length==0">
-                <td colspan="6" class="text-center text-danger">
+                <td colspan="8" class="text-center text-danger">
                     Không có dữ liệu!
                 </td>
             </tr>

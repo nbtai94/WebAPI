@@ -11,6 +11,9 @@ namespace WebAPI.Models
         public int Id { get; set; }
 
         public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerPhone { get; set; }
         public decimal TotalMoney { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime DateCreated { get; set; }

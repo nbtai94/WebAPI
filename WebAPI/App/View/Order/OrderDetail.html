@@ -1,0 +1,73 @@
+﻿<style>
+    .customer {
+        padding: 20px;
+        -webkit-box-shadow: 5px 5px 15px -10px #000000;
+        box-shadow: 5px 5px 15px -10px #000000;
+    }
+
+    .fa-user-circle {
+        font-size: 100px;
+        color: #d4d4d4;
+    }
+
+    .fa-boxes {
+        font-size: 100px;
+        color: #d4d4d4;
+    }
+
+    .product {
+        padding: 20px;
+        -webkit-box-shadow: 5px 5px 15px -10px #000000;
+        box-shadow: 5px 5px 15px -10px #000000;
+    }
+</style>
+<div class="breadcrumb">
+    <h3 class="text-info text-center">Thông tin đơn hàng</h3>
+</div>
+<div ng-controller="OrderDetailController as vm">
+
+    <div class="row">
+        <div  class="col-md-4 customer">
+            <div class="text-center">
+                <i class="far fa-user-circle"></i>
+            </div>
+            <hr />
+            <div style="margin-left:20px;">
+                <h4 class="text-warning">Tên khách hàng: <span class="text-primary">{{vm.order.CustomerName}}</span></h4>
+                <h4 class="text-warning">Số điện thoại: <span class="text-primary">{{vm.order.CustomerPhone}}</span></h4>
+                <h4 class="text-warning">Địa chỉ: <span class="text-primary">{{vm.order.CustomerAddress}}</span></h4>
+                <h4 class="text-warning">Ngày đặt hàng: <span class="text-primary">{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</span></h4>
+            </div>
+        </div>
+        <div class="col-md-8 product">
+            <div class="text-center">
+            </div>
+            <table class="table table-hover table-striped">
+                <tr class="warning">
+                    <th>STT</th>
+                    <th>Ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr ng-repeat="item in vm.order.Items">
+                    <td>{{$index}}</td>
+                    <td>{{item.ProductId}}</td>
+                    <td>{{item.ProductName}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.Price|currency}}</td>
+                    <td>{{item.Price*item.Quantity|currency}}</td>
+                </tr>
+            </table>
+            <hr />
+            <div class="pull-right">
+                <h3 class="text-primary">
+                    Tổng tiền : <span class="text-danger">{{vm.order.TotalMoney|currency}}
+                    </span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+</div>
