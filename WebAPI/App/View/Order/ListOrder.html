@@ -33,7 +33,7 @@
                 <th>
                 </th>
             </tr>
-            <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse" class="warning">
+            <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse"  class="warning">
                 <td>{{item.Id}}</td>
                 <td>{{item.CustomerName}}</td>
                 <td>{{item.CustomerAddress}}</td>
@@ -43,6 +43,8 @@
                 <td>{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
                 <td>
                     <button class="btn btn-sm btn-info" type="button" ng-click="vm.info(item)">Xem</button>
+                    <button class="btn btn-sm btn-warning" type="button" ng-click="vm.edit(item)">Sửa</button>
+                    <button class="btn btn-sm btn-danger" type="button" ng-click="vm.remove(item)">Xóa</button>
                 </td>
             </tr>
             <tr ng-if="!vm.orders||(vm.orders).length==0">
@@ -51,9 +53,7 @@
                 </td>
             </tr>
         </table>
-
         <div class="row">
-
             <div class="col-md-6">
                 <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
             </div>

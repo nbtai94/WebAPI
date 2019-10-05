@@ -43,6 +43,21 @@
             vm.total = result.data.total;
         })
     }
+    //Phan trang
+    vm.onChangePagination = onChangePagination;
+    function onChangePagination() {
+        debugger;
+        vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
+        vm.take = vm.itemsPerPage;
+        $http({
+            method: "GET",
+            url: "api/Orders/GetOrders?skip=" + vm.skip + "&take=" + vm.take
+        }).then(function (result) {
+            debugger;
+            vm.orders = result.data.data;
+            vm.total = result.data.total;
+        })
+    }
     //Sap xep
     vm.sortBy = sortBy;
     vm.sortColumn = 'Id';
@@ -75,5 +90,17 @@
         }
         vm.reverse = !reverse;
     }
+    //Redirect
+    vm.remove = remove;
+    function remove(item) {
+        debugger;
+        $http({
+            method: "DELETE",
+            url: "api/Orders/RemoveOrder?id=" + item.Id,
 
+        }).then(function (res) {
+            alert("Đã xóa thành công!");
+            getAllOrder();
+        });
+    }
 });

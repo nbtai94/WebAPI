@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -22,7 +24,7 @@ namespace WebAPI.Controllers
                     Id = s.Id,
                     Name = s.Name,
                     Address = s.Address,
-                    Email = s.Address,
+                    Email = s.Email,
                     Phone = s.Phone
                 });
             return Ok(new
@@ -43,7 +45,7 @@ namespace WebAPI.Controllers
                    Id = s.Id,
                    Name = s.Name,
                    Address = s.Address,
-                   Email = s.Address,
+                   Email = s.Email,
                    Phone = s.Phone
                });
             return Ok(new
@@ -92,7 +94,15 @@ namespace WebAPI.Controllers
         public IHttpActionResult GetCustomer(int Id)
         {
             var result = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
-            return Ok(result);
+            var res = new CustomerViewModel {
+                Id = result.Id,
+                Name=result.Name,
+                Address=result.Address,
+                Email=result.Email,
+                Phone=result.Phone
+                
+            };
+            return Ok(res);
         }
 
         //PUT api/Customers/Edit
@@ -113,11 +123,21 @@ namespace WebAPI.Controllers
         public IHttpActionResult RemoveCustomer(int Id)
         {
             Customer cus = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
+
             if (cus != null)
             {
+                try
+                {   
                 db.Customers.Remove(cus);
                 db.SaveChanges();
-                return Ok();
+                    return Ok();
+                }
+                catch(Exception)
+                {
+                    return NotFound();
+                }
+                
+                
             }
             else
             {

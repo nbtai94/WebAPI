@@ -80,7 +80,7 @@
     vm.sortBy = sortBy;
     vm.sortColumn = 'Id';
     vm.reverse = false;
-    function sortBy(col, reverse) {
+    function sortBy(col, reverse,show) {
         debugger;
         switch (col) {
             case "Id": {
@@ -95,7 +95,6 @@
             case "Price": {
                 vm.sortColumn = 'Price'; break;
             }
-
         }
         vm.reverse = !reverse;
     }

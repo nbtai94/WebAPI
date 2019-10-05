@@ -76,16 +76,18 @@ namespace WebAPI.Controllers
             });
         }
 
-        // GET: api/Products/5
-        [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> GetProduct(int id)
+    [HttpGet]
+        public IHttpActionResult GetProduct(int id)
         {
-            Product product = await db.Products.FindAsync(id);
-            if (product == null)
+            var result = db.Products.Where(i => i.Id == id).SingleOrDefault();
+            var res = new ProductViewModel
             {
-                return NotFound();
-            }
-            return Ok(product);
+                Id = result.Id,
+                Category = result.Category,
+                Name = result.Name,
+                Price = result.Price
+            };
+            return Ok(res);
         }
 
         // PUT: api/Products/5

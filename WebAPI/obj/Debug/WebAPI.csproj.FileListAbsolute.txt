@@ -173,4 +173,3 @@ C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.pdb
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.GenerateResource.cache
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F1.resources
-C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F2.resources

@@ -47,3 +47,15 @@ Cách căn nội dung trong table vào giữa: Thêm: CSS
 .table > tbody > tr > td {
      vertical-align: middle;
 }
+
+
+Xử lý ngoại lệ bằng IQ vô cực C#
+
+try
+{
+    // Try something wrong here 
+}
+catch (System.Exception ex)
+{
+    System.Diagnostics.Process.Start("http://stackoverflow.com/search?q=[c%23]+" + ex.Message);
+}

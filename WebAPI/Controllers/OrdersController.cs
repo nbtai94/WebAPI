@@ -127,5 +127,21 @@ namespace WebAPI.Controllers
 
 
         }
+
+
+
+        [HttpDelete]
+        public IHttpActionResult RemoveOrder(int Id)
+        {
+            var result = db.Orders.Where(i => i.Id == Id).SingleOrDefault();
+            if (result != null)
+            {
+                db.Orders.Remove(result);
+                db.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
     }
+
 }
