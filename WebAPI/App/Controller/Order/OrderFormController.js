@@ -86,6 +86,7 @@
             data: JSON.stringify(vm.data)
         }).then(function (res) {
             alert("Đã thêm thành công");
+            vm.listItems = {};
         });
     }
 });

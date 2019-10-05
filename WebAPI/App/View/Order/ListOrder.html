@@ -23,17 +23,17 @@
         <button class="btn btn-sm btn-success" type="button" ng-click="vm.add()">Tạo đơn hàng</button>
         <table class="table table-striped table-bordered text-center">
             <tr class="success">
-                <th>Id</th>
-                <th>Tên khách hàng</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-                <th>Tổng tiền</th>
-                <th>Ngày đặt hàng</th>
-                <th>Ngày tạo</th>
+                <th ng-click="vm.sortBy('Id',vm.reverse)">Id <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('CustomerName',vm.reverse)">Tên khách hàng <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('CustomerAddress',vm.reverse)">Địa chỉ <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('CustomerPhone',vm.reverse)">Số điện thoại <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('TotalMoney',vm.reverse)">Tổng tiền <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('DateOrder',vm.reverse)">Ngày đặt hàng <i class="fas fa-sort"></i></th>
+                <th ng-click="vm.sortBy('DateCreated',vm.reverse)">Ngày tạo <i class="fas fa-sort"></i></th>
                 <th>
                 </th>
             </tr>
-            <tr ng-repeat="item in vm.orders" class="warning">
+            <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse" class="warning">
                 <td>{{item.Id}}</td>
                 <td>{{item.CustomerName}}</td>
                 <td>{{item.CustomerAddress}}</td>

@@ -48,7 +48,7 @@
                     <label>Ngày đặt hàng:</label>
                     <input id="datepicker" name="datepicker" width="300" ng-model="vm.datepicker" required />
                     <i class="fa fa-check text-success" ng-show="frmAdd.datepicker.$dirty && frmAdd.datepicker.$valid"></i>
-                    <span ng-show="frmAdd.datepicker.$touched && frmAdd.datepicker.$invalid" class="text-danger">Vui lòng chọn ngày đặt hàng!.</span>
+                    <span ng-show=" frmAdd.datepicker.$invalid &&frmAdd.customer.$touched" class="text-danger">Vui lòng chọn ngày đặt hàng!.</span>
                 </div>
                 {{datepicker}}
 
