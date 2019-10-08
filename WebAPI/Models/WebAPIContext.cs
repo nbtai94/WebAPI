@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace WebAPI.Models
 {
@@ -15,10 +16,33 @@ namespace WebAPI.Models
         {
         }
 
-        public System.Data.Entity.DbSet<WebAPI.Models.Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<WebAPI.Models.Customer> Customers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        public System.Data.Entity.DbSet<WebAPI.Models.Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+          
+            //modelBuilder.Entity<Order>()
+            //        .HasRequired(c=>c.Customer)
+            //        .WithMany()
+            //        .WillCascadeOnDelete(false);
+
+            //base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<OrderDetail>()
+            //       .HasRequired(c => c.Order)
+            //       .WithMany()
+            //       .WillCascadeOnDelete(true);
+
+            //base.OnModelCreating(modelBuilder);
+        }
+
+
+
     }
 }

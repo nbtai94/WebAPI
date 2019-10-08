@@ -18,9 +18,9 @@ namespace WebAPI.Models
         public DateTime DateOrder { get; set; }
         public DateTime DateCreated { get; set; }
         public string Note { get; set; }
+
+        //public CustomerViewModel Customer { get; set; }
         public List<OrderDetailViewModel> Items { get; set; } 
         ///list detail
     }
-
-
 }

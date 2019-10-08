@@ -6,60 +6,66 @@
     .mg-b-10 {
         margin-bottom: 10px;
     }
-  
+  .container{
+      padding-right:15px;
+     
+}
+  body{
+       overflow-x: hidden;
+        overflow-y: scroll;
+  }
 </style>
-<div class="container">
-    <div class="breadcrumb">
-        <h3 class="text-primary">Danh sách đơn hàng</h3>
-    </div>
+   
 
-    <div ng-controller="ListOrderController as vm">
-        <form class="form-group form-inline search pull-right">
-            <div>
-                <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
-                <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
-            </div>
-        </form>
-        <button class="btn btn-sm btn-success" type="button" ng-click="vm.add()">Tạo đơn hàng</button>
-        <table class="table table-striped table-bordered text-center">
-            <tr class="success">
-                <th ng-click="vm.sortBy('Id',vm.reverse)">Id <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('CustomerName',vm.reverse)">Tên khách hàng <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('CustomerAddress',vm.reverse)">Địa chỉ <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('CustomerPhone',vm.reverse)">Số điện thoại <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('TotalMoney',vm.reverse)">Tổng tiền <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('DateOrder',vm.reverse)">Ngày đặt hàng <i class="fas fa-sort"></i></th>
-                <th ng-click="vm.sortBy('DateCreated',vm.reverse)">Ngày tạo <i class="fas fa-sort"></i></th>
-                <th>
-                </th>
-            </tr>
-            <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse"  class="warning">
-                <td>{{item.Id}}</td>
-                <td>{{item.CustomerName}}</td>
-                <td>{{item.CustomerAddress}}</td>
-                <td>{{item.CustomerPhone}}</td>
-                <td>{{item.TotalMoney|currency}}</td>
-                <td>{{item.DateOrder|date:"dd/MM/yyyy"}}</td>
-                <td>{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
-                <td>
-                    <button class="btn btn-sm btn-info" type="button" ng-click="vm.info(item)">Xem</button>
-                    <button class="btn btn-sm btn-warning" type="button" ng-click="vm.edit(item)">Sửa</button>
-                    <button class="btn btn-sm btn-danger" type="button" ng-click="vm.remove(item)">Xóa</button>
-                </td>
-            </tr>
-            <tr ng-if="!vm.orders||(vm.orders).length==0">
-                <td colspan="8" class="text-center text-danger">
-                    Không có dữ liệu!
-                </td>
-            </tr>
-        </table>
-        <div class="row">
-            <div class="col-md-6">
-                <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
-            </div>
-            <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">
-                <div class="breadcrumb small">Total record: {{vm.total}}</div>
-            </div>
+<div ng-controller="ListOrderController as vm" class="container">
+    <div class="breadcrumb">
+        <h3 class="text-primary text-success text-center">Danh sách đơn hàng</h3>
+    </div>
+    <form class="form-group form-inline search pull-right">
+        <div>
+            <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
+            <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
+        </div>
+    </form>
+    <button class="btn btn-sm btn-success" type="button" ng-click="vm.add()">Tạo đơn hàng</button>
+    <table class="table table-striped table-bordered text-center">
+        <tr class="success">
+            <th ng-click="vm.sortBy('Id',vm.reverse)">Id <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('CustomerName',vm.reverse)">Tên khách hàng <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('CustomerAddress',vm.reverse)">Địa chỉ <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('CustomerPhone',vm.reverse)">Số điện thoại <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('TotalMoney',vm.reverse)">Tổng tiền <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('DateOrder',vm.reverse)">Ngày đặt hàng <i class="fas fa-sort"></i></th>
+            <th ng-click="vm.sortBy('DateCreated',vm.reverse)">Ngày tạo<i class="fas fa-sort"></i></th>
+            <th>
+            </th>
+        </tr>
+        <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse" class="warning">
+            <td>{{item.Id}}</td>
+            <td>{{item.CustomerName}}</td>
+            <td>{{item.CustomerAddress}}</td>
+            <td>{{item.CustomerPhone}}</td>
+            <td>{{item.TotalMoney|currency}}</td>
+            <td>{{item.DateOrder|date:"dd/MM/yyyy"}}</td>
+            <td>{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
+            <td>
+                <button class="btn btn-sm btn-info" type="button" ng-click="vm.info(item)">Xem</button>
+                <button class="btn btn-sm btn-warning" type="button" ng-click="vm.edit(item)">Sửa</button>
+                <button class="btn btn-sm btn-danger" type="button" ng-click="vm.remove(item)">Xóa</button>
+            </td>
+        </tr>
+        <tr ng-if="!vm.orders||(vm.orders).length==0">
+            <td colspan="8" class="text-center text-danger">
+                Không có dữ liệu!
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-md-6">
+            <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
+        </div>
+        <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">
+            <div class="breadcrumb small">Total record: {{vm.total}}</div>
         </div>
     </div>
 </div>

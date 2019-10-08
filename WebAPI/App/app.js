@@ -1,5 +1,4 @@
-﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap']);
-
+﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap',"kendo.directives"]);
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
@@ -34,14 +33,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/ListOrder',
             templateUrl: 'App/View/Order/ListOrder.html'
         })
+      
         .state('shopping', {
             url: '/Shopping',
             templateUrl: 'App/View/Shopping.html'
         })
         .state('orderform', {
-            url: '/CreateOrder',
+            url: '/Order?id',
             templateUrl: 'App/View/Order/OrderForm.html'
-        })
+        }) 
         .state('orderdetail', {
             url: '/OrderInfo?id',
             templateUrl: 'App/View/Order/OrderDetail.html'

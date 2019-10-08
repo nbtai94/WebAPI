@@ -24,17 +24,18 @@
 
 
 </style>
-<div class="breadcrumb">
-    <h3 class="text-info text-center">Thông tin đơn hàng</h3>
-</div>
-<div ng-controller="OrderDetailController as vm">
 
+<div ng-controller="OrderDetailController as vm" class="container">
+    <div class="breadcrumb">
+        <h3 class="text-info text-center">Thông tin đơn hàng</h3>
+    </div>
     <div class="row">
         <div class="col-md-4 customer">
             <div class="text-center">
                 <i class="far fa-user-circle"></i>
             </div>
             <hr />
+
             <div style="margin-left:20px;">
                 <h4 class="text-warning">Tên khách hàng: <span class="text-primary">{{vm.order.CustomerName}}</span></h4>
                 <h4 class="text-warning">Số điện thoại: <span class="text-primary">{{vm.order.CustomerPhone}}</span></h4>
@@ -46,26 +47,26 @@
             <div class="text-center">
             </div>
             <table class="table table-hover table-striped">
-  
-                    <tr class="warning">
-                        <th>STT</th>
-                        <th>Ảnh</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
-                    </tr>
 
-  
-                    <tr ng-repeat="item in vm.order.Items">
-                        <td>{{$index+1}}</td>
-                        <td width="10%"><img ng-src="../../Content/Images/{{item.ProductId}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
-                        <td>{{item.ProductName}}</td>
-                        <td>{{item.Quantity}}</td>
-                        <td>{{item.Price|currency}}</td>
-                        <td>{{item.Price*item.Quantity|currency}}</td>
+                <tr class="warning">
+                    <th>STT</th>
+                    <th>Ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
 
-</table>
+
+                <tr ng-repeat="item in vm.order.Items">
+                    <td>{{$index+1}}</td>
+                    <td width="10%"><img ng-src="../../Content/Images/{{item.ProductId}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
+                    <td>{{item.ProductName}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.Price|currency}}</td>
+                    <td>{{item.Price*item.Quantity|currency}}</td>
+
+            </table>
             <hr />
             <div class="pull-right">
                 <h3 class="text-primary">

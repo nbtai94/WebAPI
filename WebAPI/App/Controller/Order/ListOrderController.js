@@ -25,6 +25,11 @@
     function add() {
         $state.go("orderform", {});
     }
+    vm.edit = edit;
+    function edit(item) {
+        $state.go("orderform", { id: item.Id });
+    }
+
     vm.info = info;
     function info(item) {
         debugger;
@@ -34,7 +39,6 @@
     vm.search = search;
 
     function search() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Orders/SearchOrder?key=" + vm.k
@@ -46,14 +50,12 @@
     //Phan trang
     vm.onChangePagination = onChangePagination;
     function onChangePagination() {
-        debugger;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
             url: "api/Orders/GetOrders?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.orders = result.data.data;
             vm.total = result.data.total;
         })
@@ -63,7 +65,6 @@
     vm.sortColumn = 'Id';
     vm.reverse = false;
     function sortBy(col, reverse) {
-        debugger;
         switch (col) {
             case "Id": {
                 vm.sortColumn = 'Id'; break;
@@ -90,10 +91,12 @@
         }
         vm.reverse = !reverse;
     }
-    //Redirect
+    //Remove & Redirect
     vm.remove = remove;
     function remove(item) {
-        debugger;
+        if (!confirm("Bạn có chắc muốn xóa đơn hàng này!")) {
+            return false;
+        }
         $http({
             method: "DELETE",
             url: "api/Orders/RemoveOrder?id=" + item.Id,
@@ -103,4 +106,6 @@
             getAllOrder();
         });
     }
+    //
+
 });

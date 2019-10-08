@@ -8,7 +8,6 @@
     vm.getOrderDetail = getOrderDetail;
     getOrderDetail();
 
-    vm.Items = {};
 
 
     function getOrderDetail() {
@@ -19,7 +18,7 @@
         }).then(function (res) {
             debugger;
             vm.order = res.data.data;
-            //vm.Items
+
         })
     };
 

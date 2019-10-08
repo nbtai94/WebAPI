@@ -1,6 +1,7 @@
-﻿app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
+﻿
+app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
     var vm = this;
-
+    vm.id = $stateParams.id;
     vm.products = {};
     vm.customers = {};
     vm.listItems = [];
@@ -29,9 +30,10 @@
 
     vm.select = select;
     function select(item) {
+        debugger;
         var data = {
             Id: item.Id,
-            Name: item.Name,
+            ProductName: item.Name,
             Price: item.Price,
             Quantity: 1
         }
@@ -68,25 +70,77 @@
     vm.customer;
     vm.datepicker;
     vm.save = save;
- 
+    debugger;
+
+    //GET 1 ORDER
+    vm.order = {};
+    vm.getOrder = getOrder;
+    if (vm.id) {
+        vm.getOrder();
+    }
+    function getOrder() {
+        debugger;
+        $http({
+            method: "GET",
+            url: "api/Orders/GetOrderDetail?Id=" + vm.id
+        }).then(function (res) {
+            debugger;
+            vm.order = res.data.data;
+            vm.listItems = vm.order.Items;
+            vm.datepicker = vm.order.DateOrder;
+            vm.customer = {
+                Id: vm.order.CustomerId,
+                Name: vm.order.CustomerName
+            }
+        })
+    };
+
     function save() {
         debugger;
-        vm.totalMoney = getTotal();
-        vm.data = {
-            CustomerId: vm.customerId,
-            TotalMoney: vm.totalMoney,
-            DateOrder: vm.datepicker,
-            DateCreate: vm.datecreate,         
-            Items: vm.listItems,
+        if (vm.id) {
+            vm.totalMoney = getTotal();
+            vm.data = {
+                CustomerId: vm.customer.Id,
+                TotalMoney: vm.totalMoney,
+                DateOrder: vm.datepicker,
+                DateCreate: vm.datecreate,
+                Items: vm.listItems,
+            };
+            $http({
+                method: "PUT",
+                url: "api/Orders/EditOrder?Id=" + vm.id,
+                datatype: "Json",
+                data: JSON.stringify(vm.data)
+            }).then(function (res) {
+                alert("Chỉnh sửa thành công");
+                $state.go('order');
+            })
+
         }
-        $http({
-            method: "POST",
-            url: "api/Orders/AddOrder",
-            datatype: "Json",
-            data: JSON.stringify(vm.data)
-        }).then(function (res) {
-            alert("Đã thêm thành công");
-            vm.listItems = {};
-        });
+        //ADD ORDER
+        else {
+            debugger;
+            vm.totalMoney = getTotal();
+            vm.data = {
+                CustomerId: vm.customer.Id,
+                TotalMoney: vm.totalMoney,
+                DateOrder: vm.datepicker,
+                DateCreate: vm.datecreate,
+                Items: vm.listItems,
+            }
+            $http({
+                method: "POST",
+                url: "api/Orders/AddOrder",
+                datatype:"JSON",
+                data:JSON.stringify(vm.data)
+
+            }).then(function (res) {
+                alert("Đã thêm thành công");
+                $state.go('order');
+            })
+        }
+        //COMBOBOX KENDO
+
+
     }
 });

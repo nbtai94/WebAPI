@@ -7,6 +7,7 @@
 
     function back() {
         history.back();
+
     }
     function save() {
         debugger;
@@ -18,6 +19,8 @@
                 data: JSON.stringify(vm.customers)
             }).then(function (res) {
                 alert("Chỉnh sửa thành công!")
+                debugger;
+                
             })
         }
         else {
@@ -40,7 +43,7 @@
         $http({
             method: "GET",
             url: "api/Customers/GetCustomer?id=" + vm.id,
-        }).then(function (res) {
+        }).then(function (res) { 
             vm.customers = res.data;
         })
     }

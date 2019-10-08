@@ -60,7 +60,7 @@
     }
     //Xoa
     function remove(item) {
-        if (!confirm("Bạn có chắc muốn xóa!")) {
+        if (!confirm("Bạn có chắc muốn xóa sản phẩm này!")) {
             return false;
         }
 

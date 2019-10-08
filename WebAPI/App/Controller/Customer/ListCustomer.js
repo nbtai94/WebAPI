@@ -62,7 +62,7 @@
 
     //Xoa
     function remove(item) {
-        if (!confirm("Bạn có chắc muốn xóa!")) {
+        if (!confirm("Bạn có chắc muốn xóa khách hàng này!")) {
             return false;
         }
 

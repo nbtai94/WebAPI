@@ -107,7 +107,7 @@ namespace WebAPI.Controllers
 
         //PUT api/Customers/Edit
         [HttpPut]
-        public IHttpActionResult EditCustomer(int Id, Customer customer)
+        public IHttpActionResult EditCustomer(int Id, CustomerViewModel customer)
         {
             var cus = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
             cus.Name = customer.Name;
@@ -126,16 +126,16 @@ namespace WebAPI.Controllers
 
             if (cus != null)
             {
-                try
-                {   
+                //try
+                //{   
                 db.Customers.Remove(cus);
                 db.SaveChanges();
                     return Ok();
-                }
-                catch(Exception)
-                {
-                    return NotFound();
-                }
+                //}
+                //catch(Exception)
+                //{
+                //    return NotFound();
+                //}
                 
                 
             }

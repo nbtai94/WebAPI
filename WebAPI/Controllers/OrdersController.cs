@@ -24,16 +24,17 @@ namespace WebAPI.Controllers
                 .Select(s => new OrderViewModel
                 {
                     Id = s.Id,
-                    CustomerId = s.CustomerId,
+
+
+                    CustomerId = s.Customer.Id,                
+                    CustomerName = s.Customer.Name,
+                    CustomerAddress = s.Customer.Address,
+                    CustomerPhone = s.Customer.Phone,
                     DateCreated = s.DateCreated,
                     DateOrder = s.DateOrder,
                     TotalMoney = s.TotalMoney,
                     Note = s.Note,
-                    CustomerName = s.Customer.Name,
-                    CustomerAddress = s.Customer.Address,
-                    CustomerPhone = s.Customer.Phone,
-
-                });
+                }); ;
             return Ok(new
             {
                 data = result,
@@ -54,9 +55,7 @@ namespace WebAPI.Controllers
                     DateOrder = s.DateOrder,
                     TotalMoney = s.TotalMoney,
                     Note = s.Note,
-                    CustomerName = s.Customer.Name,
-                    CustomerAddress = s.Customer.Address,
-                    CustomerPhone = s.Customer.Phone,
+
                 });
             var total = result.Count();
             return Ok(new
@@ -67,18 +66,18 @@ namespace WebAPI.Controllers
         }
 
 
-
+        [HttpPost]
         public IHttpActionResult AddOrder(OrderViewModel model)
         {
             if (model != null)
             {
                 Order order = new Order();
                 order.Items = new List<OrderDetail>();
-
+                order.CustomerId = model.CustomerId;
                 order.DateOrder = model.DateOrder;
                 order.DateCreated = DateTime.Now;
                 order.TotalMoney = model.TotalMoney;
-                order.CustomerId = model.CustomerId;
+               
 
                 foreach (var item in model.Items)
                 {
@@ -108,10 +107,11 @@ namespace WebAPI.Controllers
             response.CustomerAddress = order.Customer.Address;
             response.CustomerName = order.Customer.Name;
             response.CustomerPhone = order.Customer.Phone;
+            response.CustomerId = order.CustomerId;
             response.DateCreated = order.DateCreated;
             response.DateOrder = order.DateOrder;
             response.TotalMoney = order.TotalMoney;
-
+            
 
             foreach (var item in order.Items)
             {
@@ -127,9 +127,47 @@ namespace WebAPI.Controllers
 
 
         }
+        //Sửa đơn hàng
+        [HttpPut]
+        public IHttpActionResult EditOrder(int Id, OrderViewModel model)
+        {           
+            if (model != null)
+            {
+                Order order = db.Orders.Where(i => i.Id == Id).SingleOrDefault();//Lay ra order
+                order.Items = db.OrderDetails.Where(i=>i.OrderId==model.Id).ToList();//Lay ra list chi tiet order
+
+                order.DateOrder = model.DateOrder;
+                order.DateCreated = DateTime.Now;
+                order.TotalMoney = model.TotalMoney;
+                order.CustomerId = model.CustomerId;
 
 
-
+            
+                foreach (var item in model.Items)
+                {
+                   
+                    var o = order.Items.Where(i => i.ProductId == item.ProductId).FirstOrDefault();
+                
+                    if (o != null)
+                    {                      
+                        o.Quantity = item.Quantity;
+                        o.Price = item.Price;
+                    }
+                    else
+                    {
+                       var ord = new OrderDetail();
+                        ord.ProductId = item.Id;
+                        ord.Quantity = item.Quantity;
+                        ord.Price = item.Price;
+                        order.Items.Add(ord);
+                    }
+                }
+                db.SaveChanges();
+                return Ok();
+            }
+            return BadRequest();
+        }
+        //Xóa đơn hàng
         [HttpDelete]
         public IHttpActionResult RemoveOrder(int Id)
         {
@@ -143,5 +181,4 @@ namespace WebAPI.Controllers
             return NotFound();
         }
     }
-
 }
