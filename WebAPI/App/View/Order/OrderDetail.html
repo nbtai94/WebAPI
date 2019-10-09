@@ -29,6 +29,7 @@
     <div class="breadcrumb">
         <h3 class="text-info text-center">Thông tin đơn hàng</h3>
     </div>
+    <button class="btn btn-sm btn-danger" ng-click="vm.back()">Quay lại</button><hr />
     <div class="row">
         <div class="col-md-4 customer">
             <div class="text-center">
@@ -60,7 +61,7 @@
 
                 <tr ng-repeat="item in vm.order.Items">
                     <td>{{$index+1}}</td>
-                    <td width="10%"><img ng-src="../../Content/Images/{{item.ProductId}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
+                    <td width="10%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
                     <td>{{item.ProductName}}</td>
                     <td>{{item.Quantity}}</td>
                     <td>{{item.Price|currency}}</td>

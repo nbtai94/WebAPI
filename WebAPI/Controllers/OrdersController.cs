@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     public class OrdersController : ApiController
     {
         private WebAPIContext db = new WebAPIContext();
-
+        //GET: Get all order
         public IHttpActionResult GetOrders(int skip, int take)
         {
             var total = db.Orders.Count();
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
                     Id = s.Id,
 
 
-                    CustomerId = s.Customer.Id,                
+                    CustomerId = s.Customer.Id,
                     CustomerName = s.Customer.Name,
                     CustomerAddress = s.Customer.Address,
                     CustomerPhone = s.Customer.Phone,
@@ -43,6 +43,7 @@ namespace WebAPI.Controllers
                 take = take
             });
         }
+        //GET: Tìm kiếm
         [HttpGet]
         public IHttpActionResult SearchOrder(string key)
         {
@@ -50,7 +51,10 @@ namespace WebAPI.Controllers
                 .Select(s => new OrderViewModel
                 {
                     Id = s.Id,
-                    CustomerId = s.CustomerId,
+                    CustomerId = s.Customer.Id,
+                    CustomerName = s.Customer.Name,
+                    CustomerAddress = s.Customer.Address,
+                    CustomerPhone = s.Customer.Phone,
                     DateCreated = s.DateCreated,
                     DateOrder = s.DateOrder,
                     TotalMoney = s.TotalMoney,
@@ -65,7 +69,7 @@ namespace WebAPI.Controllers
             });
         }
 
-
+        //POST: Tạo đơn hàng
         [HttpPost]
         public IHttpActionResult AddOrder(OrderViewModel model)
         {
@@ -77,7 +81,7 @@ namespace WebAPI.Controllers
                 order.DateOrder = model.DateOrder;
                 order.DateCreated = DateTime.Now;
                 order.TotalMoney = model.TotalMoney;
-               
+
 
                 foreach (var item in model.Items)
                 {
@@ -93,7 +97,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
-        //GET 1 ORDER
+        //GET: GET 1 ORDER
         [HttpGet]
         public IHttpActionResult GetOrderDetail(int Id)
         {
@@ -103,7 +107,6 @@ namespace WebAPI.Controllers
 
             Order order = db.Orders.Where(i => i.Id == Id).SingleOrDefault();
 
-
             response.CustomerAddress = order.Customer.Address;
             response.CustomerName = order.Customer.Name;
             response.CustomerPhone = order.Customer.Phone;
@@ -111,12 +114,12 @@ namespace WebAPI.Controllers
             response.DateCreated = order.DateCreated;
             response.DateOrder = order.DateOrder;
             response.TotalMoney = order.TotalMoney;
-            
+
 
             foreach (var item in order.Items)
             {
                 OrderDetailViewModel ord = new OrderDetailViewModel();
-                ord.ProductId = item.Product.Id;
+                ord.Id = item.Product.Id;
                 ord.Price = item.Price;
                 ord.Quantity = item.Quantity;
                 ord.ProductName = item.Product.Name;
@@ -124,38 +127,43 @@ namespace WebAPI.Controllers
             }
 
             return Ok(new { data = response });
-
-
         }
-        //Sửa đơn hàng
+        //PUT: Sửa đơn hàng
         [HttpPut]
         public IHttpActionResult EditOrder(int Id, OrderViewModel model)
-        {           
+        {
+
             if (model != null)
             {
                 Order order = db.Orders.Where(i => i.Id == Id).SingleOrDefault();//Lay ra order
-                order.Items = db.OrderDetails.Where(i=>i.OrderId==model.Id).ToList();//Lay ra list chi tiet order
-
+                order.Items = db.OrderDetails.Where(i => i.OrderId == model.Id).ToList();//Lay ra list chi tiet order cũ
                 order.DateOrder = model.DateOrder;
                 order.DateCreated = DateTime.Now;
                 order.TotalMoney = model.TotalMoney;
                 order.CustomerId = model.CustomerId;
+                var ids = model.Items.Select(s => s.Id).ToList();//list item mới truyền lên
+                var itemRemove = order.Items.Where(x => !ids.Contains(x.Id)).ToList();//list item cần xóa
 
+                foreach (var i in itemRemove)
+                {
+                    db.OrderDetails.Remove(i);
 
-            
+                }
+                //foreach (var item in model.Items)
+                //{
+                //}
+
                 foreach (var item in model.Items)
                 {
-                   
-                    var o = order.Items.Where(i => i.ProductId == item.ProductId).FirstOrDefault();
-                
+                    var o = order.Items.Where(i => i.ProductId == item.Id).FirstOrDefault();
                     if (o != null)
-                    {                      
+                    {
                         o.Quantity = item.Quantity;
                         o.Price = item.Price;
                     }
                     else
                     {
-                       var ord = new OrderDetail();
+                        var ord = new OrderDetail();
                         ord.ProductId = item.Id;
                         ord.Quantity = item.Quantity;
                         ord.Price = item.Price;
@@ -167,7 +175,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
-        //Xóa đơn hàng
+        //DELETE: Xóa đơn hàng
         [HttpDelete]
         public IHttpActionResult RemoveOrder(int Id)
         {

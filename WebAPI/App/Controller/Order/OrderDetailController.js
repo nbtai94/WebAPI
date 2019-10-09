@@ -7,7 +7,10 @@
     };
     vm.getOrderDetail = getOrderDetail;
     getOrderDetail();
-
+    vm.back = back;
+    function back() {
+        history.back();
+    }
 
 
     function getOrderDetail() {

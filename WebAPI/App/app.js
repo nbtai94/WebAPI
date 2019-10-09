@@ -1,9 +1,7 @@
 ﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap',"kendo.directives"]);
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
-
     $stateProvider
-
         .state('home', {
             url: '/Home',  //Tên hiển thị trên URL
             templateUrl: 'home/index'  //Đường dẫn file

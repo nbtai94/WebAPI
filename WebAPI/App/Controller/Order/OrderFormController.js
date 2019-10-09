@@ -73,6 +73,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     debugger;
 
     //GET 1 ORDER
+    debugger;
     vm.order = {};
     vm.getOrder = getOrder;
     if (vm.id) {
@@ -100,6 +101,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         if (vm.id) {
             vm.totalMoney = getTotal();
             vm.data = {
+                Id:vm.id,
                 CustomerId: vm.customer.Id,
                 TotalMoney: vm.totalMoney,
                 DateOrder: vm.datepicker,
