@@ -1,4 +1,5 @@
-﻿<style>
+﻿
+<style>
 
     th {
         text-align: center;
@@ -42,10 +43,10 @@
                 </div>
                 <div class="k-content col-md-6 form-group">
                     <label>Ngày đặt hàng:</label>
-                    <input kendo-date-picker
+                    <input name="datetimepicker" kendo-date-picker
                            ng-model="vm.datepicker"
                            k-ng-model="dataObject"
-                           style="width: 50%;" />
+                           style="width: 50%;" ng-required="true" />
                 </div>
             </div>
         </form>

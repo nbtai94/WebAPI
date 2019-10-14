@@ -4,7 +4,7 @@
     vm.add = add;
     vm.getAllOrder = getAllOrder;
     vm.currentPage = 1;
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = 10    ;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
     vm.take = vm.itemsPerPage;
 
@@ -23,6 +23,7 @@
     }
     //Redirect sang form
     function add() {
+        debugger;
         $state.go("orderform", {});
     }
     vm.edit = edit;

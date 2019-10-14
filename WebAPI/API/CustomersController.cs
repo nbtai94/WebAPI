@@ -94,13 +94,14 @@ namespace WebAPI.Controllers
         public IHttpActionResult GetCustomer(int Id)
         {
             var result = db.Customers.Where(i => i.Id == Id).SingleOrDefault();
-            var res = new CustomerViewModel {
+            var res = new CustomerViewModel
+            {
                 Id = result.Id,
-                Name=result.Name,
-                Address=result.Address,
-                Email=result.Email,
-                Phone=result.Phone
-                
+                Name = result.Name,
+                Address = result.Address,
+                Email = result.Email,
+                Phone = result.Phone
+
             };
             return Ok(res);
         }
@@ -126,18 +127,22 @@ namespace WebAPI.Controllers
 
             if (cus != null)
             {
-                //try
-                //{   
-                db.Customers.Remove(cus);
-                db.SaveChanges();
+                var order = db.Orders.Where(i => i.Customer.Id == cus.Id).ToList();
+                if (order.Count!=0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    db.Customers.Remove(cus);
+                    db.SaveChanges();
                     return Ok();
-                //}
-                //catch(Exception)
-                //{
-                //    return NotFound();
-                //}
-                
-                
+                }
+             
+               
+
+
+
             }
             else
             {

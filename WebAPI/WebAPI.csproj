@@ -161,10 +161,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="API\CustomersController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="API\OrdersController.cs" />
+    <Compile Include="API\ProductsController.cs" />
+    <Compile Include="Controllers\OrderssController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,14 +197,6 @@
     <Content Include="App\Controller\Product\ListProductController.js" />
     <Content Include="App\Controller\Order\ListOrderController.js" />
     <Content Include="App\Controller\Order\OrderFormController.js" />
-    <Content Include="App\View\Customer\CustomerForm.html" />
-    <Content Include="App\View\Customer\ListCustomer.html" />
-    <Content Include="App\View\Order\ListOrder.html" />
-    <Content Include="App\View\Order\OrderDetail.html" />
-    <Content Include="App\View\Product\ListProduct.html" />
-    <Content Include="App\View\Order\OrderForm.html" />
-    <Content Include="App\View\Product\ProductForm.html" />
-    <Content Include="App\View\Shopping.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assests\KendoUI\js\angular.min.js" />
     <Content Include="Assests\KendoUI\js\cultures\kendo.culture.aa-DJ.min.js" />
@@ -4421,10 +4416,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Product\ListProduct.cshtml" />
+    <Content Include="Views\Product\ProductForm.cshtml" />
+    <Content Include="Views\Customer\ListCustomer.cshtml" />
+    <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Orderss\ListOrder.cshtml" />
+    <Content Include="Views\Orderss\OrderForm.cshtml" />
+    <Content Include="Views\Orderss\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

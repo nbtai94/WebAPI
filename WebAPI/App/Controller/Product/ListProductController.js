@@ -31,7 +31,7 @@
         debugger;
         $http({
             method: "GET",
-            url: "api/Products/SearchProduct?k=" + vm.k
+            url: "api/Products/SearchProduct?k=" + vm.k 
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;
@@ -72,6 +72,7 @@
             alert("Đã xóa thành công!");
             getAllProduct();
         }, function (error) {
+            alert("Không thể xóa sản phẩm đã có trong đơn hàng!")
         });
     }
 
@@ -80,7 +81,7 @@
     vm.sortBy = sortBy;
     vm.sortColumn = 'Id';
     vm.reverse = false;
-    function sortBy(col, reverse,show) {
+    function sortBy(col, reverse, show) {
         debugger;
         switch (col) {
             case "Id": {

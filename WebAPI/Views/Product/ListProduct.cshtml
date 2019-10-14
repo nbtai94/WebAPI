@@ -1,4 +1,7 @@
-﻿<style>
+﻿@{ 
+    Layout = null;
+}
+<style>
     th {
         text-align: center;
     }
@@ -16,7 +19,7 @@
     <div ng-controller="ListProductController as vm">
         <form class="form-group form-inline search pull-right">
             <div>
-                <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" class="form-control input-sm" />
+                <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" value="" class="form-control input-sm" />
                 <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
             </div>
         </form>

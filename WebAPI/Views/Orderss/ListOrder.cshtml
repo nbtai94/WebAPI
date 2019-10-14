@@ -1,4 +1,9 @@
-﻿<style>
+﻿
+@{
+    Layout = null;
+}
+
+<style>
     th {
         text-align: center;
     }
@@ -6,16 +11,17 @@
     .mg-b-10 {
         margin-bottom: 10px;
     }
-  .container{
-      padding-right:15px;
-     
-}
-  body{
-       overflow-x: hidden;
+
+    .container {
+        padding-right: 15px;
+    }
+
+    body {
+        overflow-x: hidden;
         overflow-y: scroll;
-  }
+    }
 </style>
-   
+
 
 <div ng-controller="ListOrderController as vm" class="container">
     <div class="breadcrumb">
@@ -45,7 +51,7 @@
             <td>{{item.CustomerName}}</td>
             <td>{{item.CustomerAddress}}</td>
             <td>{{item.CustomerPhone}}</td>
-            <td>{{(item.TotalMoney|currency:"")+"VNĐ"}}</td>
+            <td>{{(item.TotalMoney|number)+" VNĐ"}}</td>
             <td>{{item.DateOrder|date:"dd/MM/yyyy"}}</td>
             <td>{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
             <td>

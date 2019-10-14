@@ -37,6 +37,12 @@
             vm.total = result.data.total;
         })
     }
+    vm.reload = reload;
+    function reload() {
+        debugger
+
+        getAllCustomer();
+    }
 
     //Phan trang
     function onChangePagination() {
@@ -74,6 +80,7 @@
             alert("Đã xóa thành công!");
             getAllCustomer();
         }, function (error) {
+                alert("Không thể xóa khách hàng đã đặt hàng!");
         });
     }
 

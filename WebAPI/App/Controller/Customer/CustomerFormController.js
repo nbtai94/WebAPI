@@ -1,4 +1,4 @@
-﻿app.controller('CustomerFormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
+﻿app.controller('CustomerFormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http,$state) {
     var vm = this;
     vm.back = back;
     vm.save = save;
@@ -33,8 +33,10 @@
                 data: JSON.stringify(vm.customers)
             }).then(function (response) {
                 debugger;
-                alert("Thêm thành công!");
+                
                 vm.customers = {};
+                alert("Thêm thành công!");
+                $state.go("customer");
             })
         }
     }

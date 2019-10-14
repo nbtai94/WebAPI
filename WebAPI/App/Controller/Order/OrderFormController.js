@@ -98,25 +98,35 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
 
     function save() {
         debugger;
+        //ADD
         if (vm.id) {
             vm.totalMoney = getTotal();
             vm.data = {
-                Id:vm.id,
+                Id: vm.id,
                 CustomerId: vm.customer.Id,
                 TotalMoney: vm.totalMoney,
                 DateOrder: vm.datepicker,
                 DateCreate: vm.datecreate,
+                Status: "",
+                Note: "",
                 Items: vm.listItems,
             };
+            ////EDIT
+
             $http({
-                method: "PUT",
-                url: "api/Orders/EditOrder?Id=" + vm.id,
-                datatype: "Json",
+                method: 'PUT',
+                url: "/api/Orders/EditOrder?Id=" + vm.id,
+                datatype: "JSON",
                 data: JSON.stringify(vm.data)
-            }).then(function (res) {
-                alert("Chỉnh sửa thành công");
-                $state.go('order');
-            })
+            }).then(function successCallback(response) {
+                alert("Chỉnh sửa thành công!");
+                $state.go("order", {});
+                // when the response is available
+            }, function errorCallback(response) {
+                alert("Vui lòng điền đủ thông tin!");
+            });
+
+
 
         }
         //ADD ORDER
@@ -124,22 +134,35 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             debugger;
             vm.totalMoney = getTotal();
             vm.data = {
+                Id: vm.id,
                 CustomerId: vm.customer.Id,
                 TotalMoney: vm.totalMoney,
                 DateOrder: vm.datepicker,
                 DateCreate: vm.datecreate,
                 Items: vm.listItems,
+                Status: "",
+                Note: "",
             }
-            $http({
-                method: "POST",
-                url: "api/Orders/AddOrder",
-                datatype:"JSON",
-                data:JSON.stringify(vm.data)
 
-            }).then(function (res) {
-                alert("Đã thêm thành công");
-                $state.go('order');
-            })
+
+            $http({
+                method: 'POST',
+                url: '/api/Orders/AddOrder',
+                datatype: "JSON",
+                data:JSON.stringify(vm.data)
+            }).then(function successCallback(response) {
+                alert("Thêm thành công!");
+                $state.go("order", {});
+                // when the response is available
+            }, function errorCallback(response) {
+                    alert("Vui lòng điền đủ thông tin!");
+            });
+
+
+
+
+
+
         }
         //COMBOBOX KENDO
 

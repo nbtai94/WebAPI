@@ -4,47 +4,53 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/Home',  //Tên hiển thị trên URL
+            template: '<div ui-view></div>',
             templateUrl: 'home/index'  //Đường dẫn file
         })
         .state('list', {
             url: '/ListProduct',
-            templateUrl: 'App/View/Product/ListProduct.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Product/ListProduct'
         })
         .state('contact', {
             url: '/Contact',
+            //template: '<div ui-view></div>',
             templateUrl: 'home/contact'
         })
         .state('customer', {
             url: '/ListCustomer',
-            templateUrl: 'App/View/Customer/ListCustomer.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Customer/ListCustomer'
         })
 
-        .state('form', {
+        .state('form', { 
             url: '/Form?id',
-            templateUrl: 'App/View/Product/ProductForm.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Product/ProductForm'
         })
         .state('cusForm', {
             url: '/CusForm?id',
-            templateUrl: 'App/View/Customer/CustomerForm.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Customer/CustomerForm'
         })
         .state('order', {
             url: '/ListOrder',
-            templateUrl: 'App/View/Order/ListOrder.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Orderss/ListOrder'
         })
-      
-        .state('shopping', {
-            url: '/Shopping',
-            templateUrl: 'App/View/Shopping.html'
-        })
+     
         .state('orderform', {
-            url: '/Order?id',
-            templateUrl: 'App/View/Order/OrderForm.html'
-        }) 
+            url: '/OrderInfo?id',
+            //template: '<div ui-view></div>',
+            templateUrl: 'Orderss/OrderForm'
+        })
         .state('orderdetail', {
             url: '/OrderInfo?id',
-            templateUrl: 'App/View/Order/OrderDetail.html'
+            //template: '<div ui-view></div>',
+            templateUrl: 'Orderss/OrderDetail'
         })
 });
+
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);
