@@ -36,7 +36,7 @@
                     <div class="col-md-6">
 
                         <div class="row">
-                            <div class="form-group">
+                            <div class="form-group col-md-8">
                                 <label>Khách hàng: </label>
                                 <select id="customer" name="customer" kendo-combo-box
                                         k-placeholder="'Chọn khách hàng'"
@@ -45,8 +45,8 @@
                                         k-filter="'contains'"
                                         k-auto-bind="true"
                                         k-data-source="vm.customers"
-                                        style="width: 50%"
-                                        ng-model="vm.customer.Id" required>
+                                        style="width: 75%"
+                                        ng-model="vm.customer.Id" ng-required="true">
                                 </select>
                             </div>
                           

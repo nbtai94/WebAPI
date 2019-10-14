@@ -77,10 +77,10 @@
             url: "api/Customers/RemoveCustomer?Id=" + item.Id
         }).then(function (response) {
             debugger;
-            alert("Đã xóa thành công!");
+            toastr["success"]("Xóa thành công!")
             getAllCustomer();
         }, function (error) {
-                alert("Không thể xóa khách hàng đã đặt hàng!");
+                toastr["error"]("Không thể xóa khách hàng đã đặt hàng!")
         });
     }
 

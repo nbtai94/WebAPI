@@ -1,4 +1,4 @@
-﻿app.controller('CustomerFormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http,$state) {
+﻿app.controller('CustomerFormController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http, $state) {
     var vm = this;
     vm.back = back;
     vm.save = save;
@@ -18,9 +18,9 @@
                 url: "api/Customers/EditCustomer?id=" + vm.id,
                 data: JSON.stringify(vm.customers)
             }).then(function (res) {
-                alert("Chỉnh sửa thành công!")
+                toastr["success"]("Chỉnh sửa thành công!")
                 debugger;
-                
+
             })
         }
         else {
@@ -33,9 +33,8 @@
                 data: JSON.stringify(vm.customers)
             }).then(function (response) {
                 debugger;
-                
                 vm.customers = {};
-                alert("Thêm thành công!");
+                toastr["success"]("Thêm thành công!")
                 $state.go("customer");
             })
         }
@@ -45,8 +44,14 @@
         $http({
             method: "GET",
             url: "api/Customers/GetCustomer?id=" + vm.id,
-        }).then(function (res) { 
+        }).then(function (res) {
             vm.customers = res.data;
         })
     }
+
+
+    
+
+
+
 }])

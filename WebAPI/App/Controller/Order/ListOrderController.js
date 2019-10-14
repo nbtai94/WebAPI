@@ -103,7 +103,7 @@
             url: "api/Orders/RemoveOrder?id=" + item.Id,
 
         }).then(function (res) {
-            alert("Đã xóa thành công!");
+            toastr["success"]("Đã xóa đơn hàng!")
             getAllOrder();
         });
     }

@@ -166,7 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="API\OrdersController.cs" />
     <Compile Include="API\ProductsController.cs" />
-    <Compile Include="Controllers\OrderssController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1591,7 +1591,8 @@
     <Content Include="Content\Images\11\product.jpg" />
     <Content Include="Content\Images\12\product.jpg" />
     <Content Include="Content\toaster.css" />
-    <Content Include="Content\toaster.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-free-5.11.2-web\css\all.css" />
     <Content Include="fonts\fontawesome-free-5.11.2-web\css\all.min.css" />
@@ -4392,14 +4393,16 @@
     <Content Include="Assests\KendoUI\styles\kendo.silver.mobile.min.css.map" />
     <Content Include="Assests\KendoUI\styles\kendo.uniform.min.css.map" />
     <Content Include="Assests\KendoUI\styles\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\toaster.js" />
-    <Content Include="Scripts\toaster.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

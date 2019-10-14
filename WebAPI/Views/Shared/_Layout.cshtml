@@ -10,6 +10,7 @@
     <link href="~/Assests/KendoUI/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="~/Assests/KendoUI/styles/kendo.default.min.css" rel="stylesheet" />
     <link href="~/Assests/KendoUI/styles/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +47,7 @@
         </div>
     </div>
 
-    <div class="body-content" >
+    <div class="body-content">
         @RenderBody()
         <hr />
         <footer>
@@ -66,6 +67,7 @@
     <script src="~/Assests/KendoUI/js/kendo.all.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
 
     <script src="~/App/app.js"></script>
     <script src="~/Scripts/ui-bootstrap-tpls-2.5.0.min.js"></script>
@@ -76,5 +78,25 @@
     <script src="~/App/Controller/Order/ListOrderController.js"></script>
     <script src="~/App/Controller/Order/OrderDetailController.js"></script>
     <script src="~/App/Controller/Order/OrderFormController.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+    </script>
 </body>
 </html>

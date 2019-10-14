@@ -69,10 +69,10 @@
             url: "api/Products?key=" + item.Id
         }).then(function (response) {
             debugger;
-            alert("Đã xóa thành công!");
+            toastr["success"]("Xóa thành công!")
             getAllProduct();
         }, function (error) {
-            alert("Không thể xóa sản phẩm đã có trong đơn hàng!")
+                toastr["error"]("Không thể xóa sản phẩm đã có trong đơn hàng!")
         });
     }
 

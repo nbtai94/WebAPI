@@ -116,7 +116,8 @@ namespace WebAPI.Controllers
             foreach (var item in order.Items)
             {
                 OrderDetailViewModel ord = new OrderDetailViewModel();
-                ord.Id = item.Product.Id;
+                ord.Id = item.Id;
+                ord.ProductId = item.Product.Id;
                 ord.Price = item.Price;
                 ord.Quantity = item.Quantity;
                 ord.ProductName = item.Product.Name;
@@ -148,24 +149,17 @@ namespace WebAPI.Controllers
                 order.CustomerId = model.CustomerId;
 
                 var ids = model.Items.Select(s => s.Id).ToList();//list item mới truyền lên
-                List<OrderDetail> itemRemove = order.Items.Where(x => !ids.Contains(x.Id)).ToList();
-                foreach (var i in itemRemove)
+
+                List<OrderDetail> itemRemoves = order.Items.Where(x => !ids.Contains(x.Id)).ToList();
+
+                foreach (var i in itemRemoves)
                 {
                     db.OrderDetails.Remove(i);
                 }
 
-                //foreach (var item in model.Items)//duyệt list mới truyền lên 
-                //{
-                //    var itemRemoves = order.Items.Where(x => x.Id != item.Id).ToList();// lấy danh sách item trong items cũ có id khác với id truyền lên
-                //    foreach (var i in itemRemoves)
-                //    {
-                //        db.OrderDetails.Remove(i);
-                //    }
-                //}
-
                 foreach (var item in model.Items)//duyệt list items mới truyền lên chưa có thì thêm vào db có rồi thì update propety
                 {
-                    var o = order.Items.Where(i => i.ProductId == item.Id).FirstOrDefault();
+                    var o = order.Items.Where(i => i.Id == item.Id).FirstOrDefault();
                     if (o != null)
                     {
                         o.Quantity = item.Quantity;
@@ -173,16 +167,19 @@ namespace WebAPI.Controllers
                     }
                     else
                     {
-                        var ord = new OrderDetail();
-                        ord.ProductId = item.Id;
-                        ord.Quantity = item.Quantity;
+                        OrderDetail ord = new OrderDetail();
+                        ord.ProductId = item.ProductId;
                         ord.Price = item.Price;
-                        order.Items.Add(ord); 
+                        ord.Quantity = item.Quantity;
+                        order.Items.Add(ord);
                     }
+
                 }
                 db.SaveChanges();
                 return Ok();
             }
+
+
             return BadRequest();
         }
         #endregion

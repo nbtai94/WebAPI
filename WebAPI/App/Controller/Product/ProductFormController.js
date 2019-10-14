@@ -17,7 +17,8 @@
                 url: "api/Products?id=" + vm.id,
                 data: JSON.stringify(vm.product)
             }).then(function (res) {
-                alert("Chỉnh sửa thành công!")
+                toastr["success"]("Chỉnh sửa thành công!"),
+                    $state.go("list")
             })
         }
         else {
@@ -30,8 +31,10 @@
                 data: JSON.stringify(vm.product)
             }).then(function (response) {
                 debugger;
-                alert("Thêm thành công!");
                 vm.product = {};
+                toastr["success"]("Thêm thành công!"),
+
+                    $state.go("list")
             })
         }
     }

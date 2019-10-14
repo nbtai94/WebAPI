@@ -95,6 +95,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             }
         })
     };
+    vm.orrrder = getOrder();
 
     function save() {
         debugger;
@@ -119,11 +120,11 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 datatype: "JSON",
                 data: JSON.stringify(vm.data)
             }).then(function successCallback(response) {
-                alert("Chỉnh sửa thành công!");
+                toastr["success"]("Chỉnh sửa thành công!")
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                alert("Vui lòng điền đủ thông tin!");
+                    toastr["error"]("Vui lòng điền đủ thông tin!")
             });
 
 
@@ -151,11 +152,11 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 datatype: "JSON",
                 data:JSON.stringify(vm.data)
             }).then(function successCallback(response) {
-                alert("Thêm thành công!");
+                toastr["success"]("Đã thêm đơn hàng!");
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                    alert("Vui lòng điền đủ thông tin!");
+                    toastr["error"]("Vui lòng điền đủ thông tin!")
             });
 
 
