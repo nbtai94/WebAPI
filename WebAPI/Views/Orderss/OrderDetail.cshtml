@@ -46,7 +46,7 @@
 
                 <tr class="warning">
                     <th>STT</th>
-                    <th>Ảnh</th>
+                    @*<th>Ảnh</th>*@
                     <th>Tên sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Đơn giá</th>
@@ -56,7 +56,7 @@
 
                 <tr ng-repeat="item in vm.order.Items">
                     <td>{{$index+1}}</td>
-                    <td width="10%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
+                    @*<td width="10%"><img ng-src="../../Content/Images/{{item.ProductId}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>*@
                     <td>{{item.ProductName}}</td>
                     <td>{{item.Quantity}}</td>
                     <td>{{(item.Price|number)+" VNĐ"}}</td>

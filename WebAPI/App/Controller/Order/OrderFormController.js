@@ -30,7 +30,6 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
 
     vm.select = select;
     function select(item) {
-        debugger;
         var data = {
             Id: item.Id,
             ProductName: item.Name,
@@ -70,22 +69,18 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     vm.customer;
     vm.datepicker;
     vm.save = save;
-    debugger;
 
     //GET 1 ORDER
-    debugger;
     vm.order = {};
     vm.getOrder = getOrder;
     if (vm.id) {
         vm.getOrder();
     }
     function getOrder() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Orders/GetOrderDetail?Id=" + vm.id
         }).then(function (res) {
-            debugger;
             vm.order = res.data.data;
             vm.listItems = vm.order.Items;
             vm.datepicker = vm.order.DateOrder;
@@ -99,7 +94,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
 
     function save() {
         debugger;
-        //ADD
+    
         if (vm.id) {
             vm.totalMoney = getTotal();
             vm.data = {
@@ -112,8 +107,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 Note: "",
                 Items: vm.listItems,
             };
-            ////EDIT
-
+                //EDIT
             $http({
                 method: 'PUT',
                 url: "/api/Orders/EditOrder?Id=" + vm.id,
@@ -124,7 +118,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                    toastr["error"]("Vui lòng điền đủ thông tin!")
+                    toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
 
 
@@ -132,7 +126,6 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         }
         //ADD ORDER
         else {
-            debugger;
             vm.totalMoney = getTotal();
             vm.data = {
                 Id: vm.id,
@@ -156,7 +149,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                    toastr["error"]("Vui lòng điền đủ thông tin!")
+                    toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
 
 

@@ -80,7 +80,7 @@
             toastr["success"]("Xóa thành công!")
             getAllCustomer();
         }, function (error) {
-                toastr["error"]("Không thể xóa khách hàng đã đặt hàng!")
+                toastr["error"]("Không thể xóa khách đã đặt hàng!")
         });
     }
 

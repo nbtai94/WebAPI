@@ -15,6 +15,7 @@
     .mgt-20{
         margin-top:20px;
     }
+ 
 </style>
 
 <div ng-controller="OrderFormController as vm" class="container">
@@ -80,17 +81,17 @@
 
 
     <div class="row">
-        <div class="col-md-4">
-            <table class="table table-striped table-hover table-bordered text-center table-chooseProduct">
+        <div class="col-md-4 table-chooseProduct">
+            <table class="table table-striped table-hover table-bordered text-center ">
 
                 <tr class="active">
-                    <th>Ảnh</th>
+                    @*<th>Ảnh</th>*@
                     <th>Tên sản phẩm</th>
                     <th>Giá</th>
                 </tr>
 
                 <tr ng-repeat="item in vm.products" ng-click="vm.select(item)">
-                    <td width="20%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
+                    @*<td width="20%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>*@
                     <td>{{item.Name}}</td>
                     <td>{{(item.Price|number)+" VNĐ"}}</td>
                 </tr>
@@ -115,8 +116,8 @@
                     <td><button type="button" class="btn btn-sm btn-danger" ng-click="vm.remove($index)">Xóa</button></td>
                 </tr>
                 <tr>
-                    <th colspan="3" class="info">Tổng tiền</th>
-                    <th colspan="4" align="center" class="danger">{{(vm.getTotal()|number)+" VNĐ"}}</th>
+                    <th colspan="5" class="info">Tổng tiền</th>
+                    <th colspan="2" align="center" class="danger">{{(vm.getTotal()|number)+" VNĐ"}}</th>
                 </tr>
             </table>
         </div>

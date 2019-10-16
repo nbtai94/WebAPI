@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class OrdersController : ApiController
     {
         private WebAPIContext db = new WebAPIContext();
-
+        #region GET ORDERS
         //GET: Get all order
         public IHttpActionResult GetOrders(int skip, int take)
         {
@@ -40,7 +40,8 @@ namespace WebAPI.Controllers
                 take = take
             });
         }
-
+        #endregion
+        #region GET SEARCH
         //GET: Tìm kiếm
         [HttpGet]
         public IHttpActionResult SearchOrder(string key)
@@ -65,7 +66,8 @@ namespace WebAPI.Controllers
                 total = total,
             });
         }
-
+        #endregion
+        #region POST ORDER
         //POST: Tạo đơn hàng
         [HttpPost]
         public IHttpActionResult AddOrder(OrderViewModel model)
@@ -97,8 +99,8 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
-
-        //GET: GET 1 ORDER
+        #endregion
+        #region GET ORDER
         [HttpGet]
         public IHttpActionResult GetOrderDetail(int Id)
         {
@@ -125,6 +127,7 @@ namespace WebAPI.Controllers
             }
             return Ok(new { data = response });
         }
+        #endregion
         #region EDIT ORDER
         //PUT: Sửa đơn hàng
         [HttpPut]
@@ -138,11 +141,7 @@ namespace WebAPI.Controllers
                     return BadRequest();
                 }
                 Order order = db.Orders.Where(i => i.Id == Id).SingleOrDefault();//Lay ra order
-
                 order.Items = db.OrderDetails.Where(i => i.OrderId == model.Id).ToList(); //Lay ra list chi tiet order cũ
-
-
-
                 order.DateOrder = model.DateOrder;
                 order.DateCreated = DateTime.Now;
                 order.TotalMoney = model.TotalMoney;
@@ -151,7 +150,6 @@ namespace WebAPI.Controllers
                 var ids = model.Items.Select(s => s.Id).ToList();//list item mới truyền lên
 
                 List<OrderDetail> itemRemoves = order.Items.Where(x => !ids.Contains(x.Id)).ToList();
-
                 foreach (var i in itemRemoves)
                 {
                     db.OrderDetails.Remove(i);
@@ -159,21 +157,22 @@ namespace WebAPI.Controllers
 
                 foreach (var item in model.Items)//duyệt list items mới truyền lên chưa có thì thêm vào db có rồi thì update propety
                 {
-                    var o = order.Items.Where(i => i.Id == item.Id).FirstOrDefault();
-                    if (o != null)
+                    var orderDetail = db.OrderDetails.Where(i => i.Id == item.Id).FirstOrDefault();// lấy 1 chi tiết có id sản phẩm = id sản phẩm truyền lên
+
+                    if (orderDetail != null)
                     {
-                        o.Quantity = item.Quantity;
-                        o.Price = item.Price;
+                        orderDetail.Quantity = item.Quantity;
+                        orderDetail.Price = item.Price;
                     }
                     else
                     {
                         OrderDetail ord = new OrderDetail();
-                        ord.ProductId = item.ProductId;
+                        ord.ProductId = item.Id;
                         ord.Price = item.Price;
                         ord.Quantity = item.Quantity;
                         order.Items.Add(ord);
                     }
-
+            
                 }
                 db.SaveChanges();
                 return Ok();
@@ -183,8 +182,7 @@ namespace WebAPI.Controllers
             return BadRequest();
         }
         #endregion
-
-
+        #region DELETE ORDER
         //DELETE: Xóa đơn hàng
         [HttpDelete]
         public IHttpActionResult RemoveOrder(int Id)
@@ -198,5 +196,6 @@ namespace WebAPI.Controllers
             }
             return NotFound();
         }
+        #endregion
     }
 }

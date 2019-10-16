@@ -166,7 +166,6 @@ C:\WebProject\GITHUB\WebAPI\WebAPI\bin\System.Web.WebPages.Razor.xml
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\Antlr3.Runtime.pdb
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.csprojAssemblyReference.cache
-C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.pdb
