@@ -9,9 +9,7 @@
         history.back();
     }
     function save() {
-        debugger;
         if (vm.id) {
-            debugger;
             $http({
                 method: "Put",
                 url: "api/Products?id=" + vm.id,
@@ -22,7 +20,6 @@
             })
         }
         else {
-            debugger;
             $http({
                 method: "POST",
                 //url:"api/Product/AddProduct",
@@ -39,7 +36,6 @@
         }
     }
     if (vm.id) {
-        debugger;
         $http({
             method: "GET",
             url: "api/Products?id=" + vm.id,

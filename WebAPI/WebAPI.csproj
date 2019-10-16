@@ -190,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\Controller\Customer\controller.js" />
     <Content Include="App\Controller\Customer\CustomerFormController.js" />
     <Content Include="App\Controller\Order\OrderDetailController.js" />
     <Content Include="App\Controller\Product\ProductFormController.js" />

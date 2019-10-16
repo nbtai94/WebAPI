@@ -16,19 +16,16 @@
     //Get All Product
     getAllCustomer();
     function getAllCustomer() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Customers?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.customers = result.data.data;
             vm.total = result.data.total;
         })
     }
     //Serach
     function search() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Customers/SearchCustomer?key=" + vm.k
@@ -39,21 +36,17 @@
     }
     vm.reload = reload;
     function reload() {
-        debugger
-
         getAllCustomer();
     }
 
     //Phan trang
     function onChangePagination() {
-        debugger;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
             url: "api/Customers?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.customers = result.data.data;
             vm.total = result.data.total;
         })
@@ -76,7 +69,7 @@
             method: 'delete',
             url: "api/Customers/RemoveCustomer?Id=" + item.Id
         }).then(function (response) {
-            debugger;
+        
             toastr["success"]("Xóa thành công!")
             getAllCustomer();
         }, function (error) {
@@ -89,11 +82,9 @@
     vm.sortColumn = 'Id';
     vm.reverse = false;
     function sortBy(col,reverse) {
-        debugger;
+        
         switch (col) {
-            case "Id": {
-                vm.sortColumn = 'Id'; break;
-            }
+        
             case "Name": {
                 vm.sortColumn = 'Name'; break;
             }

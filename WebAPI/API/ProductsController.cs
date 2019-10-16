@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult SearchProduct(/*SearchViewModel model*/ string k)
         {
-            var result = db.Products.OrderBy(x => x.Id).Where(x => x.Name.Contains(k) || x.Category.Contains(k) || k == null)
+            var result = db.Products.OrderBy(x => x.Id).Where(x => x.Name.Contains(k) || x.Category.Contains(k) || string.IsNullOrEmpty(k))
         
                 .Select(s => new ProductViewModel
                 {

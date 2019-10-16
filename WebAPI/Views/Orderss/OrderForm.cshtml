@@ -12,10 +12,21 @@
     .form-group {
         margin: 0;
     }
-    .mgt-20{
-        margin-top:20px;
+
+    .mgt-20 {
+        margin-top: 20px;
     }
- 
+      .table1{
+   overflow-y:scroll;
+   height:550px;
+   display:block;
+}
+    .table2{
+   overflow-y:scroll;
+   height:450px;
+   display:block;
+}
+
 </style>
 
 <div ng-controller="OrderFormController as vm" class="container">
@@ -27,11 +38,11 @@
     <div class="row">
         <form id="frmAdd" name="frmAdd" novalidate>
             <div class="col-md-12">
-                <button type="button" class="btn btn-sm btn-primary" ng-click="vm.save()" >Lưu</button>
-                <button type="button" class="btn btn-sm  btn-default " ng-click="vm.back()">Bỏ qua</button>
+                <button type="button" class="btn btn-sm btn-primary" ng-click="vm.save()">Lưu</button>
+                <button type="button" class="btn btn-sm  btn-default " ng-click="vm.back()">Quay lại</button>
 
             </div><hr />
-          
+
             <div class="form-group form-inline col-md-12 mgt-20">
                 <div class="row">
                     <div class="col-md-6">
@@ -50,7 +61,7 @@
                                         ng-model="vm.customer.Id" ng-required="true">
                                 </select>
                             </div>
-                          
+
                             <div class="form-group">
                                 <i class="fa fa-check text-success" ng-show="frmAdd.customer.$dirty && frmAdd.customer.$valid"></i>
                                 <span ng-show=" frmAdd.customer.$invalid" class="text-danger">Vui lòng chọn khách hàng!.</span>
@@ -64,7 +75,7 @@
                                 <input name="datepicker" id="datepicker" kendo-date-picker
                                        ng-model="vm.datepicker"
                                        k-ng-model="dataObject"
-                                       style="width: 50%;" ng-required="true" />
+                                       style="width: 50%;" ng-required="true"  @*k-format="'dd/MM/yyyy'"*@/>
                             </div>
                             <div class="form-group">
                                 <i class="fa fa-check text-success" ng-show="frmAdd.datepicker.$dirty && frmAdd.datepicker.$valid"></i>
@@ -82,23 +93,23 @@
 
     <div class="row">
         <div class="col-md-4 table-chooseProduct">
-            <table class="table table-striped table-hover table-bordered text-center ">
+            <table class="table table-striped table-hover table-bordered  table1 ">
 
                 <tr class="active">
-                    @*<th>Ảnh</th>*@
+                    <th>Ảnh</th>
                     <th>Tên sản phẩm</th>
                     <th>Giá</th>
                 </tr>
 
                 <tr ng-repeat="item in vm.products" ng-click="vm.select(item)">
-                    @*<td width="20%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>*@
-                    <td>{{item.Name}}</td>
-                    <td>{{(item.Price|number)+" VNĐ"}}</td>
+                    <td width="20%"><img ng-src="../../Content/Images/{{item.Id}}/product.jpg" class="img-responsive" alt="NO-IMAGE" /></td>
+                    <td class="text-center">{{item.Name}}</td>
+                    <td class="text-right">{{(item.Price|number)+" VNĐ"}}</td>
                 </tr>
             </table>
         </div>
         <div class="col-md-8">
-            <table class="table table-hover table-striped table-bordered text-center table-responsive" style="width:100%">
+            <table class="table table-hover table-striped table-bordered  table2" style="width:100%">
                 <tr class="active">
                     <th>STT</th>
                     <th>Sản phẩm</th>
@@ -108,18 +119,21 @@
                     <th></th>
                 </tr>
                 <tr ng-repeat="item in vm.listItems">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.ProductName}}</td>
-                    <td width="15%"><input type="number" min="1" name="quantity" ng-model="item.Quantity" value="" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>
-                    <td width="15%"><input type="text" name="price" ng-model="item.Price" value="{{item.Price}}" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>
-                    <td>{{(item.Quantity*item.Price|number)+" VNĐ"}}</td>
+                    <td class="text-right">{{$index+1}}</td>
+                    <td class="text-center">{{item.ProductName}}</td>
+                    <td class="text-right" width="15%"><input id="numeric" kendo-numeric-text-box k-min="0" k-max="100" k-ng-model="item.Quantity" k-options="vm.quantity" style="width:100%" ng-model-options="{updateOn:'blur'}" /></td>
+                    @*<td width="15%"><input type="text" name="price" ng-model="item.Price" value="{{item.Price}}" class="form-control" ng-model-options="{updateOn:'blur'}" /></td>*@
+                    <td class="text-right"> <input kendo-numeric-text-box id="currency" type="number" ng-model="item.Price" min="0" style="width: 70%;" k-options="vm.price" /> VNĐ</td>
+                    <td class="text-right" width="20%">{{(item.Quantity*item.Price|number)+" VNĐ"}}</td>
                     <td><button type="button" class="btn btn-sm btn-danger" ng-click="vm.remove($index)">Xóa</button></td>
                 </tr>
-                <tr>
-                    <th colspan="5" class="info">Tổng tiền</th>
-                    <th colspan="2" align="center" class="danger">{{(vm.getTotal()|number)+" VNĐ"}}</th>
-                </tr>
+
             </table>
         </div>
+        <div class="pull-right">
+            <h3 class="text-info">Tổng tiền: <span class="text-danger">{{(vm.getTotal()|number)+" VNĐ"}}</span></h3>
+        </div>
+          
+
     </div>
 </div>

@@ -10,21 +10,17 @@
 
     }
     function save() {
-        debugger;
         if (vm.id) {
-            debugger;
             $http({
                 method: "Put",
                 url: "api/Customers/EditCustomer?id=" + vm.id,
                 data: JSON.stringify(vm.customers)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!")
-                debugger;
 
             })
         }
         else {
-            debugger;
             $http({
                 method: "POST",
                 //url:"api/Product/AddProduct",
@@ -32,7 +28,6 @@
                 datatype: "json",
                 data: JSON.stringify(vm.customers)
             }).then(function (response) {
-                debugger;
                 vm.customers = {};
                 toastr["success"]("Thêm thành công!")
                 $state.go("customer");
@@ -40,7 +35,6 @@
         }
     }
     if (vm.id) {
-        debugger;
         $http({
             method: "GET",
             url: "api/Customers/GetCustomer?id=" + vm.id,

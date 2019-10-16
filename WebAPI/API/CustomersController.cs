@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult SearchCustomer(string key)
         {
-            var result = db.Customers.OrderBy(x => x.Id).Where(x => x.Name.Contains(key) || x.Address.Contains(key) || x.Email.Contains(key) || key == null)
+            var result = db.Customers.OrderBy(x => x.Id).Where(x => x.Name.Contains(key) || x.Address.Contains(key) || x.Email.Contains(key) || string.IsNullOrEmpty(key))
                 .Select(s => new CustomerViewModel
                 {
                     Id = s.Id,

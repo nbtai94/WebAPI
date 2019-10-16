@@ -1,5 +1,6 @@
 ﻿
 app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
+   
     var vm = this;
     vm.id = $stateParams.id;
     vm.products = {};
@@ -36,7 +37,6 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             Price: item.Price,
             Quantity: 1
         }
-        //debugger;
         //var a = (0 == '0')
         //var b = (0 === '0')
         var isExist = vm.listItems.find(x => x.Id === item.Id);
@@ -120,15 +120,11 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             }, function errorCallback(response) {
                     toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
-
-
-
         }
         //ADD ORDER
         else {
             vm.totalMoney = getTotal();
             vm.data = {
-                Id: vm.id,
                 CustomerId: vm.customer.Id,
                 TotalMoney: vm.totalMoney,
                 DateOrder: vm.datepicker,
@@ -137,8 +133,6 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 Status: "",
                 Note: "",
             }
-
-
             $http({
                 method: 'POST',
                 url: '/api/Orders/AddOrder',
@@ -151,15 +145,19 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             }, function errorCallback(response) {
                     toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
-
-
-
-
-
-
         }
-        //COMBOBOX KENDO
-
-
+ 
     }
+
+    //FORTMAT NUMERIC QUANTITY KENDO
+    vm.quantity = {
+        format: "#",
+        decimals: 0
+    }
+     //FORTMAT NUMERIC PRICE KENDO
+    vm.price = {
+        format: "0,",
+        step:1000
+    }
+
 });

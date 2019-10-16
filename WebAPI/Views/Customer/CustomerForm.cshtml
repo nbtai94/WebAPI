@@ -25,11 +25,11 @@
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">Email:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customers.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
+                    <input type="email" ng-model="vm.customers.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
                 </div>
                 <div class="col-sm-6">
                     <i class="fa fa-check text-success" ng-show="frmAdd.email.$dirty && frmAdd.email.$valid"></i>
-                    <span ng-show="frmAdd.email.$touched && frmAdd.email.$invalid" class="text-danger">Email không được để trống!!!.</span>
+                    <span ng-show="frmAdd.email.$touched && frmAdd.email.$invalid" class="text-danger">Email để trống hoặc ko đúng định dạng!!!.</span>
                 </div>
             </div>
             <div class="form-group">

@@ -74,9 +74,9 @@ namespace WebAPI.Controllers
         {
             if (model != null)
             {
-                if (model.Items.Count == 0 || model.DateOrder == null || model.CustomerId == 0)
+                if (model.Items.Count == 0 || model.DateOrder==DateTime.MinValue || model.CustomerId == 0)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
                 Order order = new Order();
                 order.Items = new List<OrderDetail>();
@@ -136,7 +136,7 @@ namespace WebAPI.Controllers
 
             if (model != null)
             {
-                if (model.Items.Count == 0)
+                if (model.Items.Count == 0 || model.DateOrder == DateTime.MinValue || model.CustomerId == 0)
                 {
                     return BadRequest();
                 }

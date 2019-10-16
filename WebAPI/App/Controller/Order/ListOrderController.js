@@ -11,19 +11,16 @@
     vm.getAllOrder();
     //Get All
     function getAllOrder() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Orders?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.orders = result.data.data;
             vm.total = result.data.total;
         })
     }
     //Redirect sang form
     function add() {
-        debugger;
         $state.go("orderform", {});
     }
     vm.edit = edit;
@@ -33,7 +30,6 @@
 
     vm.info = info;
     function info(item) {
-        debugger;
         $state.go("orderdetail", {id:item.Id});
     }
     //Tim kiem
@@ -67,9 +63,7 @@
     vm.reverse = false;
     function sortBy(col, reverse) {
         switch (col) {
-            case "Id": {
-                vm.sortColumn = 'Id'; break;
-            }
+          
             case "CustomerName": {
                 vm.sortColumn = 'CustomerName'; break;
             }

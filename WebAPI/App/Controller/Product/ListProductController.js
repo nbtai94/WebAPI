@@ -16,19 +16,16 @@
     //Get all
 
     function getAllProduct() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Products?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.products = result.data.data;
             vm.total = result.data.total;
         })
     }
     //tim kiem
     function search() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Products/SearchProduct?k=" + vm.k 
@@ -40,14 +37,12 @@
 
     //Phan trang
     function onChangePagination() {
-        debugger;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
             url: "api/Products?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
-            debugger;
             vm.products = result.data.data;
             vm.total = result.data.total;
         })
@@ -68,7 +63,6 @@
             method: 'delete',
             url: "api/Products?key=" + item.Id
         }).then(function (response) {
-            debugger;
             toastr["success"]("Xóa thành công!")
             getAllProduct();
         }, function (error) {
@@ -82,11 +76,8 @@
     vm.sortColumn = 'Id';
     vm.reverse = false;
     function sortBy(col, reverse, show) {
-        debugger;
         switch (col) {
-            case "Id": {
-                vm.sortColumn = 'Id'; break;
-            }
+      
             case "Name": {
                 vm.sortColumn = 'Name'; break;
             }

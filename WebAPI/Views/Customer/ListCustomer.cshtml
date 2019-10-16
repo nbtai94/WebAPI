@@ -24,16 +24,14 @@
         <button class="btn btn-sm btn-primary mg-b-10" ng-click="vm.add()">Thêm</button>
 
         <table class="table table-striped table-bordered table-hover  text-center ">
-            <tr class="success">
-                <th ng-click="vm.sortBy('Id',vm.reverse)"> Id <i class="fas fa-sort"></i></th>
+            <tr>
                 <th ng-click="vm.sortBy('Name',vm.reverse)">Tên khách hàng: <i class="fas fa-sort"></i></th>
                 <th ng-click="vm.sortBy('Email',vm.reverse)">Email <i class="fas fa-sort"></i></th>
                 <th ng-click="vm.sortBy('Address',vm.reverse)">Địa chỉ <i class="fas fa-sort"></i></th>
                 <th ng-click="vm.sortBy('Phone',vm.reverse)">Số điện thoại <i class="fas fa-sort"></i></th>
                 <th></th>
             </tr>
-            <tr ng-repeat="item in vm.customers|orderBy:vm.sortColumn:vm.reverse" class="warning">
-                <td>{{item.Id}}</td>
+            <tr ng-repeat="item in vm.customers|orderBy:vm.sortColumn:vm.reverse" >
                 <td>{{item.Name}}</td>
                 <td>{{item.Email}}</td>
                 <td>{{item.Address}}</td>

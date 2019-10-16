@@ -14,12 +14,10 @@
 
 
     function getOrderDetail() {
-        debugger;
         $http({
             method: "GET",
             url: "api/Orders/GetOrderDetail?Id=" + vm.id
         }).then(function (res) {
-            debugger;
             vm.order = res.data.data;
 
         })
