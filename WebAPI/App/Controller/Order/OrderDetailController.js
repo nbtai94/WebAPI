@@ -16,14 +16,10 @@
     function getOrderDetail() {
         $http({
             method: "GET",
-            url: "api/Orders/GetOrderDetail?Id=" + vm.id
+            url: "api/Orders/GetOrder?Id=" + vm.id
         }).then(function (res) {
             vm.order = res.data.data;
 
         })
     };
-
-
-
-
 });

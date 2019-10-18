@@ -23,6 +23,7 @@ namespace WebAPI.Models
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,8 +42,5 @@ namespace WebAPI.Models
 
             //base.OnModelCreating(modelBuilder);
         }
-
-
-
     }
 }

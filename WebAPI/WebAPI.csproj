@@ -129,6 +129,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ProductCategoriesAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -167,24 +168,31 @@
     <Compile Include="API\OrdersController.cs" />
     <Compile Include="API\ProductsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910070304154_F.cs" />
-    <Compile Include="Migrations\201910070304154_F.Designer.cs">
-      <DependentUpon>201910070304154_F.cs</DependentUpon>
+    <Compile Include="Migrations\201910180441413_F.cs" />
+    <Compile Include="Migrations\201910180441413_F.Designer.cs">
+      <DependentUpon>201910180441413_F.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910181017058_F1.cs" />
+    <Compile Include="Migrations\201910181017058_F1.Designer.cs">
+      <DependentUpon>201910181017058_F1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\WebAPIContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
@@ -192,6 +200,8 @@
     <Content Include="App\app.js" />
     <Content Include="App\Controller\Customer\CustomerFormController.js" />
     <Content Include="App\Controller\Order\OrderDetailController.js" />
+    <Content Include="App\Controller\ProductCategory\categoryFormController.js" />
+    <Content Include="App\Controller\ProductCategory\listCategoriesController.js" />
     <Content Include="App\Controller\Product\ProductFormController.js" />
     <Content Include="App\Controller\Customer\ListCustomer.js" />
     <Content Include="App\Controller\Product\ListProductController.js" />
@@ -1586,10 +1596,11 @@
     <Content Include="Content\Images\6\product.jpg" />
     <Content Include="Content\Images\7\product.jpg" />
     <Content Include="Content\Images\8\product.jpg" />
-    <Content Include="Content\Images\9\product.jpg" />
+    <Content Include="Content\Images\1012\product.jpg" />
     <Content Include="Content\Images\10\product.jpg" />
     <Content Include="Content\Images\11\product.jpg" />
     <Content Include="Content\Images\12\product.jpg" />
+    <Content Include="Content\Images\banner.jpg" />
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -4400,6 +4411,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
@@ -4415,7 +4429,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -4426,9 +4439,16 @@
     <Content Include="Views\Orderss\ListOrder.cshtml" />
     <Content Include="Views\Orderss\OrderForm.cshtml" />
     <Content Include="Views\Orderss\OrderDetail.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\ProductCategory\ListCategories.cshtml" />
+    <Content Include="Views\ProductCategory\CategoryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\cate\" />
+    <Folder Include="Views\ProductCategories\" />
+    <Folder Include="Views\ProductCategoryViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4460,8 +4480,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910070304154_F.resx">
-      <DependentUpon>201910070304154_F.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910180441413_F.resx">
+      <DependentUpon>201910180441413_F.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181017058_F1.resx">
+      <DependentUpon>201910181017058_F1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

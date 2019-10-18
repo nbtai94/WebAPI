@@ -3,14 +3,17 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
    
     var vm = this;
     vm.id = $stateParams.id;
-    vm.products = {};
-    vm.customers = {};
+    vm.products = [{}];
     vm.listItems = [];
-
     vm.getAllCustomer = getAllCustomer;
     vm.getAllProduct = getAllProduct;
     getAllCustomer();
     getAllProduct();
+    vm.save = save;
+    vm.back = back;
+    vm.remove = remove;
+    vm.getTotal = getTotal;
+   
     function getAllCustomer() {
         $http({
             method: "GET",
@@ -31,44 +34,36 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
 
     vm.select = select;
     function select(item) {
+        debugger
         var data = {
-            Id: item.Id,
+            ProductId: item.Id,
             ProductName: item.Name,
             Price: item.Price,
             Quantity: 1
-        }
-        //var a = (0 == '0')
-        //var b = (0 === '0')
-        var isExist = vm.listItems.find(x => x.Id === item.Id);
+        }    
+            vm.order.Items.push(data);
 
-        if (!isExist) {
-            vm.listItems.push(data);
-        }
-        else {
-            isExist.Quantity++;
-            //++isExist.Quantity;
-        }
     }
-    vm.getTotal = getTotal;
     function getTotal() {
         var sum = 0;
-        for (var i = 0; i < vm.listItems.length; i++) {
-            sum += vm.listItems[i].Price * vm.listItems[i].Quantity;
-        }
+        //for (var i = 0; i < vm.listItems.length; i++) {  //Không sử dụng for
+        //    sum += vm.listItems[i].Price * vm.listItems[i].Quantity;
+        //}
+
+
+        angular.forEach(vm.order.Items, function (value) {
+            sum+=value.Quantity*value.Price
+        })
         return sum;
     }
 
-    vm.back = back;
     function back() {
         history.back();
     }
-    vm.remove = remove;
     function remove(index) {
-        vm.listItems.splice(index, 1);
+        vm.order.Items.splice(index, 1);
     }
-    vm.customer;
-    vm.datepicker;
-    vm.save = save;
+
 
     //GET 1 ORDER
     vm.order = {};
@@ -79,40 +74,40 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     function getOrder() {
         $http({
             method: "GET",
-            url: "api/Orders/GetOrderDetail?Id=" + vm.id
+            url: "api/Orders/GetOrder?Id=" + vm.id
         }).then(function (res) {
             vm.order = res.data.data;
-            vm.listItems = vm.order.Items;
-            vm.datepicker = vm.order.DateOrder;
-            vm.customer = {
-                Id: vm.order.CustomerId,
-                Name: vm.order.CustomerName
-            }
+            //vm.listItems = vm.order.Items;  // không sử dụng vm.listItems?
+            //vm.datepicker = vm.order.DateOrder; //Không sử dụng vm.datepicker?
+            //vm.customer = {   //Không sử dụng vm.customer ?
+            //    Id: vm.order.CustomerId,
+            //    Name: vm.order.CustomerName
+            //}
         })
     };
-    vm.orrrder = getOrder();
 
     function save() {
         debugger;
     
         if (vm.id) {
             vm.totalMoney = getTotal();
-            vm.data = {
-                Id: vm.id,
-                CustomerId: vm.customer.Id,
-                TotalMoney: vm.totalMoney,
-                DateOrder: vm.datepicker,
-                DateCreate: vm.datecreate,
-                Status: "",
-                Note: "",
-                Items: vm.listItems,
-            };
-                //EDIT
+  
+            vm.data = { //Không sử dụng vm.data được không ?
+                Id:  vm.id,
+                CustomerId: vm.order.CustomerId,
+                TotalMoney:vm.totalMoney,
+                DateOrder: vm.order.DateOrder,
+                DateCreate:vm.DateCreate,
+                Status:"",
+                Note:"",
+                Items:vm.order.Items,
+            }
+            //EDIT
             $http({
                 method: 'PUT',
                 url: "/api/Orders/EditOrder?Id=" + vm.id,
                 datatype: "JSON",
-                data: JSON.stringify(vm.data)
+                data: angular.toJson(vm.data)
             }).then(function successCallback(response) {
                 toastr["success"]("Chỉnh sửa thành công!")
                 $state.go("order", {});
@@ -125,9 +120,9 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         else {
             vm.totalMoney = getTotal();
             vm.data = {
-                CustomerId: vm.customer.Id,
+                CustomerId: vm.order.CustomerId,
                 TotalMoney: vm.totalMoney,
-                DateOrder: vm.datepicker,
+                DateOrder: vm.order.DateOrder,
                 DateCreate: vm.datecreate,
                 Items: vm.listItems,
                 Status: "",

@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+    <div class="container" ng-controller="listCategoriesController as vm">
+        <div class="breadcrumb">
+            <h3 class="text-info text-center">Danh mục sản phẩm</h3>
+        </div>
+        <button type="button" class="btn btn-sm btn-primary" ng-click="vm.add()" style="margin-bottom:10px;">Thêm</button>
+        <table class="table table-striped">
+            <tr class="active">
+                <th>
+                    Mã danh mục sản phẩm
+                </th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Ngày tạo
+                </th>
+                <th>Thao tác</th>
+            </tr>
+            <tr ng-repeat="item in vm.categories">
+                <td>{{item.CategoryCode}}</td>
+                <td>{{item.CategoryName}}</td>
+                <td>{{item.CreateDate|date:"dd/MM/yyyy"}}</td>
+                <td>
+                    <button type="button" ng-click="vm.edit(item)" class="btn btn-sm btn-warning">Sửa</button>
+                    <button type="button" ng-click="vm.remove(item)" class="btn btn-sm btn-danger">Xóa</button>
+                </td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
+            </div>
+            <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">
+                <div class="breadcrumb small">Total record: {{vm.total}}</div>
+            </div>
+        </div>
+    </div>
+

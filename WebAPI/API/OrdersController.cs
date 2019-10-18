@@ -74,21 +74,21 @@ namespace WebAPI.Controllers
         {
             if (model != null)
             {
-                if (model.Items.Count == 0 || model.DateOrder==DateTime.MinValue || model.CustomerId == 0)
+                if (model.Items.Count == 0 || model.DateOrder==default(DateTime) || model.CustomerId == 0)
                 {
                     return BadRequest();
                 }
                 Order order = new Order();
-                order.Items = new List<OrderDetail>();
+                
                 order.CustomerId = model.CustomerId;
                 order.DateOrder = model.DateOrder;
                 order.DateCreated = DateTime.Now;
                 order.TotalMoney = model.TotalMoney;
-
+                order.Items = new List<OrderDetail>();
                 foreach (var item in model.Items)
                 {
                     OrderDetail ord = new OrderDetail();
-                    ord.ProductId = item.Id;
+                    ord.ProductId = item.ProductId;
                     ord.Price = item.Price;
                     ord.Quantity = item.Quantity;
                     order.Items.Add(ord);
@@ -102,7 +102,7 @@ namespace WebAPI.Controllers
         #endregion
         #region GET ORDER
         [HttpGet]
-        public IHttpActionResult GetOrderDetail(int Id)
+        public IHttpActionResult GetOrder(int Id)
         {
             OrderViewModel response = new OrderViewModel();
             response.Items = new List<OrderDetailViewModel>();
@@ -167,7 +167,7 @@ namespace WebAPI.Controllers
                     else
                     {
                         OrderDetail ord = new OrderDetail();
-                        ord.ProductId = item.Id;
+                        ord.ProductId = item.ProductId;
                         ord.Price = item.Price;
                         ord.Quantity = item.Quantity;
                         order.Items.Add(ord);

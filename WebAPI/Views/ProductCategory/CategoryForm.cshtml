@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="categoryFormController as vm" class="container">
+    <div class="breadcrumb text-info">
+        <h3 ng-if="!vm.id" class="text-center">Thêm danh mục</h3>
+        <h3 ng-if="vm.id" class="text-center">Sửa danh mục</h3>
+    </div>
+
+    <form class="form-horizontal" novalidate id="frmAdd" name="frmAdd">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tên danh mục</label>
+            <div class="col-sm-4">
+                <input type="text" required class="form-control" name="categoryName" id="categoryName" placeholder="Tên danh mục" ng-model="vm.category.CategoryName" value="category.CategoryName">
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-check text-success" ng-show="frmAdd.categoryName.$dirty && frmAdd.categoryName.$valid"></i>
+                <span ng-show="frmAdd.categoryName.$touched && frmAdd.categoryName.$invalid" class="text-danger">Tên danh mục không được để trống!!!.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Mã danh mục</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required name="categoryCode" id="categoryCode" placeholder="Mã danh mục" ng-model="vm.category.CategoryCode" value="category.CategoryCode">
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-check text-success" ng-show="frmAdd.categoryCode.$dirty && frmAdd.categoryCode.$valid"></i>
+                <span ng-show="frmAdd.categoryCode.$touched && frmAdd.categoryCode.$invalid" class="text-danger">Mã danh mục không được để trống!!!.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" ng-click="vm.save()" class="btn btn-sm btn-primary" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
+                <button type="button" ng-click="vm.back()" class="btn btn-sm btn-danger">Quay lại</button>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -23,10 +23,11 @@ namespace WebAPI.Controllers
                 .Take(take)
                 .Select(s => new ProductViewModel
                 {
-                    Id = s.Id,
+                    Id = s.Id,         
                     Name = s.Name,
+                    ProductCategoryId=s.ProductCategory.Id,
+                    ProductCode = s.ProductCode,
                     Price = s.Price,
-                    Category = s.Category
                 });
 
             return Ok(new
@@ -47,7 +48,8 @@ namespace WebAPI.Controllers
                     Id = s.Id,
                     Name = s.Name,
                     Price = s.Price,
-                    Category = s.Category
+                    ProductCategoryId=s.ProductCategory.Id,
+                    ProductCode=s.ProductCode
                 });
 
             return Ok(new
@@ -60,14 +62,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult SearchProduct(/*SearchViewModel model*/ string k)
         {
-            var result = db.Products.OrderBy(x => x.Id).Where(x => x.Name.Contains(k) || x.Category.Contains(k) || string.IsNullOrEmpty(k))
+            var result = db.Products.OrderBy(x => x.Id).Where(x => x.Name.Contains(k) || string.IsNullOrEmpty(k))
         
                 .Select(s => new ProductViewModel
                 {
                     Id = s.Id,
                     Name = s.Name,
                     Price = s.Price,
-                    Category = s.Category
+                    ProductCategoryId=s.ProductCategory.Id,
+                    ProductCode=s.ProductCode
                 });
             var total = result.Count();
             return Ok(new
@@ -84,7 +87,7 @@ namespace WebAPI.Controllers
             var res = new ProductViewModel
             {
                 Id = result.Id,
-                Category = result.Category,
+                //Category = result.Category,
                 Name = result.Name,
                 Price = result.Price
             };

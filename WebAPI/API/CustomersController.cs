@@ -137,12 +137,7 @@ namespace WebAPI.Controllers
                     db.Customers.Remove(cus);
                     db.SaveChanges();
                     return Ok();
-                }
-             
-               
-
-
-
+                }                         
             }
             else
             {

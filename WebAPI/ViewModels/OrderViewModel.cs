@@ -9,6 +9,7 @@ namespace WebAPI.Models
     {
         [Key]
         public int Id { get; set; }
+        public string OrderCode { get; set; }
 
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }

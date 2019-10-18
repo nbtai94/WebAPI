@@ -10,7 +10,7 @@ namespace WebAPI.Models
 
         [Key]
         public int Id { get; set; }
-
+        public string OrderCode { get; set; }
         public int CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
