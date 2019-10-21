@@ -1,6 +1,6 @@
 Mở file ngoài ~Views
 Thêm dòng <add key="webpages:Enabled" value="true" /> vào Webcon.fig
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Gọi $HTTP
 app.controller('MainCtrl', function ($scope, $http){
    $http({
@@ -12,7 +12,7 @@ app.controller('MainCtrl', function ($scope, $http){
 
    });
 }
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Gọi dịch vụ $HTTP với ID
 
 function remove(item) {
@@ -28,7 +28,7 @@ function remove(item) {
         });
 }
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Sử dụng nhiều Action trong 1 API controller:
 thêm vào appstart/web.config
 
@@ -40,15 +40,13 @@ thêm vào appstart/web.config
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
 
-
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Cách căn nội dung trong table vào giữa: Thêm: CSS
 .table > tbody > tr > td {
      vertical-align: middle;
 }
-
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Xử lý ngoại lệ bằng IQ vô cực C#
 
 try
@@ -61,6 +59,85 @@ catch (System.Exception ex)
 }
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Autofit column trong table
+    .table td,
+    .table th {
+        white-space: nowrap;
+        width: 1%;
+    }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cách reset Key Identity về 0 : Add lệnh sau vào NewQuery SQL
+DBCC CHECKIDENT ('[Table]', RESEED, 0);
+GO
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sửa lỗi Possibly unhandled rejection thêm vào app
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Update record bằng Entityframework 
  db.Entry(category).State = EntityState.Modified;
 db.SaveChanges();
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+thêm dòng này vào .state router tránh lỗi loop layout
+ template: '<div ui-view></div>',// 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//GET CATEGORY BIND TO GRID KENDO
+    vm.data = new kendo.data.ObservableArray([]);
+    $http({
+        method: 'GET',
+        type: "json",
+        url: 'api/ProductCategoryAPI/Categories'
+    }).then(function successCallback(response) {
+        vm.grid.dataSource.data(response.data.data);
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
+    vm.mainGridOptions = {
+        dataSource: {
+            data: vm.data,
+            pageSize: 5
+        },
+        sortable: true,
+        pageable: true,
+        //filterable: {
+        //    mode: "row"
+        //},
+        //resizable: true,
+        columns: [{
+            field: "Id",
+            title: "Id",
+            width: "100px"
+        }, {
+            field: "CategoryName",
+                title: "Danh mục sản phẩm ",
+            width: "120px"
+        }]
+    };
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cách check datetime null 
+https://forums.asp.net/t/1964573.aspx?Check+empty+for+dateTime
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Cách FORTMAT NUMERIC QUANTITY KENDO
+<input id="numeric" kendo-numeric-text-box k-min="0" k-max="100" k-ng-model="item.Quantity" k-options="vm.quantity" style="width:100%" ng-model-options="{updateOn:'blur'}" />
+   
+ vm.quantity = {
+        format: "#",
+        decimals: 0
+    }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bắt sự kiện ENTER thêm dòng dưới vào <input>
+ ng-keydown="$event.keyCode === 13 && vm.search()"
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cách Remove $$Haskey trong object JSON
+
+Nếu bạn sử dụng angular.toJson(obj)thay vì JSON.stringify(obj)sau đó Angular sẽ loại bỏ các giá trị sử dụng nội bộ này cho bạn.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
