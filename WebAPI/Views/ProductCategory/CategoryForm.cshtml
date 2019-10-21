@@ -2,10 +2,10 @@
     Layout = null;
 }
 
-<div ng-controller="categoryFormController as vm" class="container">
-    <div class="breadcrumb text-info">
-        <h3 ng-if="!vm.id" class="text-center">Thêm danh mục</h3>
-        <h3 ng-if="vm.id" class="text-center">Sửa danh mục</h3>
+<div ng-controller="categoryFormController as vm" class="container-fluid">
+    <div class="breadcrumb text-success">
+        <h3 ng-if="!vm.id">Thêm danh mục</h3>
+        <h3 ng-if="vm.id">Sửa danh mục</h3>
     </div>
 
     <form class="form-horizontal" novalidate id="frmAdd" name="frmAdd">

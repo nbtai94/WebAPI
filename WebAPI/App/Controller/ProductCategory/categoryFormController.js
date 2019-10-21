@@ -20,7 +20,7 @@
             }).then(function (response) {
                 toastr["success"]("Thêm thành công!");
 
-                $state.go("categories", {});
+                vm.category = {};
 
             }, function errorCallback(res) {
                     toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
@@ -49,6 +49,7 @@
             url: "api/ProductCategoriesAPI/ProductCategory?Id=" + vm.id
         }).then(function successCallback(res) {
             vm.category = res.data.data;
+            debugger;
         }, function errorCallback(res) {
             toastr["error"]("Lỗi rồi bạn ơi thử lại đi!")
         })

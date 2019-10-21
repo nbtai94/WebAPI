@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap',"kendo.directives"]);
+﻿var app = angular.module("app", ['ui.router', 'ui.bootstrap', "kendo.directives"]);
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/dashboard'); // Trang mac dinh
     $stateProvider

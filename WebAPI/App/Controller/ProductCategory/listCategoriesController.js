@@ -51,6 +51,9 @@
         }
         vm.remove = remove;
         function remove(item) {
+            if (!confirm("Có chắc muốn xóa không??")) {
+                return false;
+            }
             debugger;
             $http({
                 method: "DELETE",
@@ -59,7 +62,7 @@
                 toastr["success"]("Đã xóa thành công");
                 getCategories();
             }, function errorCallback() {
-                    toastr["error"]("Lỗi rồi bạn ơi thử lại đi!");
+                    toastr["error"]("Không thể xóa danh mục đã có sản phẩm!");
             })
         }
     }

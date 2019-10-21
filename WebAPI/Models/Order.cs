@@ -14,7 +14,6 @@ namespace WebAPI.Models
         public int CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
-        
         public decimal TotalMoney { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime DateCreated { get; set; }

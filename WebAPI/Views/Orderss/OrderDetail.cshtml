@@ -10,31 +10,44 @@
     }
 
     .pd-20{
-        padding:20px;
+        padding:20px!important;
     }
-    .customer{
+    .box{
         border:1px solid black;
         margin-bottom:5px;
     }
-    
+    .mgb-20{
+        margin-bottom:20px;
+    }
 </style>
 
-<div ng-controller="OrderDetailController as vm" class="container">
+<div ng-controller="OrderDetailController as vm" class="container-fluid">
     <div class="breadcrumb">
-        <h3 class="text-center text-info">Thông tin đơn hàng</h3>
+        <h3 class="text-success ">Đơn hàng</h3>
     </div>
+
     <div class="pd-20">
-        <div class="customer">
+        <div class="mgb-20">
+            <button class="btn btn-sm btn-info" ng-click="vm.print()"><i class="fas fa-print"></i> In</button>
+            <button type="button" ng-click="vm.back()" class="btn btn-sm btn-default">Quay lại</button>
+        </div>
 
-
-            <h4>Thông tin khách hàng:</h4>
-            <h4 class="text-primary">Tên: {{vm.order.CustomerName}}</h4>
-            <h4 class="text-primary">Số điện thoại: {{vm.order.CustomerPhone}}</h4>
-            <h4 class="text-primary"> Địa chỉ :{{vm.order.CustomerAddress}}</h4>
+        <div class="box pd-20">
+            <h4>Thông tin đơn hàng:</h4>
+            <h4 class="text-primary">Mã đơn hàng: <span class="text-danger">{{vm.order.OrderCode}}</span></h4>
+            <h4 class="text-primary">Ngày đặt hàng: <span class="text-danger">{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</span></h4>
 
             <hr />
         </div>
-        <div class="customer">
+        <div class="box pd-20">
+            <h4>Thông tin khách hàng:</h4>
+            <h4 class="text-primary">Tên: <span class="text-danger">{{vm.order.CustomerName}}</span></h4>
+            <h4 class="text-primary">Số điện thoại: <span class="text-danger">{{vm.order.CustomerPhone}}</span></h4>
+            <h4 class="text-primary"> Địa chỉ :<span class="text-danger">{{vm.order.CustomerAddress}}</span></h4>
+
+            <hr />
+        </div>
+        <div class="box pd-20">
             <h4>Thông tin sản phẩm:</h4>
             <table class="table table-hover table-striped table-bordered">
                 <tr class="active">
@@ -53,11 +66,11 @@
                 </tr>
             </table>
             <hr />
-                <h4 class="text-right">
-                    Tổng tiền : <span class="text-danger">
-                        {{(vm.order.TotalMoney|number)+" VNĐ"}}
-                    </span>
-                </h4>
+            <h4 class="text-right">
+                Tổng tiền : <span class="text-danger">
+                    {{(vm.order.TotalMoney|number)+" VNĐ"}}
+                </span>
+            </h4>
         </div>
     </div>
-    </div>
+</div>

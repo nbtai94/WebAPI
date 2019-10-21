@@ -11,15 +11,17 @@
     function back() {
         history.back();
     }
-
-
     function getOrderDetail() {
         $http({
             method: "GET",
-            url: "api/Orders/GetOrder?Id=" + vm.id
+            url: "api/OrdersAPI/Orders?Id=" + vm.id
         }).then(function (res) {
             vm.order = res.data.data;
 
         })
     };
+    vm.print = print;
+    function print() {
+        window.print();
+    }
 });

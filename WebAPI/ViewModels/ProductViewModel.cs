@@ -7,9 +7,11 @@ namespace WebAPI.Models
     {
         public int Id { get; set; }
         public string ProductCode { get; set; }
+        public string Description { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int ProductCategoryId { get; set; }
+        public string ProductCategoryName { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
 }

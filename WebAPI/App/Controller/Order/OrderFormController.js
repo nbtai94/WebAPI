@@ -1,6 +1,6 @@
 ﻿
 app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
-   
+
     var vm = this;
     vm.id = $stateParams.id;
     vm.products = [{}];
@@ -13,7 +13,10 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     vm.back = back;
     vm.remove = remove;
     vm.getTotal = getTotal;
-   
+    vm.order = {
+        Items: [], DateOrder: new Date(),
+    };
+
     function getAllCustomer() {
         $http({
             method: "GET",
@@ -25,7 +28,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     function getAllProduct() {
         $http({
             method: "GET",
-            url: "api/Products/GetAllProducts"
+            url: "api/ProductsAPI/Products"
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;
@@ -33,15 +36,19 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     }
 
     vm.select = select;
+
     function select(item) {
         debugger
-        var data = {
+        data = {
             ProductId: item.Id,
             ProductName: item.Name,
             Price: item.Price,
             Quantity: 1
-        }    
-            vm.order.Items.push(data);
+        }
+
+
+        //vm.order.Items.push(data);
+        vm.order.Items.push(data);
 
     }
     function getTotal() {
@@ -51,8 +58,11 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         //}
 
 
+        //angular.forEach(vm.order.Items, function (value) {
+        //    sum+=value.Quantity*value.Price
+        //})
         angular.forEach(vm.order.Items, function (value) {
-            sum+=value.Quantity*value.Price
+            sum += value.Quantity * value.Price
         })
         return sum;
     }
@@ -61,12 +71,12 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         history.back();
     }
     function remove(index) {
+        //vm.order.Items.splice(index, 1);
         vm.order.Items.splice(index, 1);
     }
 
 
     //GET 1 ORDER
-    vm.order = {};
     vm.getOrder = getOrder;
     if (vm.id) {
         vm.getOrder();
@@ -74,74 +84,53 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     function getOrder() {
         $http({
             method: "GET",
-            url: "api/Orders/GetOrder?Id=" + vm.id
+            url: "api/OrdersAPI/Orders?Id=" + vm.id
         }).then(function (res) {
             vm.order = res.data.data;
-            //vm.listItems = vm.order.Items;  // không sử dụng vm.listItems?
-            //vm.datepicker = vm.order.DateOrder; //Không sử dụng vm.datepicker?
-            //vm.customer = {   //Không sử dụng vm.customer ?
-            //    Id: vm.order.CustomerId,
-            //    Name: vm.order.CustomerName
-            //}
         })
     };
-
+    ///
     function save() {
         debugger;
-    
+
         if (vm.id) {
-            vm.totalMoney = getTotal();
-  
-            vm.data = { //Không sử dụng vm.data được không ?
-                Id:  vm.id,
-                CustomerId: vm.order.CustomerId,
-                TotalMoney:vm.totalMoney,
-                DateOrder: vm.order.DateOrder,
-                DateCreate:vm.DateCreate,
-                Status:"",
-                Note:"",
-                Items:vm.order.Items,
-            }
+            vm.order.DateOrder = kendo.toString(vm.order.DateOrder, 's');
+
+            vm.order.TotalMoney = getTotal();
             //EDIT
             $http({
                 method: 'PUT',
-                url: "/api/Orders/EditOrder?Id=" + vm.id,
+                url: "/api/OrdersAPI/Order?Id=" + vm.id,
                 datatype: "JSON",
-                data: angular.toJson(vm.data)
+                data: angular.toJson(vm.order)
             }).then(function successCallback(response) {
                 toastr["success"]("Chỉnh sửa thành công!")
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                    toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
+                toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
         }
         //ADD ORDER
         else {
-            vm.totalMoney = getTotal();
-            vm.data = {
-                CustomerId: vm.order.CustomerId,
-                TotalMoney: vm.totalMoney,
-                DateOrder: vm.order.DateOrder,
-                DateCreate: vm.datecreate,
-                Items: vm.listItems,
-                Status: "",
-                Note: "",
-            }
+            //vm.order.DateOrder = kendo.toString(vm.order.DateOrder, 's');
+            vm.order.DateOrder = kendo.parseDate(vm.order.DateOrder, "s");
+
+            vm.order.TotalMoney = getTotal();
             $http({
                 method: 'POST',
-                url: '/api/Orders/AddOrder',
+                url: '/api/OrdersAPI/Orders',
                 datatype: "JSON",
-                data:JSON.stringify(vm.data)
+                data: angular.toJson(vm.order)
             }).then(function successCallback(response) {
                 toastr["success"]("Đã thêm đơn hàng!");
                 $state.go("order", {});
                 // when the response is available
             }, function errorCallback(response) {
-                    toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
+                toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
         }
- 
+
     }
 
     //FORTMAT NUMERIC QUANTITY KENDO
@@ -149,10 +138,10 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         format: "#",
         decimals: 0
     }
-     //FORTMAT NUMERIC PRICE KENDO
+    //FORTMAT NUMERIC PRICE KENDO
     vm.price = {
         format: "0,",
-        step:1000
+        step: 1000
     }
 
 });

@@ -13,7 +13,7 @@
     function getAllOrder() {
         $http({
             method: "GET",
-            url: "api/Orders?skip=" + vm.skip + "&take=" + vm.take
+            url: "api/OrdersAPI/Orders?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
             vm.orders = result.data.data;
             vm.total = result.data.total;
@@ -38,7 +38,7 @@
     function search() {
         $http({
             method: "GET",
-            url: "api/Orders/SearchOrder?key=" + vm.k
+            url: "api/OrdersAPI/Orders?key=" + vm.k
         }).then(function (result) {
             vm.orders = result.data.data;
             vm.total = result.data.total;
@@ -51,7 +51,7 @@
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
-            url: "api/Orders/GetOrders?skip=" + vm.skip + "&take=" + vm.take
+            url: "api/OrdersAPI/Orders?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
             vm.orders = result.data.data;
             vm.total = result.data.total;
@@ -94,7 +94,7 @@
         }
         $http({
             method: "DELETE",
-            url: "api/Orders/RemoveOrder?id=" + item.Id,
+            url: "api/OrdersAPI/Delete?Id=" + item.Id,
 
         }).then(function (res) {
             toastr["success"]("Đã xóa đơn hàng!")

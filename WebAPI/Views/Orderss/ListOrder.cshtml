@@ -4,25 +4,16 @@
 }
 
 <style>
-    th {
-        text-align: center;
+
+    th{
+        text-align:center;
     }
-
-    .mg-b-10 {
-        margin-bottom: 10px;
-    }
-
-    .container {
-        padding-right: 15px;
-    }
-
-
 </style>
 
 
-<div ng-controller="ListOrderController as vm" class="container">
+<div ng-controller="ListOrderController as vm" class="container-fluid">
     <div class="breadcrumb">
-        <h3 class="text-primary text-success text-center">Danh sách đơn hàng</h3>
+        <h3 class="text-success ">Danh sách đơn hàng</h3>
     </div>
     <form class="form-group form-inline search pull-right">
         <div>
@@ -43,9 +34,9 @@
             </th>
         </tr>
         <tr ng-repeat="item in vm.orders|orderBy:vm.sortColumn:vm.reverse">
-            <td  class="text-center">{{item.CustomerName}}</td>
-            <td  class="text-center">{{item.CustomerAddress}}</td>
-            <td class="text-center">{{item.CustomerPhone}}</td>
+            <td  >{{item.CustomerName}}</td>
+            <td >{{item.CustomerAddress}}</td>
+            <td>{{item.CustomerPhone}}</td>
             <td class="text-right">{{(item.TotalMoney|number)+" VNĐ"}}</td>
             <td class="text-right">{{item.DateOrder|date:"dd/MM/yyyy"}}</td>
             <td class="text-right">{{item.DateCreated|date:"dd/MM/yyyy"}}</td>
@@ -62,7 +53,7 @@
         </tr>
     </table>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <ul uib-pagination total-items="vm.total" ng-model="vm.currentPage" max-size="5" items-per-page="vm.itemsPerPage" class="pagination-sm" ng-change="vm.onChangePagination()" num-pages="numPages"></ul>
         </div>
         <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">

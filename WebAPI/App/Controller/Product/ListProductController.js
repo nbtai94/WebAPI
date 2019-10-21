@@ -18,7 +18,7 @@
     function getAllProduct() {
         $http({
             method: "GET",
-            url: "api/Products?skip=" + vm.skip + "&take=" + vm.take
+            url: "api/ProductsAPI/Products?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;
@@ -28,7 +28,7 @@
     function search() {
         $http({
             method: "GET",
-            url: "api/Products/SearchProduct?k=" + vm.k 
+            url: "api/ProductsAPI/SearchProduct?k=" + vm.k 
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;
@@ -41,7 +41,7 @@
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
-            url: "api/Products?skip=" + vm.skip + "&take=" + vm.take
+            url: "api/ProductsAPI/Products?skip=" + vm.skip + "&take=" + vm.take
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;
@@ -58,10 +58,9 @@
         if (!confirm("Bạn có chắc muốn xóa sản phẩm này!")) {
             return false;
         }
-
         $http({
             method: 'delete',
-            url: "api/Products?key=" + item.Id
+            url: "api/ProductsAPI/Delete?key=" + item.Id
         }).then(function (response) {
             toastr["success"]("Xóa thành công!")
             getAllProduct();
