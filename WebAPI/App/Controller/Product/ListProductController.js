@@ -7,7 +7,7 @@
     vm.search = search;
     vm.products = [{}];
     vm.currentPage = 1;
-    vm.itemsPerPage = 8;
+    vm.itemsPerPage = 10;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
     vm.take = vm.itemsPerPage;
     vm.onChangePagination = onChangePagination;

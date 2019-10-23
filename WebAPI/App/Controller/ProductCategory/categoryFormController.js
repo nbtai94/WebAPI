@@ -20,7 +20,7 @@
             }).then(function (response) {
                 toastr["success"]("Thêm thành công!");
 
-                vm.category = {};
+                vm.back();
 
             }, function errorCallback(res) {
                     toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
@@ -35,7 +35,7 @@
                 data: angular.toJson(vm.category)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!")
-
+                vm.back();
             }, function errorCallback(res) {
                 toastr["error"]("Lỗi rồi bạn ơi thử lại đi!")
             })

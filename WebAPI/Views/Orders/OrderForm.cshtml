@@ -34,8 +34,9 @@
         white-space: nowrap;
         width: 1%;
     }
+
 </style>
-<div ng-controller="OrderFormController as vm" class="container-fluid">
+<div ng-controller="OrderFormController as vm" class="container-fluid  ">
         <div class="breadcrumb col-md-12">
         <h3 class="text-success text-center" ng-if="!vm.id">TẠO ĐƠN HÀNG</h3>
         <h3 class="text-success text-center" ng-if="vm.id">SỬA ĐƠN HÀNG</h3>
@@ -62,7 +63,6 @@
                                 style="width: 65%"
                                 ng-required="true">
                         </select>
-                        {{vm.order.CustomerId}}
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     <th>Số lượng</th>
                     <th>Đơn giá</th>
                     <th>Thành tiền</th>
-                    <th>Thao tác</th>
+                    <th><button type="button" class="btn btn-sm btn-danger" ng-click="vm.clear()">Clear</button></th>
                 </tr>
                 @*<tr  ng-repeat="item in vm.order.Items">*@
                 <tr ng-repeat="item in vm.order.Items">

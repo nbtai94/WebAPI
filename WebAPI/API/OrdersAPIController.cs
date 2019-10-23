@@ -31,9 +31,9 @@ namespace WebAPI.API
                     DateCreated = s.DateCreated,
                     DateOrder = s.DateOrder,
                     TotalMoney = s.TotalMoney,
-                    OrderCode=s.OrderCode,
+                    OrderCode = s.OrderCode,
                     Note = s.Note,
-                }); ;
+                }); 
             return Ok(new
             {
                 data = result,
@@ -62,6 +62,7 @@ namespace WebAPI.API
             var total = result.Count();
             return Ok(new
             {
+
                 data = result,
                 total = total,
             });
@@ -76,19 +77,23 @@ namespace WebAPI.API
                 {
                     return BadRequest();
                 }
-                Order order = new Order();
-
-                order.CustomerId = model.CustomerId;
-                order.DateOrder = model.DateOrder;
-                order.DateCreated = DateTime.Now;
-                order.TotalMoney = model.TotalMoney;
-                order.Items = new List<OrderDetail>();
+                Order order = new Order
+                {
+                    CustomerId = model.CustomerId,
+                    DateOrder = model.DateOrder,
+                    DateCreated = DateTime.Now,
+                    TotalMoney = model.TotalMoney,
+                    Items = new List<OrderDetail>(),
+                    OrderCode = "DH" + model.DateOrder.ToString()
+                };
                 foreach (var item in model.Items)
                 {
-                    OrderDetail ord = new OrderDetail();
-                    ord.ProductId = item.ProductId;
-                    ord.Price = item.Price;
-                    ord.Quantity = item.Quantity;
+                    OrderDetail ord = new OrderDetail
+                    {
+                        ProductId = item.ProductId,
+                        Price = item.Price,
+                        Quantity = item.Quantity
+                    };
                     order.Items.Add(ord);
                 }
                 db.Orders.Add(order);
@@ -101,26 +106,30 @@ namespace WebAPI.API
         public IHttpActionResult Orders(int Id)
         {
             Order order = db.Orders.Where(i => i.Id == Id).SingleOrDefault();
-            OrderViewModel response = new OrderViewModel();
-            response.Items = new List<OrderDetailViewModel>();
+            OrderViewModel response = new OrderViewModel
+            {
+                Items = new List<OrderDetailViewModel>(),
 
-            response.CustomerAddress = order.Customer.Address;
-            response.CustomerName = order.Customer.Name;
-            response.CustomerPhone = order.Customer.Phone;
-            response.CustomerId = order.CustomerId;
-            response.DateCreated = order.DateCreated;
-            response.DateOrder = order.DateOrder;
-            response.TotalMoney = order.TotalMoney;
-            response.OrderCode = order.OrderCode;
+                CustomerAddress = order.Customer.Address,
+                CustomerName = order.Customer.Name,
+                CustomerPhone = order.Customer.Phone,
+                CustomerId = order.CustomerId,
+                DateCreated = order.DateCreated,
+                DateOrder = order.DateOrder,
+                TotalMoney = order.TotalMoney,
+                OrderCode = order.OrderCode
+            };
 
             foreach (var item in order.Items)
             {
-                OrderDetailViewModel ord = new OrderDetailViewModel();
-                ord.Id = item.Id;
-                ord.ProductId = item.Product.Id;
-                ord.Price = item.Price;
-                ord.Quantity = item.Quantity;
-                ord.ProductName = item.Product.Name;
+                OrderDetailViewModel ord = new OrderDetailViewModel
+                {
+                    Id = item.Id,
+                    ProductId = item.Product.Id,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    ProductName = item.Product.Name
+                };
                 response.Items.Add(ord);
             }
             return Ok(new { data = response });
@@ -161,10 +170,12 @@ namespace WebAPI.API
                     }
                     else
                     {
-                        OrderDetail ord = new OrderDetail();
-                        ord.ProductId = item.ProductId;
-                        ord.Price = item.Price;
-                        ord.Quantity = item.Quantity;
+                        OrderDetail ord = new OrderDetail
+                        {
+                            ProductId = item.ProductId,
+                            Price = item.Price,
+                            Quantity = item.Quantity
+                        };
                         order.Items.Add(ord);
                     }
 

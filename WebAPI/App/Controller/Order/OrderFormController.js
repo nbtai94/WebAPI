@@ -1,10 +1,7 @@
-﻿
-app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
-
+﻿app.controller("OrderFormController", function ($scope, $stateParams, $state, $http) {
     var vm = this;
     vm.id = $stateParams.id;
     vm.products = [{}];
-    vm.listItems = [];
     vm.getAllCustomer = getAllCustomer;
     vm.getAllProduct = getAllProduct;
     getAllCustomer();
@@ -16,7 +13,6 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
     vm.order = {
         Items: [], DateOrder: new Date(),
     };
-
     function getAllCustomer() {
         $http({
             method: "GET",
@@ -34,48 +30,40 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             vm.total = result.data.total;
         })
     }
-
     vm.select = select;
-
     function select(item) {
-        debugger
         data = {
             ProductId: item.Id,
             ProductName: item.Name,
             Price: item.Price,
             Quantity: 1
         }
-
-
-        //vm.order.Items.push(data);
         vm.order.Items.push(data);
-
     }
     function getTotal() {
         var sum = 0;
-        //for (var i = 0; i < vm.listItems.length; i++) {  //Không sử dụng for
+        //for (var i = 0; i < vm.listItems.length; i++) {                       //For
         //    sum += vm.listItems[i].Price * vm.listItems[i].Quantity;
         //}
 
-
-        //angular.forEach(vm.order.Items, function (value) {
+        //vm.order.Items.forEach(function (value) {                         //Foreach JavaScript
         //    sum+=value.Quantity*value.Price
         //})
-        angular.forEach(vm.order.Items, function (value) {
+        angular.forEach(vm.order.Items, function (value) {                  //Foreach Angular
             sum += value.Quantity * value.Price
         })
         return sum;
     }
-
     function back() {
         history.back();
     }
     function remove(index) {
-        //vm.order.Items.splice(index, 1);
         vm.order.Items.splice(index, 1);
     }
-
-
+    vm.clear = clear;
+    function clear() {
+        vm.order.Items = [];
+    }
     //GET 1 ORDER
     vm.getOrder = getOrder;
     if (vm.id) {
@@ -89,13 +77,9 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
             vm.order = res.data.data;
         })
     };
-    ///
     function save() {
-        debugger;
-
         if (vm.id) {
             vm.order.DateOrder = kendo.toString(vm.order.DateOrder, 's');
-
             vm.order.TotalMoney = getTotal();
             //EDIT
             $http({
@@ -130,9 +114,7 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
                 toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
             });
         }
-
     }
-
     //FORTMAT NUMERIC QUANTITY KENDO
     vm.quantity = {
         format: "#",
@@ -143,5 +125,4 @@ app.controller("OrderFormController", function ($scope, $stateParams, $state, $h
         format: "0,",
         step: 1000
     }
-
 });

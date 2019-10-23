@@ -198,15 +198,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\Controller\Customer\CustomerFormController.js" />
-    <Content Include="App\Controller\Order\OrderDetailController.js" />
+    <Content Include="App\Controller\Customer\customerFormController.js" />
+    <Content Include="App\Controller\Order\orderDetailController.js" />
     <Content Include="App\Controller\ProductCategory\categoryFormController.js" />
     <Content Include="App\Controller\ProductCategory\listCategoriesController.js" />
-    <Content Include="App\Controller\Product\ProductFormController.js" />
-    <Content Include="App\Controller\Customer\ListCustomer.js" />
-    <Content Include="App\Controller\Product\ListProductController.js" />
-    <Content Include="App\Controller\Order\ListOrderController.js" />
-    <Content Include="App\Controller\Order\OrderFormController.js" />
+    <Content Include="App\Controller\Product\productFormController.js" />
+    <Content Include="App\Controller\Customer\listCustomer.js" />
+    <Content Include="App\Controller\Product\listProductController.js" />
+    <Content Include="App\Controller\Order\listOrderController.js" />
+    <Content Include="App\Controller\Order\orderFormController.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assests\KendoUI\js\angular.min.js" />
     <Content Include="Assests\KendoUI\js\cultures\kendo.culture.aa-DJ.min.js" />
@@ -6189,9 +6189,9 @@
     <Content Include="Views\Product\ProductForm.cshtml" />
     <Content Include="Views\Customer\ListCustomer.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
-    <Content Include="Views\Orderss\ListOrder.cshtml" />
-    <Content Include="Views\Orderss\OrderForm.cshtml" />
-    <Content Include="Views\Orderss\OrderDetail.cshtml" />
+    <Content Include="Views\Orders\ListOrder.cshtml" />
+    <Content Include="Views\Orders\OrderForm.cshtml" />
+    <Content Include="Views\Orders\OrderDetail.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\ProductCategory\ListCategories.cshtml" />

@@ -7,7 +7,7 @@
         vm.categories = {};
         vm.getCategories = getCategories;
         vm.currentPage = 1;
-        vm.itemsPerPage =5;
+        vm.itemsPerPage =10;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
         vm.take = vm.itemsPerPage;
         vm.onChangePagination = onChangePagination;

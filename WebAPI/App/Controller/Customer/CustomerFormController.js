@@ -17,7 +17,7 @@
                 data: JSON.stringify(vm.customers)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!")
-
+                vm.back()
             })
         }
         else {
@@ -30,7 +30,7 @@
             }).then(function (response) {
                 vm.customers = {};
                 toastr["success"]("Thêm thành công!")
-                $state.go("customer");
+                vm.back()
             })
         }
     }

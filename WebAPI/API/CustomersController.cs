@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
             });
         }
 
-        //POST: AddCUstomer
+        //POST: AddCustomer
         [HttpPost]
         public IHttpActionResult AddCustomer(Customer customer)
         {

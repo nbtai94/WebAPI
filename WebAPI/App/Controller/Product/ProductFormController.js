@@ -27,6 +27,7 @@
                 data: JSON.stringify(vm.product)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!");
+                vm.back();
             });
         }
         else {
@@ -40,7 +41,7 @@
                 debugger;
                 vm.product = {};
                 toastr["success"]("Thêm thành công!"),
-                    $state.go("list")
+                    vm.back();
             })
         }
     }

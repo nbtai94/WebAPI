@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebAPI.Controllers
 {
-    public class OrderssController : Controller
+    public class OrdersController : Controller
     {
         // GET: Order
         public ActionResult ListOrder()

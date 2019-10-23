@@ -12,7 +12,6 @@
     vm.take = vm.itemsPerPage;
     vm.onChangePagination = onChangePagination;
     vm.getAllCustomer = getAllCustomer;
-  
     //Get All Product
     getAllCustomer();
     function getAllCustomer() {
@@ -34,11 +33,6 @@
             vm.total = result.data.total;
         })
     }
-    vm.reload = reload;
-    function reload() {
-        getAllCustomer();
-    }
-
     //Phan trang
     function onChangePagination() {
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
@@ -58,13 +52,11 @@
     function edit(item) {
         $state.go("cusForm", { id: item.Id });
     }
-
     //Xoa
     function remove(item) {
         if (!confirm("Bạn có chắc muốn xóa khách hàng này!")) {
             return false;
         }
-
         $http({
             method: 'delete',
             url: "api/Customers/RemoveCustomer?Id=" + item.Id

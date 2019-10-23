@@ -55,18 +55,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('order', {
             url: '/ListOrder',
             //template: '<div ui-view></div>',
-            templateUrl: '/Orderss/ListOrder'
+            templateUrl: '/Orders/ListOrder'
         })
      
         .state('orderform', {
             url: '/OrderInfo?id',
             //template: '<div ui-view></div>',
-            templateUrl: '/Orderss/OrderForm'
+            templateUrl: '/Orders/OrderForm'
         })
         .state('orderdetail', {
             url: '/OrderInfo?id',
             //template: '<div ui-view></div>',
-            templateUrl: '/Orderss/OrderDetail'
+            templateUrl: '/Orders/OrderDetail'
         })
 });
 
