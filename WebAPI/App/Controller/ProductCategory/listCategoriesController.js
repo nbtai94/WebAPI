@@ -7,21 +7,21 @@
         vm.categories = {};
         vm.getCategories = getCategories;
         vm.currentPage = 1;
-        vm.itemsPerPage =10;
+        vm.itemsPerPage =5;
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-        vm.take = vm.itemsPerPage;
+        vm.top = vm.itemsPerPage;
         vm.onChangePagination = onChangePagination;
   
         //Phan trang
         function onChangePagination() {
             vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-            vm.take = vm.itemsPerPage;
+            vm.top = vm.itemsPerPage;
             $http({
                 method: "GET",
-                url: "api/ProductCategoriesAPI/ProductCategories?skip=" + vm.skip + "&take=" + vm.take
+                url: "odata/ProductCategories?" + "$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top
             }).then(function successCallback(res) {
-                vm.categories = res.data.data;
-                vm.total = res.data.total;
+                vm.categories = res.data.value;
+                vm.total = res.data["@odata.count"];
             })
         }
         //GET Categories
@@ -29,10 +29,11 @@
             debugger
             $http({
                 method: "GET",
-                url: "api/ProductCategoriesAPI/ProductCategories?skip=" + vm.skip + "&take=" + vm.take
+                //url: "api/ProductCategoriesAPI/ProductCategories?skip=" + vm.skip + "&take=" + vm.take
+                url:"odata/ProductCategories?"+"$count=true"+"&$skip="+vm.skip+"&$top="+vm.top
             }).then(function successCallback(res) {
-                vm.categories = res.data.data;
-                vm.total = res.data.total;
+                vm.categories = res.data.value;
+                vm.total = res.data["@odata.count"];
             }, function errorCallback(res) {
                 toastr["error"]("Có lỗi rồi, chưa thể tải được dữ liệu");
             });                    
@@ -57,7 +58,8 @@
             debugger;
             $http({
                 method: "DELETE",
-                url:"api/ProductCategoriesAPI/ProductCategories?Id=" +item.Id
+                //url:"api/ProductCategoriesAPI/ProductCategories?Id=" +item.Id
+                url:"odata/ProductCategories"+"(" +item.Id +")",
             }).then(function successCallback(res) {
                 toastr["success"]("Đã xóa thành công");
                 getCategories();
@@ -65,5 +67,9 @@
                     toastr["error"]("Không thể xóa danh mục đã có sản phẩm!");
             })
         }
+
+        
+
+
     }
 })();

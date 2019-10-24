@@ -28,8 +28,8 @@
                     <button type="button" ng-click="vm.remove(item)" class="btn btn-sm btn-danger">Xóa</button>
                 </td>
             </tr>
-            <tr  ng-if="!vm.categories||(vm.categories).length==0">
-                <td  colspan="4" class="text-center text-danger">
+            <tr ng-if="!vm.categories||(vm.categories).length==0">
+                <td colspan="4" class="text-center text-danger">
                     Không có dữ liệu!
                 </td>
             </tr>
@@ -42,5 +42,6 @@
                 <div class="breadcrumb small">Total record: {{vm.total}}</div>
             </div>
         </div>
+
     </div>
 

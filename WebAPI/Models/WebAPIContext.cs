@@ -42,5 +42,6 @@ namespace WebAPI.Models
 
             //base.OnModelCreating(modelBuilder);
         }
+
     }
 }

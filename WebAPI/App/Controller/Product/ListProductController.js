@@ -19,6 +19,7 @@
         $http({
             method: "GET",
             url: "api/ProductsAPI/Products?skip=" + vm.skip + "&take=" + vm.take
+            
         }).then(function (result) {
             vm.products = result.data.data;
             vm.total = result.data.total;

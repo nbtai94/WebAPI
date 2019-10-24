@@ -24,9 +24,9 @@
     function getAllProduct() {
         $http({
             method: "GET",
-            url: "api/ProductsAPI/Products"
+            url: "odata/Products"
         }).then(function (result) {
-            vm.products = result.data.data;
+            vm.products = result.data.value;
             vm.total = result.data.total;
         })
     }

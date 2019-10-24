@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
 using WebAPI.ViewModels;
@@ -12,7 +8,7 @@ namespace WebAPI.API
 {
     public class ProductsAPIController : ApiController
     {
-        private readonly WebAPIContext db = new WebAPIContext();
+        WebAPIContext db = new WebAPIContext();
         [HttpGet]
         public IHttpActionResult Products(int skip, int take)
         {
@@ -37,7 +33,8 @@ namespace WebAPI.API
         [HttpGet]
         public IHttpActionResult Products()
         {
-            var result = db.Products.Select(s => new ProductViewModel
+
+            var result = db.Products.Select(s => new 
             {
                 Id = s.Id,
                 Name = s.Name,

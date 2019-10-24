@@ -19,8 +19,9 @@
                 data: angular.toJson(vm.category)
             }).then(function (response) {
                 toastr["success"]("Thêm thành công!");
-
+                
                 vm.back();
+                getCategories()
 
             }, function errorCallback(res) {
                     toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
@@ -31,7 +32,8 @@
          
             $http({
                 method: "Put",
-                url: "api/ProductCategoriesAPI/ProductCategory",
+                //url: "api/ProductCategoriesAPI/ProductCategory",
+                url: "odata/ProductCategories"+"("+vm.id+")",
                 data: angular.toJson(vm.category)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!")
@@ -46,10 +48,11 @@
     if (vm.id) {
         $http({
             method: "GET",
-            url: "api/ProductCategoriesAPI/ProductCategory?Id=" + vm.id
+            //url: "api/ProductCategoriesAPI/ProductCategory?Id=" + vm.id
+            url: "odata/ProductCategories" + "(" + vm.id + ")",
+            datatype:"odata"
         }).then(function successCallback(res) {
-            vm.category = res.data.data;
-            debugger;
+            vm.category = res.data;
         }, function errorCallback(res) {
             toastr["error"]("Lỗi rồi bạn ơi thử lại đi!")
         })
