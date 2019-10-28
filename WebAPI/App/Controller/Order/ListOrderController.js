@@ -3,20 +3,20 @@
     vm.orders = [{}];
     vm.add = add;
     vm.getAllOrder = getAllOrder;
-    vm.currentPage=1;
-    vm.itemsPerPage = 10    ;
+    vm.currentPage = 1;
+    vm.itemsPerPage = 5;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-    vm.take = vm.itemsPerPage;
+    vm.top = vm.itemsPerPage;
 
     vm.getAllOrder();
     //Get All
     function getAllOrder() {
         $http({
             method: "GET",
-            url: "api/OrdersAPI/Orders?skip=" + vm.skip + "&take=" + vm.take
+            url: "odata/Orders?" + "$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top,
         }).then(function (result) {
-            vm.orders = result.data.data;
-            vm.total = result.data.total;
+            vm.orders = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     //Redirect sang form
@@ -30,7 +30,7 @@
 
     vm.info = info;
     function info(item) {
-        $state.go("orderdetail", {id:item.Id});
+        $state.go("orderdetail", { id: item.Id });
     }
     //Tim kiem
     vm.search = search;
@@ -51,10 +51,10 @@
         vm.take = vm.itemsPerPage;
         $http({
             method: "GET",
-            url: "api/OrdersAPI/Orders?skip=" + vm.skip + "&take=" + vm.take
+            url: "odata/Orders?" + "$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top,
         }).then(function (result) {
-            vm.orders = result.data.data;
-            vm.total = result.data.total;
+            vm.orders = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     //Sap xep
@@ -63,7 +63,7 @@
     vm.reverse = false;
     function sortBy(col, reverse) {
         switch (col) {
-          
+
             case "CustomerName": {
                 vm.sortColumn = 'CustomerName'; break;
             }
@@ -82,7 +82,7 @@
             case "DateCreated": {
                 vm.sortColumn = 'TotalMoney'; break;
             }
-                
+
         }
         vm.reverse = !reverse;
     }
@@ -94,7 +94,7 @@
         }
         $http({
             method: "DELETE",
-            url: "api/OrdersAPI/Delete?Id=" + item.Id,
+            url: "odata/Orders" + "(" + item.Id + ")",
 
         }).then(function (res) {
             toastr["success"]("Đã xóa đơn hàng!")

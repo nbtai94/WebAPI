@@ -82,17 +82,25 @@ namespace WebAPI.API.OdataAPI
         }
 
         // POST: odata/ProductCategories
-        public IHttpActionResult Post(ProductCategoryViewModel productCategoryViewModel)
+        public IHttpActionResult Post(ProductCategoryViewModel model)
         {
-            if (!ModelState.IsValid)
+            var category = new ProductCategory() {
+                Id = model.Id,
+                CategoryName = model.CategoryName,
+                CategoryCode = model.CategoryCode,
+                CreateDate = DateTime.Now,            
+            };
+            try
             {
-                return BadRequest(ModelState);
+                db.ProductCategories.Add(category);
+                db.SaveChanges();
             }
+            catch 
+            {
+                return BadRequest();
+            }
+            return Ok();
 
-            // TODO: Add create logic here.
-
-            // return Created(productCategoryViewModel);
-            return StatusCode(HttpStatusCode.NotImplemented);
         }
 
 
@@ -109,7 +117,7 @@ namespace WebAPI.API.OdataAPI
             }
             catch
             {
-                throw;
+                return BadRequest();
             }
             return Ok();
 

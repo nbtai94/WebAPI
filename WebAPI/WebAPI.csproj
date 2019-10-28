@@ -185,11 +185,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\OdataAPI\CustomersController.cs" />
     <Compile Include="API\OdataAPI\ProductCategoriesController.cs" />
+    <Compile Include="API\OdataAPI\ProductsController.cs" />
     <Compile Include="API\OrdersAPIController.cs" />
+    <Compile Include="API\OrdersController.cs" />
     <Compile Include="API\ProductCategoriesAPIController.cs" />
     <Compile Include="API\ProductsAPIController.cs" />
-    <Compile Include="API\ProductsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -222,7 +224,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="API\CustomersController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />

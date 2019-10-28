@@ -11,9 +11,9 @@
     }
     $http({
         method: "GET",
-        url: "api/ProductCategoriesAPI/ProductCategories",
+        url: "odata/ProductCategories",
     }).then(function successCallback(res) {
-        vm.categories = res.data.data;
+        vm.categories = res.data.value;
     }, function errorCallback(res) {
         toastr["error"]("Lỗi rồi , ko tải được dữ liệu!");
     })
@@ -23,8 +23,8 @@
         if (vm.id) {
             $http({
                 method: "Put",
-                url: "api/ProductsAPI/Product",
-                data: JSON.stringify(vm.product)
+                url: "odata/Products"+ "("+vm.id+")",
+                data: angular.toJson(vm.product)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!");
                 vm.back();
@@ -33,13 +33,11 @@
         else {
             $http({
                 method: "POST",
-                //url:"api/Product/AddProduct",
-                url: "api/ProductsAPI/Products",
+                //url: "api/ProductsAPI/Products",
+                url:"odata/Products",
                 datatype: "json",
                 data: JSON.stringify(vm.product)
             }).then(function (response) {
-                debugger;
-                vm.product = {};
                 toastr["success"]("Thêm thành công!"),
                     vm.back();
             })
@@ -48,10 +46,13 @@
     if (vm.id) {
         $http({
             method: "GET",
-            url: "api/ProductsAPI/Products?id=" + vm.id,
-        }).then(function (res) {
-            vm.product = res.data
-            debugger;
+            //url: "api/ProductCategoriesAPI/ProductCategory?Id=" + vm.id
+            url: "odata/Products" + "(" + vm.id + ")",
+            datatype: "odata"
+        }).then(function successCallback(res) {
+            vm.product = res.data;
+        }, function errorCallback(res) {
+            toastr["error"]("Lỗi rồi bạn ơi thử lại đi!")
         })
     }
     vm.price = {

@@ -13,8 +13,8 @@
         if (vm.id) {
             $http({
                 method: "Put",
-                url: "api/Customers/EditCustomer?id=" + vm.id,
-                data: JSON.stringify(vm.customers)
+                url: "odata/Customers" + "(" + vm.id + ")",
+                data: angular.toJson(vm.customers)
             }).then(function (res) {
                 toastr["success"]("Chỉnh sửa thành công!")
                 vm.back()
@@ -23,12 +23,11 @@
         else {
             $http({
                 method: "POST",
-                //url:"api/Product/AddProduct",
-                url: "api/Customers/AddCustomer",
+                //url: "api/Customers/AddCustomer",
+                url: "odata/Customers",
                 datatype: "json",
-                data: JSON.stringify(vm.customers)
+                data: angular.toJson(vm.customers)
             }).then(function (response) {
-                vm.customers = {};
                 toastr["success"]("Thêm thành công!")
                 vm.back()
             })
@@ -37,14 +36,14 @@
     if (vm.id) {
         $http({
             method: "GET",
-            url: "api/Customers/GetCustomer?id=" + vm.id,
+            url: "odata/Customers" + "(" + vm.id + ")",
         }).then(function (res) {
             vm.customers = res.data;
         })
     }
 
 
-    
+
 
 
 

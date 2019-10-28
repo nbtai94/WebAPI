@@ -16,9 +16,9 @@
     function getAllCustomer() {
         $http({
             method: "GET",
-            url: "api/Customers/GetAllCustomers"
+            url: "odata/Customers"
         }).then(function (result) {
-            vm.customers = result.data.data;
+            vm.customers = result.data.value;
         })
     }
     function getAllProduct() {
@@ -72,9 +72,9 @@
     function getOrder() {
         $http({
             method: "GET",
-            url: "api/OrdersAPI/Orders?Id=" + vm.id
+            url: "odata/Orders" + "(" + vm.id + ")" + "?$expand=Items",
         }).then(function (res) {
-            vm.order = res.data.data;
+            vm.order = res.data;
         })
     };
     function save() {
@@ -84,7 +84,7 @@
             //EDIT
             $http({
                 method: 'PUT',
-                url: "/api/OrdersAPI/Order?Id=" + vm.id,
+                url: "odata/Orders" + "(" + vm.id + ")",
                 datatype: "JSON",
                 data: angular.toJson(vm.order)
             }).then(function successCallback(response) {
@@ -103,7 +103,7 @@
             vm.order.TotalMoney = getTotal();
             $http({
                 method: 'POST',
-                url: '/api/OrdersAPI/Orders',
+                url: 'odata/Orders',
                 datatype: "JSON",
                 data: angular.toJson(vm.order)
             }).then(function successCallback(response) {

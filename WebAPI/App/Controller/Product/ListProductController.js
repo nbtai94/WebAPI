@@ -7,9 +7,9 @@
     vm.search = search;
     vm.products = [{}];
     vm.currentPage = 1;
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = 5;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-    vm.take = vm.itemsPerPage;
+    vm.top = vm.itemsPerPage;
     vm.onChangePagination = onChangePagination;
     vm.getAllProduct = getAllProduct;
     getAllProduct();
@@ -18,11 +18,10 @@
     function getAllProduct() {
         $http({
             method: "GET",
-            url: "api/ProductsAPI/Products?skip=" + vm.skip + "&take=" + vm.take
-            
+            url: "odata/Products?" + "$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top
         }).then(function (result) {
-            vm.products = result.data.data;
-            vm.total = result.data.total;
+            vm.products = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     //tim kiem
@@ -39,13 +38,13 @@
     //Phan trang
     function onChangePagination() {
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-        vm.take = vm.itemsPerPage;
+        vm.top = vm.itemsPerPage;
         $http({
             method: "GET",
-            url: "api/ProductsAPI/Products?skip=" + vm.skip + "&take=" + vm.take
+            url: "odata/Products?$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top
         }).then(function (result) {
-            vm.products = result.data.data;
-            vm.total = result.data.total;
+            vm.products = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     function add() {
@@ -61,7 +60,8 @@
         }
         $http({
             method: 'delete',
-            url: "api/ProductsAPI/Delete?key=" + item.Id
+            //url: "api/ProductsAPI/Delete?key=" + item.Id
+            url:"odata/Products"+"("+item.Id+")",
         }).then(function (response) {
             toastr["success"]("Xóa thành công!")
             getAllProduct();

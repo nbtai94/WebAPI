@@ -7,9 +7,9 @@
     vm.search = search;
     vm.customers = [{}];
     vm.currentPage = 1;
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = 5;
     vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-    vm.take = vm.itemsPerPage;
+    vm.top = vm.itemsPerPage;
     vm.onChangePagination = onChangePagination;
     vm.getAllCustomer = getAllCustomer;
     //Get All Product
@@ -17,10 +17,11 @@
     function getAllCustomer() {
         $http({
             method: "GET",
-            url: "api/Customers?skip=" + vm.skip + "&take=" + vm.take
+            //url: "api/Customers?skip=" + vm.skip + "&take=" + vm.take
+            url:"odata/Customers?"+"$count=true"+"&$skip="+vm.skip+"&$top="+vm.top,
         }).then(function (result) {
-            vm.customers = result.data.data;
-            vm.total = result.data.total;
+            vm.customers = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     //Serach
@@ -36,13 +37,14 @@
     //Phan trang
     function onChangePagination() {
         vm.skip = (vm.currentPage - 1) * vm.itemsPerPage;
-        vm.take = vm.itemsPerPage;
+        vm.top = vm.itemsPerPage;
         $http({
             method: "GET",
-            url: "api/Customers?skip=" + vm.skip + "&take=" + vm.take
+            url: "odata/Customers?" + "$count=true" + "&$skip=" + vm.skip + "&$top=" + vm.top,
+
         }).then(function (result) {
-            vm.customers = result.data.data;
-            vm.total = result.data.total;
+            vm.customers = result.data.value;
+            vm.total = result.data["@odata.count"];
         })
     }
     //Redirect sang form
@@ -59,7 +61,7 @@
         }
         $http({
             method: 'delete',
-            url: "api/Customers/RemoveCustomer?Id=" + item.Id
+            url: "odata/Customers" +"("+ item.Id+")",
         }).then(function (response) {
         
             toastr["success"]("Xóa thành công!")

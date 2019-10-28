@@ -14,7 +14,7 @@
             debugger;
             $http({
                 method: "POST",
-                url: "api/ProductCategoriesAPI/ProductCategories",
+                url: "odata/ProductCategories",
                 datatype: "json",
                 data: angular.toJson(vm.category)
             }).then(function (response) {

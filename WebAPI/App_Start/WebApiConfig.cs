@@ -13,8 +13,14 @@ namespace WebAPI
         {
          //ODATA
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<ProductViewModel>("Products");
             builder.EntitySet<ProductCategoryViewModel>("ProductCategories");
+            builder.EntitySet<ProductViewModel>("Products");
+            builder.EntitySet<CustomerViewModel>("Customers");
+            builder.EntitySet<OrderViewModel>("Orders");
+
+
+
+            config.Expand();
             config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
             //Enable QUERY ODATA
             config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
