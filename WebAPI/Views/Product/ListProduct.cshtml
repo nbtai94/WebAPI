@@ -2,13 +2,7 @@
     Layout = null;
 }
 <style>
-    th {
-        text-align: center;
-    }
 
-    .mg-b-10 {
-        margin-bottom: 10px;
-    }
 </style>
 <div class="container-fluid">
 
@@ -16,8 +10,8 @@
         <h3 class="text-success text-center">Danh sách sản phẩm</h3>
     </div>
 
-    <div ng-controller="ListProductController as vm">
-        <form class="form-group form-inline search pull-right">
+    <div ng-controller="listProductController as vm">
+        @*<form class="form-group form-inline search pull-right">
             <div>
                 <input type="text" name="txtSearch" placeholder="Tìm kiếm..." ng-model="vm.k" value="" ng-blur="vm.search()"  ng-keydown="$event.keyCode === 13 && vm.search()" class="form-control input-sm" />
                 <button type="button" ng-click="vm.search()" class="btn-sm btn btn-primary">Tìm </button>
@@ -33,7 +27,7 @@
                 <th>
                 </th>
             </tr>
-            <tr  ng-repeat="item in vm.products|orderBy:vm.sortColumn:vm.reverse">
+            <tr  ng-repeat="item in vm.products">
                 <td class="text-center">{{item.ProductCode}}</td>
                 <td class="text-center">{{item.Name}}</td>
                 <td class="text-center">{{item.ProductCategoryName}}</td>
@@ -56,6 +50,29 @@
             <div class="col-md-2 form-group-sm pull-right" style="padding:20px;">
                 <div class="breadcrumb small">Total record: {{vm.total}}</div>
             </div>
+        </div>*@
+        <div class="form-group">
+            <select id="customer" name="customer" kendo-combo-box
+                    k-placeholder="'Search'"
+                    k-data-text-field="'Name'"
+                    k-data-value-field="'Id'"
+                    k-filter="'contains'"
+                    k-auto-bind="true"
+                    k-data-source="vm.dropdowns"
+                    ng-model="vm.dropdowns.Id"
+                    style="width:10%"
+                    ng-required="true">
+            </select>
+            <input type="search"
+                   id="searchBox" class="k-textbox"
+                   ng-model="vm.key" placeholder="Tìm kiếm..." style="width: 100%"
+                   ng-keydown="$event.keyCode === 13 && vm.search(vm.key,vm.dropdowns.Id)" />
+            <button type="button" id="btnSearch"
+                    class="btn btn-sm btn-default"
+                    ng-click="vm.search(vm.key,vm.dropdowns.Id)">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
+        <div kendo-grid="vm.grid" options="vm.mainGridOptions"></div>
     </div>
 </div>

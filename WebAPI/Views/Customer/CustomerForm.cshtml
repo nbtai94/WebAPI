@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
 
-    <div ng-controller="CustomerFormController as vm">
+    <div ng-controller="customerFormController as vm">
         <div class="breadcrumb text-info">
             <h3 ng-if="!vm.id" class="text-center">Thêm khách hàng</h3>
             <h3 ng-if="vm.id" class="text-center">Sửa thông tin khách hàng</h3>
@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Tên khách hàng:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customers.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng" value="{{customers.Name}}" required />
+                    <input type="text" ng-model="vm.customer.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng" value="{{customers.Name}}" required />
                 </div>
                 <div class="col-sm-6">
                     <i class="fa fa-check text-success" ng-show="frmAdd.name.$dirty && frmAdd.name.$valid"></i>
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">Email:</label>
                 <div class="col-sm-4">
-                    <input type="email" ng-model="vm.customers.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
+                    <input type="email" ng-model="vm.customer.Email" name="email" id="email" class="form-control" placeholder="Email" value="{{customers.Email}}" required />
                 </div>
                 <div class="col-sm-6">
                     <i class="fa fa-check text-success" ng-show="frmAdd.email.$dirty && frmAdd.email.$valid"></i>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">Địa chỉ:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customers.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ" value="{{customers.Address}}" required />
+                    <input type="text" ng-model="vm.customer.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ" value="{{customers.Address}}" required />
                 </div>
                 <div class="col-sm-6">
                     <i class="fa fa-check text-success" ng-show="frmAdd.address.$dirty && frmAdd.address.$valid"></i>
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">Số điện thoại:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customers.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại" value="{{customers.Phone}}" required />
+                    <input type="text" ng-model="vm.customer.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại" value="{{customers.Phone}}" required />
                 </div>
                 <div class="col-sm-6">
                     <i class="fa fa-check text-success" ng-show="frmAdd.phone.$dirty && frmAdd.phone.$valid"></i>

@@ -2,9 +2,9 @@
     var vm = this;
     vm.id = $stateParams.id;
     vm.products = [{}];
-    vm.getAllCustomer = getAllCustomer;
+    //vm.getAllCustomer = getAllCustomer;
     vm.getAllProduct = getAllProduct;
-    getAllCustomer();
+    //getAllCustomer();
     getAllProduct();
     vm.save = save;
     vm.back = back;
@@ -13,18 +13,27 @@
     vm.order = {
         Items: [], DateOrder: new Date(),
     };
-    function getAllCustomer() {
-        $http({
-            method: "GET",
-            url: "odata/Customers"
-        }).then(function (result) {
-            vm.customers = result.data.value;
-        })
-    }
+    //function getAllCustomer() {
+    //    $http({
+    //        method: "GET",
+    //        url: "odata/Customers"
+    //    }).then(function (result) {
+    //        vm.customers = result.data.value;
+    //    })
+    //}
+    vm.customerDataSource = {
+        type: "odata-v4",
+        serverFiltering: true,
+        transport: {
+            read: {
+                url: "/odata/Customers",
+            }
+        }
+    };
     function getAllProduct() {
         $http({
             method: "GET",
-            url: "odata/Products"
+            url: "/odata/Products"
         }).then(function (result) {
             vm.products = result.data.value;
             vm.total = result.data.total;
@@ -32,13 +41,23 @@
     }
     vm.select = select;
     function select(item) {
+        debugger;
         data = {
             ProductId: item.Id,
             ProductName: item.Name,
             Price: item.Price,
             Quantity: 1
         }
-        vm.order.Items.push(data);
+        var isExist = vm.order.Items.find(x => x.ProductId === item.Id);
+
+        if (!isExist) {
+            vm.order.Items.push(data);
+        }
+        else {
+            isExist.Quantity++;
+            //++isExist.Quantity;
+        }
+        
     }
     function getTotal() {
         var sum = 0;
@@ -72,7 +91,7 @@
     function getOrder() {
         $http({
             method: "GET",
-            url: "odata/Orders" + "(" + vm.id + ")" + "?$expand=Items",
+            url: "/odata/Orders" + "(" + vm.id + ")" + "?$expand=Items",
         }).then(function (res) {
             vm.order = res.data;
         })
@@ -84,7 +103,7 @@
             //EDIT
             $http({
                 method: 'PUT',
-                url: "odata/Orders" + "(" + vm.id + ")",
+                url: "/odata/Orders" + "(" + vm.id + ")",
                 datatype: "JSON",
                 data: angular.toJson(vm.order)
             }).then(function successCallback(response) {
@@ -103,7 +122,7 @@
             vm.order.TotalMoney = getTotal();
             $http({
                 method: 'POST',
-                url: 'odata/Orders',
+                url: '/odata/Orders',
                 datatype: "JSON",
                 data: angular.toJson(vm.order)
             }).then(function successCallback(response) {

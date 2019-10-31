@@ -12,6 +12,7 @@ using System.Web.Http.OData.Routing;
 using WebAPI.Models;
 using Microsoft.Data.OData;
 using System.Data.Entity;
+using System.Web.OData.Routing;
 
 namespace WebAPI.API.OdataAPI
 {
@@ -27,7 +28,7 @@ namespace WebAPI.API.OdataAPI
             try
             {
                 queryOptions.Validate(_validationSettings);
-                var result = db.Customers.Select(s => new CustomerViewModel
+                var result = db.Customers.OrderByDescending(i => i.Id).Select(s => new CustomerViewModel
                 {
                     Id = s.Id,
                     Name = s.Name,
@@ -50,7 +51,7 @@ namespace WebAPI.API.OdataAPI
             try
             {
                 queryOptions.Validate(_validationSettings);
-                var result = db.Customers.Select(s => new CustomerViewModel
+                var result = db.Customers.Where(i => i.Id == key).Select(s => new CustomerViewModel
                 {
                     Id = s.Id,
                     Name = s.Name,
@@ -66,6 +67,8 @@ namespace WebAPI.API.OdataAPI
             }
 
         }
+     
+
 
         // PUT: odata/Customers(5)
         public IHttpActionResult Put([FromODataUri] int key, CustomerViewModel model)
@@ -93,6 +96,7 @@ namespace WebAPI.API.OdataAPI
         // POST: odata/Customers
         public IHttpActionResult Post(CustomerViewModel model)
         {
+
             var customer = new Customer()
             {
                 Id = model.Id,
@@ -112,9 +116,6 @@ namespace WebAPI.API.OdataAPI
             }
             return Ok();
         }
-
-
-
         // DELETE: odata/Customers(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {

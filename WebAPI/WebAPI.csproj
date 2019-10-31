@@ -188,7 +188,6 @@
     <Compile Include="API\OdataAPI\CustomersController.cs" />
     <Compile Include="API\OdataAPI\ProductCategoriesController.cs" />
     <Compile Include="API\OdataAPI\ProductsController.cs" />
-    <Compile Include="API\WebAPI\CustomersAPIController.cs" />
     <Compile Include="API\WebAPI\OrdersAPIController.cs" />
     <Compile Include="API\OdataAPI\OrdersController.cs" />
     <Compile Include="API\WebAPI\ProductCategoriesAPIController.cs" />
@@ -266,12 +265,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Controller\Customer\listCustomerController.js" />
     <Content Include="App\Controller\Customer\customerFormController.js" />
     <Content Include="App\Controller\Order\orderDetailController.js" />
     <Content Include="App\Controller\ProductCategory\categoryFormController.js" />
     <Content Include="App\Controller\ProductCategory\listCategoriesController.js" />
     <Content Include="App\Controller\Product\productFormController.js" />
-    <Content Include="App\Controller\Customer\listCustomer.js" />
     <Content Include="App\Controller\Product\listProductController.js" />
     <Content Include="App\Controller\Order\listOrderController.js" />
     <Content Include="App\Controller\Order\orderFormController.js" />

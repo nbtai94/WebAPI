@@ -52,7 +52,8 @@ namespace WebAPI.API.OdataAPI
         {
             try
             {
-                Order order = db.Orders.Where(i => i.Id == key).SingleOrDefault();
+                Order order = db.Orders.Where(i => i.Id == key).SingleOrDefault();//Lay order ra
+
                 OrderViewModel result = new OrderViewModel
                 {
                     CustomerId = order.Customer.Id,
@@ -64,12 +65,13 @@ namespace WebAPI.API.OdataAPI
                     DateOrder = order.DateOrder,
                     TotalMoney = order.TotalMoney,
                     Note = order.Note,
-                    Items = new List<OrderDetailViewModel>(),
+                    Items = new List<OrderDetailViewModel>()
                 };
                 foreach (var item in order.Items)
                 {
                     var detail = new OrderDetailViewModel
                     {
+
                         Id = item.Id,
                         ProductId = item.Product.Id,
                         Price = item.Price,
@@ -101,6 +103,7 @@ namespace WebAPI.API.OdataAPI
             order.DateCreated = DateTime.Now;
             order.TotalMoney = model.TotalMoney;
             order.CustomerId = model.CustomerId;
+
             var ids = model.Items.Select(s => s.Id).ToList();//list item mới truyền lên
             List<OrderDetail> itemRemoves = order.Items.Where(x => !ids.Contains(x.Id)).ToList();
             foreach (var i in itemRemoves)
@@ -145,7 +148,7 @@ namespace WebAPI.API.OdataAPI
                 DateCreated = DateTime.Now,
                 DateOrder = model.DateOrder,
                 TotalMoney = model.TotalMoney,
-                OrderCode = "DH" + model.DateOrder.ToString(),
+                OrderCode = "DH" +  model.DateOrder.ToString(),
                 Items = new List<OrderDetail>(),
             };
             foreach (var item in model.Items)

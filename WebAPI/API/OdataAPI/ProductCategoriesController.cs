@@ -17,7 +17,7 @@ namespace WebAPI.API.OdataAPI
         WebAPIContext db = new WebAPIContext();
         // GET: odata/ProductCategories
 
-        [EnableQuery(PageSize = 10)]
+        [EnableQuery]
 
         public IHttpActionResult Get(ODataQueryOptions<ProductCategoryViewModel> queryOptions)
         {
@@ -26,7 +26,7 @@ namespace WebAPI.API.OdataAPI
             {
 
                 queryOptions.Validate(_validationSettings);
-                var result = db.ProductCategories.Select(s => new ProductCategoryViewModel
+                var result = db.ProductCategories.OrderBy(i => i.Id).Select(s => new ProductCategoryViewModel
                 {
                     Id = s.Id,
                     CategoryCode = s.CategoryCode,

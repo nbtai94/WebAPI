@@ -14,9 +14,9 @@
     function getOrderDetail() {
         $http({
             method: "GET",
-            url: "api/OrdersAPI/Orders?Id=" + vm.id
+            url: "/odata/Orders" + "(" + vm.id + ")" + "?$expand=Items",
         }).then(function (res) {
-            vm.order = res.data.data;
+            vm.order = res.data;
 
         })
     };

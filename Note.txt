@@ -216,3 +216,44 @@ $expand=?? (Mở rộng các thực thể liên quan trong object)
 $select=?? (Chọn một vài trường để trả về)
 
 $value=?? Chỉ trả về giá trị của Object ví dụ : {Id:1, Name:"MR Tai"} sử dụng $value trả về 1,Mr Tai
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CUSTOM FORMAT FOR KENDO GRID
+
+
+format date column trong Kendo Grid
+
+  template: "#= kendo.toString(kendo.parseDate(CreateDate, 'yyyy-MM-dd'), 'dd/MM/yyyy') #"
+                ,
+them style cho column
+                attributes: {
+                    style: "text-align: right;"
+                }
+
+format giá tiền:     format: "{0:0,} VNĐ",
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CONFIG FILTER KENDO GRID
++Lọc dữ liệu Filter Kendo với 1 option : đặt extra:false,
++Thay đổi thông báo filter: dùng messages:{info:'text'}
++Thêm chức năng search add dòng: toolbar: ["search"],
+filterable: {
+ 	messages: {
+          info: 'Show items custom message:'
+        },
+        extra:false,
+        operators: {
+          string:{
+             contains: "Contains",
+	  }
+        }
+},
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Odata filter Tìm record có chứa kí tự $filter=contains(Name,'key')
+
+https://localhost:44379/odata/Customers?$filter=contains(Name,'Ali')
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
