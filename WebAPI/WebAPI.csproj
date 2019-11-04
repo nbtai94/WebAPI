@@ -224,6 +224,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CodeManagerController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -232,23 +233,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Migrations\201910180441413_F.cs" />
     <Compile Include="Migrations\201910180441413_F.Designer.cs">
       <DependentUpon>201910180441413_F.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910181017058_F1.cs" />
-    <Compile Include="Migrations\201910181017058_F1.Designer.cs">
-      <DependentUpon>201910181017058_F1.cs</DependentUpon>
+    <Compile Include="Migrations\201911010131346_F1.cs" />
+    <Compile Include="Migrations\201911010131346_F1.Designer.cs">
+      <DependentUpon>201911010131346_F1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910230726135_F2.cs" />
-    <Compile Include="Migrations\201910230726135_F2.Designer.cs">
-      <DependentUpon>201910230726135_F2.cs</DependentUpon>
+    <Compile Include="Migrations\201911010434341_F2.cs" />
+    <Compile Include="Migrations\201911010434341_F2.Designer.cs">
+      <DependentUpon>201911010434341_F2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910231013468_F3.cs" />
-    <Compile Include="Migrations\201910231013468_F3.Designer.cs">
-      <DependentUpon>201910231013468_F3.cs</DependentUpon>
+    <Compile Include="Migrations\201911020116364_F3.cs" />
+    <Compile Include="Migrations\201911020116364_F3.Designer.cs">
+      <DependentUpon>201911020116364_F3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911020148166_F4.cs" />
+    <Compile Include="Migrations\201911020148166_F4.Designer.cs">
+      <DependentUpon>201911020148166_F4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911020223132_F5.cs" />
+    <Compile Include="Migrations\201911020223132_F5.Designer.cs">
+      <DependentUpon>201911020223132_F5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911020447379_F6.cs" />
+    <Compile Include="Migrations\201911020447379_F6.Designer.cs">
+      <DependentUpon>201911020447379_F6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911020755219_F7.cs" />
+    <Compile Include="Migrations\201911020755219_F7.Designer.cs">
+      <DependentUpon>201911020755219_F7.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CodeManager.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -261,7 +280,6 @@
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
@@ -6235,6 +6253,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Script.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.min.js" />
@@ -6264,6 +6283,7 @@
     <Content Include="Views\ProductCategory\ListCategories.cshtml" />
     <Content Include="Views\ProductCategory\CategoryForm.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\CodeManager\CodeManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6301,14 +6321,26 @@
     <EmbeddedResource Include="Migrations\201910180441413_F.resx">
       <DependentUpon>201910180441413_F.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910181017058_F1.resx">
-      <DependentUpon>201910181017058_F1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911010131346_F1.resx">
+      <DependentUpon>201911010131346_F1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910230726135_F2.resx">
-      <DependentUpon>201910230726135_F2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911010434341_F2.resx">
+      <DependentUpon>201911010434341_F2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910231013468_F3.resx">
-      <DependentUpon>201910231013468_F3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911020116364_F3.resx">
+      <DependentUpon>201911020116364_F3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911020148166_F4.resx">
+      <DependentUpon>201911020148166_F4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911020223132_F5.resx">
+      <DependentUpon>201911020223132_F5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911020447379_F6.resx">
+      <DependentUpon>201911020447379_F6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911020755219_F7.resx">
+      <DependentUpon>201911020755219_F7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

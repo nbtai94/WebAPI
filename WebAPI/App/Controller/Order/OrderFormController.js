@@ -11,8 +11,13 @@
     vm.remove = remove;
     vm.getTotal = getTotal;
     vm.order = {
-        Items: [], DateOrder: new Date(),
+        Items: [], DateOrder: new Date(),TotalMoney:0
     };
+    vm.order.DateOrder = kendo.parseDate(vm.order.DateOrder, "s");
+    vm.getOrder = getOrder;
+    vm.select = select;
+    vm.clear = clear;
+
     //function getAllCustomer() {
     //    $http({
     //        method: "GET",
@@ -39,9 +44,7 @@
             vm.total = result.data.total;
         })
     }
-    vm.select = select;
     function select(item) {
-        debugger;
         data = {
             ProductId: item.Id,
             ProductName: item.Name,
@@ -57,14 +60,15 @@
             isExist.Quantity++;
             //++isExist.Quantity;
         }
+        vm.order.TotalMoney= vm.getTotal()
         
     }
     function getTotal() {
+        debugger;
         var sum = 0;
         //for (var i = 0; i < vm.listItems.length; i++) {                       //For
         //    sum += vm.listItems[i].Price * vm.listItems[i].Quantity;
         //}
-
         //vm.order.Items.forEach(function (value) {                         //Foreach JavaScript
         //    sum+=value.Quantity*value.Price
         //})
@@ -73,18 +77,20 @@
         })
         return sum;
     }
+    
+
     function back() {
         history.back();
     }
     function remove(index) {
         vm.order.Items.splice(index, 1);
+        vm.order.TotalMoney = vm.getTotal()
     }
-    vm.clear = clear;
     function clear() {
         vm.order.Items = [];
+        vm.order.TotalMoney = 0;
     }
     //GET 1 ORDER
-    vm.getOrder = getOrder;
     if (vm.id) {
         vm.getOrder();
     }
@@ -98,8 +104,6 @@
     };
     function save() {
         if (vm.id) {
-            vm.order.DateOrder = kendo.toString(vm.order.DateOrder, 's');
-            vm.order.TotalMoney = getTotal();
             //EDIT
             $http({
                 method: 'PUT',
@@ -116,10 +120,6 @@
         }
         //ADD ORDER
         else {
-            //vm.order.DateOrder = kendo.toString(vm.order.DateOrder, 's');
-            vm.order.DateOrder = kendo.parseDate(vm.order.DateOrder, "s");
-
-            vm.order.TotalMoney = getTotal();
             $http({
                 method: 'POST',
                 url: '/odata/Orders',

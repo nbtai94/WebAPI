@@ -19,20 +19,15 @@
             <div class="col-sm-6">
                 <input type="text" ng-model="vm.product.Name" name="name" id="name" class="k-textbox input" placeholder="Tên sản phẩm..." value="{{product.Name}}" required />
             </div>
-            <div class="col-sm-4">
-                <i class="fa fa-check text-success" ng-show="frmAdd.name.$dirty && frmAdd.name.$valid"></i>
-                <span ng-show="frmAdd.name.$touched && frmAdd.name.$invalid" class="text-danger">Tên không được để trống!!!.</span>
-            </div>
+
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Mã sản phẩm <span class="text-danger">*</span>:</label>
-            <div class="col-sm-6">
-                <input type="text" ng-model="vm.product.ProductCode" name="code" id="code" class="input k-textbox" placeholder="Mã sản phẩm..." value="{{product.Code}}" required width="100" />
-            </div>
+            <label for="inputEmail3" class="col-sm-2 control-label">Mã sản phẩm </label>
             <div class="col-sm-4">
-                <i class="fa fa-check text-success" ng-show="frmAdd.code.$dirty && frmAdd.code.$valid"></i>
-                <span ng-show="frmAdd.code.$touched && frmAdd.code.$invalid" class="text-danger">Mã không được để trống!!!.</span>
+                <input type="text"  ng-model="vm.product.ProductCode" name="code" id="code" class="input k-textbox" placeholder="Để trống để tự phát sinh mã..." value="{{product.Code}}" width="100" />
             </div>
+          
+
         </div>
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Danh mục <span class="text-danger">*</span>:</label>
@@ -44,14 +39,11 @@
                         k-filter="'contains'"
                         k-auto-bind="true"
                         k-data-source="vm.categories"
-                        ng-model="vm.product.ProductCategoryId"
-                        style="width: 40%"
+                        k-value-primitive ="true"
+                        k-ng-model="vm.product.ProductCategoryId"
+                        style="width: 35%"
                         required>
                 </select>
-            </div>
-            <div class="col-sm-4">
-                <i class="fa fa-check text-success" ng-show="frmAdd.category.$dirty && frmAdd.category.$valid"></i>
-                <span ng-show="frmAdd.category.$touched && frmAdd.category.$invalid" class="text-danger">Danh mục không được để trống!!!.</span>
             </div>
         </div>
         <div class="form-group">
@@ -59,12 +51,9 @@
             <div class="col-sm-6">
                 <input kendo-numeric-text-box
                        type="number" name="price" id="price"
-                       ng-model="vm.product.Price" required min="0" style="width: 40%;" k-options="vm.price"  k-placeholder="'Giá sản phẩm...'"/> VNĐ
+                       k-ng-model="vm.product.Price" required min="0" style="width: 35%;" k-options="vm.price"  k-placeholder="'Giá sản phẩm...'"/> &nbsp;VNĐ
             </div>
-            <div class="col-sm-4">
-                <i class="fa fa-check text-success" ng-show="frmAdd.category.$dirty && frmAdd.category.$valid"></i>
-                <span ng-show="frmAdd.price.$touched && frmAdd.price.$invalid" class="text-danger">Giá không được để trống!!!.</span>
-            </div>
+
         </div>
 
         <div class="form-group">
@@ -79,7 +68,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary" ng-disabled="!frmAdd.$dirty ||(frmAdd.$dirty && frmAdd.$invalid)">Lưu</button>
+                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary")">Lưu</button>
                 <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
             </div>
         </div>

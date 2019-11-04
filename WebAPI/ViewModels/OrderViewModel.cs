@@ -10,7 +10,6 @@ namespace WebAPI.Models
         [Key]
         public int Id { get; set; }
         public string OrderCode { get; set; }
-
         public decimal TotalMoney { get; set; }
         public DateTime DateOrder { get; set; }
         public DateTime DateCreated { get; set; }

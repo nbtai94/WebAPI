@@ -44,7 +44,10 @@
         </form>
 
         <!-- Navbar -->
-        <ul class="navbar-nav ml-auto ml-md-0">
+        <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
+
+            <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
@@ -81,6 +84,7 @@
                 </div>
             </li>
         </ul>
+        </div>
 
     </nav>
 
@@ -119,13 +123,17 @@
                     <span class="link">Khách hàng</span>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a class="nav-link" ui-sref="codemanager">
+                    <i class="fas fa-barcode"></i>
+                    <span class="link">Quản lý mã</span>
+                </a>
+              
+            </li>
         </ul>
-
         <div id="content-wrapper">
             <div>
                 @RenderBody()
-
             </div>
             <!-- /.container-fluid -->
             <!-- Sticky Footer -->
@@ -198,27 +206,9 @@
     <script src="~/App/Controller/Order/orderFormController.js"></script>
     <script src="~/App/Controller/ProductCategory/listCategoriesController.js"></script>
     <script src="~/App/Controller/ProductCategory/categoryFormController.js"></script>
+    <script src="~/Scripts/Script.js"></script>
 
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "2000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
 
-    </script>
 </body>
 
 </html>

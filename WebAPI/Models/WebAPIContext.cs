@@ -24,22 +24,18 @@ namespace WebAPI.Models
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-
+        public DbSet<CodeManager> CodeManagers { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-          
             //modelBuilder.Entity<Order>()
             //        .HasRequired(c=>c.Customer)
             //        .WithMany()
             //        .WillCascadeOnDelete(false);
-
             //base.OnModelCreating(modelBuilder);
-
             //modelBuilder.Entity<OrderDetail>()
             //       .HasRequired(c => c.Order)
             //       .WithMany()
             //       .WillCascadeOnDelete(true);
-
             //base.OnModelCreating(modelBuilder);
         }
 

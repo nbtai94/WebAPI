@@ -171,7 +171,6 @@ C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.pdb
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.GenerateResource.cache
-C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F1.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\Microsoft.Data.Edm.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\Microsoft.Data.OData.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -249,5 +248,10 @@ C:\WebProject\GITHUB\WebAPI\WebAPI\bin\zh-Hant\System.Spatial.resources.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\System.Web.Cors.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\System.Web.Http.Cors.dll
 C:\WebProject\GITHUB\WebAPI\WebAPI\bin\System.Web.Http.Cors.xml
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F1.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F2.resources
 C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F3.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F4.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F5.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F6.resources
+C:\WebProject\GITHUB\WebAPI\WebAPI\obj\Debug\WebAPI.Migrations.F7.resources

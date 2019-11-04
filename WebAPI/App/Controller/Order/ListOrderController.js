@@ -4,6 +4,8 @@
     vm.add = add;
     vm.remove = remove;
     vm.info = info;
+    vm.search = search;
+
     //vm.getAllOrder = getAllOrder;
     //vm.currentPage = 1;
     //vm.itemsPerPage = 5;
@@ -93,6 +95,30 @@
         });
     }
 
+    //SEARCH
+    vm.dropdowns = [
+        { field: "CustomerName", Name: "Tên khách hàng" },
+        { field: "OrderCode", Name: "Mã đơn hàng" },
+
+    ]
+    function search(key ="", field) {
+        var A = [];
+        debugger
+        if (!field) {
+            toastr["warning"]("Vui lòng chọn cách thức tìm kiếm!");
+        }
+        else if (field === "CustomerName") {
+            A.push({ field: field, operator: "contains", value: key })
+            vm.grid.dataSource.filter({ logic: "or", filters: A });
+        }
+        else {
+            A.push({ field: field, operator: "contains", value: key })
+            vm.grid.dataSource.filter(A);
+        }
+    }
+    
+
+
     //KENDO GRID config
     vm.mainGridOptions = {
         dataSource: {
@@ -102,6 +128,7 @@
             },
             serverPaging: true,
             serverSorting: true,
+            serverFiltering: true,
             sort: { field: "Id", dir: "desc" },
         },
         sortable: true,
@@ -109,9 +136,6 @@
             pageSize: 10,
             refresh: true
         },
-  
-    
-
         dataBound: function () {
             this.expandRow(this.tbody.find("tr.k-master-row").first());
         },
@@ -131,11 +155,11 @@
         }, {
             field: "CustomerAddress",
             title: "Địa chỉ khách hàng",
-            width: "200px"
+            width: "300px"
         }, {
             field: "CustomerPhone",
             title: "Số điện thoại",
-            width: "150px"
+            width: "100px"
         }, {
             field: "TotalMoney",
             title: "Tổng tiền",
@@ -144,30 +168,11 @@
             attributes: {
                 style: "text-align: right;"
             },
-            //Bo loc
-            filterable: {
-                extra: false,
-                messages: {
-                    info: 'Phương thức lọc:',
-                    filter: "Lọc",
-                    clear: "Hủy lọc"
-                },
-                operators: {
-                    string: {
-                        eq: "Bằng",
-                        gte: "Lớn hơn hoặc bằng",
-                        gt: "Lớn hơn",
-                        lte: "Nhỏ hơn hoặc bằng",
-                        lt: "Nhỏ hơn"
-
-                    }
-                }
-            },
         },
         {
             field: "DateOrder",
             title: "Ngày đặt hàng",
-            width: "200px",
+            width: "100px",
             template: "#= kendo.toString(kendo.parseDate(DateOrder, 'yyyy-MM-dd'), 'dd/MM/yyyy') #"
             ,
             attributes: {
@@ -177,13 +182,16 @@
         {
             command: [
                 {
-                    template: "<a class='k-button k-grid-settings' ng-click='vm.edit(dataItem.Id)'><span class='k-icon k-i-edit'></span> Sửa</a>",
+                    template: "<a class='k-button k-grid-settings' ng-click='vm.info(dataItem.Id)' title='Xem chi tiết!'><span class='k-icon k-i-preview'></span> </a>",
                 },
                 {
-                    template: "<a class='k-button  k-grid-settings' ng-click='vm.remove(dataItem.Id)'><span class='k-icon k-i-delete'></span> Xóa</a>",
+                    template: "<a class='k-button k-grid-settings' ng-click='vm.edit(dataItem.Id)' title='Chỉnh sửa đơn hàng!'><span class='k-icon k-i-edit'></span></a>",
+                },
+                {
+                    template: "<a class='k-button  k-grid-settings' ng-click='vm.remove(dataItem.Id)' title='Xóa đơn hàng!'><span class='k-icon k-i-delete'></span></a>",
 
                 },
-            ], title: "&nbsp;", width: "100px"
+            ], title: "&nbsp;", width: "150px"
         },
         ]
     };

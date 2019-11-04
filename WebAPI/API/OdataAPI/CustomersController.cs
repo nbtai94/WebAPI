@@ -13,12 +13,13 @@ using WebAPI.Models;
 using Microsoft.Data.OData;
 using System.Data.Entity;
 using System.Web.OData.Routing;
-
+using WebAPI.Helper;
 namespace WebAPI.API.OdataAPI
 {
 
     public class CustomersController : ODataController
     {
+
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
         WebAPIContext db = new WebAPIContext();
         // GET: odata/Customers
@@ -35,6 +36,8 @@ namespace WebAPI.API.OdataAPI
                     Address = s.Address,
                     Email = s.Email,
                     Phone = s.Phone,
+                    NormalizeName = s.NormalizeName,
+                    CustomerCode = s.CustomerCode
                 });
                 return Ok(result);
             }
@@ -58,6 +61,7 @@ namespace WebAPI.API.OdataAPI
                     Address = s.Address,
                     Email = s.Email,
                     Phone = s.Phone,
+                    CustomerCode = s.CustomerCode
                 }).FirstOrDefault();
                 return Ok(result);
             }
@@ -67,20 +71,46 @@ namespace WebAPI.API.OdataAPI
             }
 
         }
-     
 
 
         // PUT: odata/Customers(5)
         public IHttpActionResult Put([FromODataUri] int key, CustomerViewModel model)
         {
-            var customer = new Customer()
+            var customer = db.Customers.Where(i => i.Id == key).FirstOrDefault();
+            customer.Id = model.Id;
+            customer.Name = model.Name;
+            customer.NormalizeName = Helper.Helper.ConvertToNormalize(model.Name);
+            customer.Address = model.Address;
+            customer.Email = model.Email;
+            customer.Phone = model.Phone;
+            if (string.IsNullOrEmpty(model.CustomerCode))
             {
-                Id = model.Id,
-                Name = model.Name,
-                Address = model.Address,
-                Email = model.Email,
-                Phone = model.Phone
-            };
+                customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
+                if (db.Customers.Where(i => i.CustomerCode == customer.CustomerCode).FirstOrDefault()!=null)
+                {
+                    customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
+                }
+            }
+            else
+            {
+                var exist = db.Customers.Where(i => i.CustomerCode == model.CustomerCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    customer.CustomerCode = model.CustomerCode;
+                }
+                else
+                {
+                    if (customer.Id == exist.Id)
+                    {
+                        customer.CustomerCode = model.CustomerCode;
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+
             try
             {
                 db.Entry(customer).State = EntityState.Modified;
@@ -101,10 +131,32 @@ namespace WebAPI.API.OdataAPI
             {
                 Id = model.Id,
                 Name = model.Name,
+                NormalizeName = Helper.Helper.ConvertToNormalize(model.Name),
                 Address = model.Address,
                 Email = model.Email,
-                Phone = model.Phone
+                Phone = model.Phone,
+                CreateDate = DateTime.Now,
             };
+            if (string.IsNullOrEmpty(model.CustomerCode))
+            {
+                customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
+                if (db.Customers.Where(i => i.CustomerCode == customer.CustomerCode).FirstOrDefault() != null)
+                {
+                    customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
+                }
+            }
+            else
+            {
+                var exist = db.Customers.Where(i => i.CustomerCode == model.CustomerCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    customer.CustomerCode = model.CustomerCode;
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
             try
             {
                 db.Customers.Add(customer);

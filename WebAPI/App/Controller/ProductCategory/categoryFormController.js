@@ -33,7 +33,7 @@
                     getCategories()
 
                 }, function errorCallback(res) {
-                    toastr["error"]("Vui lòng điền đủ thông tin và thử lại!")
+                    toastr["error"]("Chưa đủ thông tin hoặc mã bị trùng, vui lòng thử lại!")
 
                 });
             }

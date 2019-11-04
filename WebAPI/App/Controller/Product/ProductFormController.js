@@ -28,6 +28,8 @@
 
         function save() {
             if (vm.id) {
+                debugger
+
                 $http({
                     method: "Put",
                     url: "/odata/Products" + "(" + vm.id + ")",
@@ -35,7 +37,9 @@
                 }).then(function (res) {
                     toastr["success"]("Chỉnh sửa thành công!");
                     vm.back();
-                });
+                }, function errorCallback(res) {
+                    toastr["error"]("Chưa đủ thông tin hoặc mã sản phẩm bị trùng, vui lòng thử lại!");
+                })
             }
             else {
                 $http({
@@ -47,10 +51,13 @@
                 }).then(function (response) {
                     toastr["success"]("Thêm thành công!"),
                         vm.back();
+                }, function errorCallback(res) {
+                    toastr["error"]("Chưa đủ thông tin hoặc mã sản phẩm bị trùng, vui lòng thử lại!");
                 })
             }
         }
         if (vm.id) {
+            
             $http({
                 method: "GET",
                 //url: "api/ProductCategoriesAPI/ProductCategory?Id=" + vm.id

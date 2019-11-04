@@ -13,6 +13,7 @@ using WebAPI.ViewModels;
 using Microsoft.Data.OData;
 using WebAPI.Models;
 using System.Data.Entity;
+using WebAPI.Helper;
 
 namespace WebAPI.API.OdataAPI
 {
@@ -29,15 +30,20 @@ namespace WebAPI.API.OdataAPI
             try
             {
                 queryOptions.Validate(_validationSettings);
+
                 var result = db.Products.Select(s => new ProductViewModel
                 {
                     Id = s.Id,
                     Name = s.Name,
                     ProductCode = s.ProductCode,
+                    ProductCategoryId=s.ProductCategory.Id,
                     ProductCategoryName = s.ProductCategory.CategoryName,
                     Price = s.Price,
                     Description = s.Description,
+                    NormalizeName = s.NormalizeName
                 });
+
+
                 return Ok(result);
             }
             catch (ODataException ex)
@@ -58,36 +64,58 @@ namespace WebAPI.API.OdataAPI
                 .Select(s => new ProductViewModel
                 {
                     Id = s.Id,
-                    ProductCategoryName=s.ProductCategory.CategoryName,
+                    ProductCategoryName = s.ProductCategory.CategoryName,
                     Name = s.Name,
                     Price = s.Price,
                     ProductCode = s.ProductCode,
                     Description = s.Description,
-                    ProductCategoryId=s.ProductCategory.Id,
+                    ProductCategoryId = s.ProductCategory.Id,
                 }).FirstOrDefault();
             return Ok(result);
         }
 
         // PUT: odata/Products(5)
-        public IHttpActionResult Put([FromODataUri] int key,ProductViewModel model)
+        public IHttpActionResult Put([FromODataUri] int key, ProductViewModel model)
         {
-            Product product = new Product
+            Product product = db.Products.Where(i => i.Id == key).FirstOrDefault();
+            product.Id = model.Id;
+            product.CategoryId = model.ProductCategoryId;
+            product.Price = model.Price;
+            product.Name = model.Name;
+            product.Description = model.Description;
+            product.NormalizeName = Helper.Helper.ConvertToNormalize(model.Name);
+            if (string.IsNullOrEmpty(model.ProductCode))
             {
-                Id = model.Id,
-                ProductCode = model.ProductCode,
-                CategoryId = model.ProductCategoryId,
-                Price = model.Price,
-                Name = model.Name,
-                Description = model.Description,
-            };
+                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
+            }
+            else
+            {
+                var exist = db.Products.Where(i => i.ProductCode == model.ProductCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    product.ProductCode = model.ProductCode;
+                }
+                else
+                {
+                    if (product.Id == exist.Id)
+                    {
+                        product.ProductCode = model.ProductCode;
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+
             try
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                throw new Exception(ex.Message);
             }
             return Ok();
         }
@@ -95,14 +123,32 @@ namespace WebAPI.API.OdataAPI
         // POST: odata/Products
         public IHttpActionResult Post(ProductViewModel model)
         {
-            var product = new Product
+
+            Product product = new Product
             {
                 CategoryId = model.ProductCategoryId,
                 Name = model.Name,
                 Price = model.Price,
-                ProductCode = model.ProductCode,
                 Description = model.Description,
+                CreateDate = DateTime.Now,
+                NormalizeName = Helper.Helper.ConvertToNormalize(model.Name)
             };
+            if (string.IsNullOrEmpty(model.ProductCode))
+            {
+                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
+            }
+            else
+            {
+                var exist = db.Products.Where(i => i.ProductCode == model.ProductCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    product.ProductCode = model.ProductCode;
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
             try
             {
                 db.Products.Add(product);

@@ -9,6 +9,8 @@ namespace WebAPI.ViewModels
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public string NormalizeCategoryName { get; set; }
+
         public string CategoryCode { get; set; }
         public DateTime CreateDate { get; set; }
     }

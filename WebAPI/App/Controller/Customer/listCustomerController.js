@@ -7,6 +7,7 @@
         vm.add = add;
         vm.edit = edit;
         vm.remove = remove;
+        vm.search = search;
         //vm.customers = [{}];
         //vm.currentPage = 1;
         //vm.itemsPerPage =5;
@@ -94,91 +95,62 @@
             });
         }
         //SEARCH
-        vm.search = search;
         vm.dropdowns = [
-            { Id: 1, Name: "Tên" },
-            { Id: 2, Name: "Địa chỉ" },
-            { Id: 3, Name: "Số điện thoại" },
-            { Id: 4, Name: "Email" }
+            { field: "Name", Name: "Tên" },
+            { field: "Address", Name: "Địa chỉ" },
+            { field: "Phone", Name: "Số điện thoại" },
+            { field: "Email", Name: "Email" },
+            { field: "CustomerCode", Name: "Mã khách hàng" }
         ]
-        function search(key="", id) {
-            var A = new Array();
-            switch (id) {
-                case "1": {
-                    debugger;
-                    A.push({ field: "Name", operator: "contains", value: key })
-                    vm.grid.dataSource.filter(A);
-                    break;
-                }
-                case "2": {
-                    debugger;
-                    A.push({ field: "Address", operator: "contains", value: key })
-                    vm.grid.dataSource.filter(A);
-                    break;
-                }
-                case "3": {
-                    debugger;
-                    A.push({ field: "Phone", operator: "contains", value: key })
-                    vm.grid.dataSource.filter(A);
-                    break;
-                }
-                case "4": {
-                    debugger;
-                    A.push({ field: "Email", operator: "contains", value: key })
-                    vm.grid.dataSource.filter(A);
-                    break;
-                }
-                default: {
-                    A = {};
-                    vm.grid.dataSource.filter(A);
-                    toastr["warning"]("Vui lòng chọn cách thức tìm kiếm!");
-                }
+        function search(key = "", field) {
+            var A = [];
+            debugger
+            if (!field) {
+                toastr["warning"]("Vui lòng chọn cách thức tìm kiếm!");
+            }
+            else if (field === "Name") {
+                A.push({ field: field, operator: "contains", value: key })
+                A.push({ field: "NormalizeName", operator: "contains", value: key })
+                vm.grid.dataSource.filter({ logic: "or", filters: A });
+            }
+            else {
+                A.push({ field: field, operator: "contains", value: key })
+                vm.grid.dataSource.filter(A);
             }
         }
-            //KENDO GRID config
-            vm.mainGridOptions = {
-                dataSource: {
-                    type: "odata-v4",
-                    transport: {
-                        read: "/odata/Customers",
-                    },
-                    serverPaging: true,
-                    serverSorting: true,
-                    serverFiltering: true,
-                    sort: { field: "Id", dir: "desc" },//sắp xếp id giảm dần
-                    filter: [
-                        //{ field: vm.dropdowns.Name, operator: "contains", value: vm.key },
-                        //{ field: "Address", operator: "neq", value: "" }
-                    ]
+        //KENDO GRID config
+        vm.mainGridOptions = {
+            dataSource: {
+                type: "odata-v4",
+                transport: {
+                    read: "/odata/Customers",
                 },
-                sortable: true,
-                pageable: {
-                    pageSize: 10,
-                    refresh: true
-                },
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                sort: { field: "Id", dir: "desc" },//sắp xếp id giảm dần
+            },
+            
+            sortable: true,
+            pageable: {
+                pageSize: 10,
+                refresh: true
+            },
+            toolbar: [{
+                template: '<a class="k-button" ng-click="vm.add()">Thêm</a>'
+            },
+            ],
+            columns: [
+                {
+                    field: "CustomerCode",
+                    title: "Mã khách hàng",
+                    width: "150px",
 
-                filterable: {
-                    messages: {
-                        info: 'Chọn phương thức lọc',
-                        filter: "Lọc",
-                        clear: "Hủy lọc"
-                    },
-                    extra: false,
-                    operators: {
-                        string: {
-                            contains: "Chứa kí tự",
-                        }
-                    }
-                },
-                toolbar: [{
-                    template: '<a class="k-button" ng-click="vm.add()">Thêm</a>'
-                },
-
-                ],
-                columns: [{
+                }, {
                     field: "Name",
                     title: "Tên khách hàng",
                     width: "200px",
+
                 }, {
                     field: "Address",
                     title: "Địa chỉ",
@@ -199,11 +171,11 @@
                     }, {
                         template: "<a class='k-button  k-grid-settings' ng-click='vm.remove(dataItem.Id)'><span class='k-icon k-i-delete'></span> Xóa</a>",
 
-                    }], title: "&nbsp;", width: "100px"
+                    }], title: "&nbsp;", width: "150px"
                 }],
-                dataBound: function () {
-                    this.expandRow(this.tbody.find("tr.k-master-row").first());
-                },
-            };
-        }
-    }) ();
+            dataBound: function () {
+                this.expandRow(this.tbody.find("tr.k-master-row").first());
+            },
+        };
+    }
+})();

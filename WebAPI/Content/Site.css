@@ -29,3 +29,36 @@ body{
 .link {
     font-size: 14px !important;
 }
+#toast-container > div {
+    font-size:1em;
+}
+th {
+    text-align: center;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+
+
+.mgt-20 {
+    margin-top: 20px;
+}
+
+.table1 {
+    overflow-y: scroll;
+    height: 550px;
+    display: block;
+}
+
+.table2 {
+    overflow-y: scroll;
+    height: 450px;
+    display: block;
+}
+
+.table td,
+.table th {
+    white-space: nowrap;
+    width: 1%;
+}

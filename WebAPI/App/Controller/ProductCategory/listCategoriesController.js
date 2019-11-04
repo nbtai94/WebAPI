@@ -7,7 +7,7 @@
         vm.add = add;
         vm.edit = edit;
         vm.remove = remove;
-
+        vm.search = search;
         //vm.categories = {};
         //vm.getCategories = getCategories;
         //vm.currentPage = 1;
@@ -43,11 +43,7 @@
         //        vm.total = res.data["@odata.count"];
         //    })
         //}
-
-
-
         //Add 
-
         function add() {
             $state.go("categoriesForm", {})
         }
@@ -64,7 +60,6 @@
                 //url:"api/ProductCategoriesAPI/ProductCategories?Id=" +item.Id
                 url: "/odata/ProductCategories" + "(" + item + ")",
             }).then(function successCallback(res) {
-                
                 vm.grid.dataSource.read();
                 toastr["success"]("Đã xóa thành công");
             }, function errorCallback() {
@@ -72,7 +67,29 @@
             })
         }
 
-
+        //SEARCH
+        vm.dropdowns = [
+            { field: "CategoryCode", Name: "Mã sản phẩm" },
+            { field: "CategoryName", Name: "Tên danh mục" },
+        ]
+        function search(key, field) {
+            var A = [];
+          
+            debugger
+            if (!field) {
+                toastr["warning"]("Vui lòng chọn cách thức tìm kiếm!");
+            }
+            else if (field === "CategoryName") {
+                A.push({ field: field, operator: "contains", value: key })
+                A.push({ field: "NormalizeCategoryName", operator: "contains", value: key })
+                vm.grid.dataSource.filter({ logic: "or", filters: A });
+            }
+            else {
+                A.push({ field: field, operator: "contains", value: key })
+                vm.grid.dataSource.filter(A);
+            }
+ 
+        }
         //KENDO GRID CONFIG
         vm.mainGridOptions = {
             dataSource: {
@@ -82,23 +99,22 @@
                 },
                 serverPaging: true,
                 serverSorting: true,
+                serverFiltering: true,
                 sort: { field: "Id", dir: "desc" },
             },
             sortable: true,
             pageable: {
-                pageSize: 5,
+                pageSize: 10,
                 refresh: true
             },
-           
-
             dataBound: function () {
                 this.expandRow(this.tbody.find("tr.k-master-row").first());
             },
             toolbar: [
                 {
                     template: '<a class="k-button" ng-click="vm.add()">Thêm</a>'
-                },"search"
-            ],
+                }],
+            //COLUMNS
             columns: [{
                 field: "CategoryCode",
                 title: "Mã danh mục",
@@ -111,11 +127,11 @@
                 field: "CreateDate",
                 title: "Ngày cập nhật",
                 width: "200px",
-                template: "#= kendo.toString(kendo.parseDate(CreateDate, 'yyyy-MM-dd'), 'dd/MM/yyyy') #"
-                ,
+                template: "#= kendo.toString(kendo.parseDate(CreateDate, 'yyyy-MM-dd'), 'dd/MM/yyyy') #",
                 attributes: {
                     style: "text-align: right;"
-                }
+                },
+
             },
             {
                 command: [
@@ -128,50 +144,8 @@
                     },
                 ], title: "&nbsp;", width: "100px"
             },
-
             ]
         };
-        //SEARCH
-        vm.dropdowns = [
-            { Id: 1, Name: "Mã danh mục" },
-            { Id: 2, Name: "Tên danh mục" },
-            { Id: 3, Name: "Ngày cập nhật" },
-        ]
-        vm.search = search;
-        function search(key, id) {
-            debugger
-            switch (id) {
-                case "1": {
-                    $http({
-                        method: "GET",
-                        url: "odata/ProductCategories?" + "$filter=contains(CategoryCode," + "'" + key + "'" + ")"
-                    }).then(function (res) {
-                        vm.grid.dataSource = res.data;
 
-                        debugger
-                    })
-                    break;
-                }
-                case "2": {
-                    $http({
-                        method: "GET",
-                        url: "odata/ProductCategories?" + "$filter=contains(CategoryName," + "'" + key + "'" + ")"
-                    }).then(function (res) {
-                    })
-                    break;
-                }
-                case "3": {
-                    $http({
-                        method: "GET",
-                        url: "odata/ProductCategories?" + "$filter=contains(CreateDate," + "'" + key + "'" + ")"
-                    }).then(function (res) {
-                    })
-                    break;
-                }
-                default: {
-                    toastr["warning"]("Bạn chưa chọn cách thức tìm kiếm, vui lòng thử lại !")
-                }
-            }
-        }
     }
 })();

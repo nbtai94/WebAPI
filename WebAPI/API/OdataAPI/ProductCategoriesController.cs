@@ -8,7 +8,7 @@ using WebAPI.ViewModels;
 using System.Linq;
 using System.Data.Entity;
 using System;
-
+using WebAPI.Helper;
 namespace WebAPI.API.OdataAPI
 {
     public class ProductCategoriesController : ODataController
@@ -18,7 +18,6 @@ namespace WebAPI.API.OdataAPI
         // GET: odata/ProductCategories
 
         [EnableQuery]
-
         public IHttpActionResult Get(ODataQueryOptions<ProductCategoryViewModel> queryOptions)
         {
 
@@ -32,6 +31,7 @@ namespace WebAPI.API.OdataAPI
                     CategoryCode = s.CategoryCode,
                     CategoryName = s.CategoryName,
                     CreateDate = s.CreateDate,
+                    NormalizeCategoryName = s.NormalizeCategoryName
                 });
                 return Ok(result);
 
@@ -51,10 +51,10 @@ namespace WebAPI.API.OdataAPI
                 .Where(i => i.Id == key)
                 .Select(s => new ProductCategoryViewModel
                 {
-                   Id=s.Id,
-                   CategoryName=s.CategoryName,
-                   CategoryCode=s.CategoryCode,
-                   CreateDate=s.CreateDate,
+                    Id = s.Id,
+                    CategoryName = s.CategoryName,
+                    CategoryCode = s.CategoryCode,
+                    CreateDate = s.CreateDate,
                 }).FirstOrDefault();
             return Ok(result);
         }
@@ -62,13 +62,40 @@ namespace WebAPI.API.OdataAPI
         // PUT: odata/ProductCategories(5)
         public IHttpActionResult Put([FromODataUri] int key, ProductCategoryViewModel model)
         {
-            ProductCategory category = new ProductCategory
+            ProductCategory category = db.ProductCategories.Where(i => i.Id == key).FirstOrDefault();
+
+            category.Id = model.Id;
+            category.CategoryCode = model.CategoryCode;
+            category.CategoryName = model.CategoryName;
+            category.CreateDate = model.CreateDate;
+            category.NormalizeCategoryName = Helper.Helper.ConvertToNormalize(model.CategoryName);
+            if (string.IsNullOrEmpty(model.CategoryCode))
             {
-                Id=model.Id,
-                CategoryCode=model.CategoryCode,
-                CategoryName=model.CategoryName,
-                CreateDate=model.CreateDate,
-            };
+                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                if (db.ProductCategories.Where(i => i.CategoryCode == category.CategoryCode).FirstOrDefault() != null)
+                {
+                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                }
+            }
+            else
+            {
+                var exist = db.Customers.Where(i => i.CustomerCode == model.CategoryCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    category.CategoryCode = model.CategoryCode;
+                }
+                else
+                {
+                    if (category.Id == exist.Id)
+                    {
+                        category.CategoryCode = model.CategoryCode;
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
             try
             {
                 db.Entry(category).State = EntityState.Modified;
@@ -84,18 +111,39 @@ namespace WebAPI.API.OdataAPI
         // POST: odata/ProductCategories
         public IHttpActionResult Post(ProductCategoryViewModel model)
         {
-            var category = new ProductCategory() {
+            var category = new ProductCategory()
+            {
                 Id = model.Id,
                 CategoryName = model.CategoryName,
-                CategoryCode = model.CategoryCode,
-                CreateDate = DateTime.Now,            
+                CreateDate = DateTime.Now,
+                NormalizeCategoryName = Helper.Helper.ConvertToNormalize(model.CategoryName)
             };
+            if (string.IsNullOrEmpty(model.CategoryCode))
+            {
+                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now,3);
+                if (db.ProductCategories.Where(i => i.CategoryCode == category.CategoryCode).FirstOrDefault() != null)
+                {
+                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                }
+            }
+            else
+            {
+                var exist = db.Customers.Where(i => i.CustomerCode == model.CategoryCode).FirstOrDefault();
+                if (exist == null)
+                {
+                    category.CategoryCode = model.CategoryCode;
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
             try
             {
                 db.ProductCategories.Add(category);
                 db.SaveChanges();
             }
-            catch 
+            catch
             {
                 return BadRequest();
             }
@@ -113,7 +161,7 @@ namespace WebAPI.API.OdataAPI
             {
                 db.ProductCategories.Remove(category);
                 db.SaveChanges();
-             
+
             }
             catch
             {

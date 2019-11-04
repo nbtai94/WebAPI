@@ -80,7 +80,7 @@ namespace WebAPI.API.OdataAPI
                     };
                     result.Items.Add(detail);
                 }
-                
+
                 return Ok(result);
             }
 
@@ -137,19 +137,20 @@ namespace WebAPI.API.OdataAPI
         // POST: odata/Orders
         public IHttpActionResult Post(OrderViewModel model)
         {
-
             if (model.Items.Count == 0 || model.CustomerId == 0)
             {
                 return BadRequest();
             }
+
+            //GENERATE ORDER CODE
             Order order = new Order
             {
                 CustomerId = model.CustomerId,
                 DateCreated = DateTime.Now,
                 DateOrder = model.DateOrder,
                 TotalMoney = model.TotalMoney,
-                OrderCode = "DH" +  model.DateOrder.ToString(),
                 Items = new List<OrderDetail>(),
+                OrderCode = Helper.Helper.GenerateCode(model.DateOrder,4)
             };
             foreach (var item in model.Items)
             {
@@ -171,9 +172,7 @@ namespace WebAPI.API.OdataAPI
                 return BadRequest();
             }
             return Ok();
-
         }
-
         // DELETE: odata/Orders(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {

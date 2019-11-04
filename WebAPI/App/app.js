@@ -23,9 +23,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //template: '<div ui-view></div>',
             templateUrl: '/ProductCategory/CategoryForm'
         })
-
-
-
         .state('list', {
             url: '/ListProduct',
             //template: '<div ui-view></div>',
@@ -41,7 +38,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //template: '<div ui-view></div>',
             templateUrl: '/Customer/ListCustomer'
         })
-
         .state('form', { 
             url: '/Form?id',
             //template: '<div ui-view></div>',
@@ -57,7 +53,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //template: '<div ui-view></div>',
             templateUrl: '/Orders/ListOrder'
         })
-     
         .state('orderform', {
             url: '/OrderInfo?id',
             //template: '<div ui-view></div>',
@@ -67,6 +62,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/OrderInfo?id',
             //template: '<div ui-view></div>',
             templateUrl: '/Orders/OrderDetail'
+        })
+        .state('codemanager', {
+            url: '/CodeManager',
+            templateUrl:'CodeManager/CodeManager'
         })
 });
 

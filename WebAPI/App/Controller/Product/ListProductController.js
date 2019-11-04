@@ -7,6 +7,8 @@
         vm.add = add;
         vm.edit = edit;
         vm.remove = remove;
+        vm.search = search;
+
         //vm.search = search;
         //vm.products = [{}];
         //vm.currentPage = 1;
@@ -73,22 +75,29 @@
                 toastr["error"]("Không thể xóa sản phẩm đã có trong đơn hàng!")
             });
         }
-        ////Sap xep
-        //function sortBy(col, reverse, show) {
-        //    switch (col) {
 
-        //        case "Name": {
-        //            vm.sortColumn = 'Name'; break;
-        //        }
-        //        case "Category": {
-        //            vm.sortColumn = 'Category'; break;
-        //        }
-        //        case "Price": {
-        //            vm.sortColumn = 'Price'; break;
-        //        }
-        //    }
-        //    vm.reverse = !reverse;
-        //}
+        //SEARCH
+        vm.dropdowns = [
+            { field: "ProductCode", Name: "Mã sản phẩm" },
+            { field: "Name", Name: "Tên sản phẩm" },
+            { field: "ProductCategoryName", Name: "Danh mục sản phẩm" },
+        ]
+        function search(key="", field) {
+            var A = [];
+            debugger
+            if (!field) {
+                toastr["warning"]("Vui lòng chọn cách thức tìm kiếm!");
+            }
+            else if (field === "Name") {
+                A.push({ field: field, operator: "contains", value: key })
+                A.push({ field: "NormalizeName", operator: "contains", value: key })
+                vm.grid.dataSource.filter({ logic: "or", filters: A });
+            }
+            else {
+                A.push({ field: field, operator: "contains", value: key })
+                vm.grid.dataSource.filter(A);
+            }
+        }
 
         //KENDO GRID CONFIG
         vm.mainGridOptions = {
@@ -99,6 +108,7 @@
                 },
                 serverPaging: true,
                 serverSorting: true,
+                serverFiltering: true,
                 sort: { field: "Id", dir: "desc" },
             },
             sortable: true,
@@ -107,15 +117,13 @@
                 pageSize: 10,
                 refresh: true
             },
-         
-
             dataBound: function () {
                 this.expandRow(this.tbody.find("tr.k-master-row").first());
             },
             toolbar: [
                 {
                     template: '<a class="k-button" ng-click="vm.add()">Thêm</a>'
-                },"search"
+                }
             ],
             columns: [{
                 field: "ProductCode",
@@ -133,25 +141,8 @@
                 field: "Price",
                 title: "Giá",
                 width: "200px",
-                //Bo loc
-                filterable: {
-                    extra: false,
-                    messages: {
-                        info: 'Phương thức lọc:',
-                        filter: "Lọc",
-                        clear: "Hủy lọc"
-                    },
-                    operators: {
-                        string: {
-                            eq: "Bằng",
-                            gte: "Lớn hơn hoặc bằng",
-                            gt: "Lớn hơn",
-                            lte: "Nhỏ hơn hoặc bằng",
-                            lt: "Nhỏ hơn"
 
-                        }
-                    }
-                },
+
                 //Thuoc tinh format
                 attributes: {
                     style: "text-align: right;"

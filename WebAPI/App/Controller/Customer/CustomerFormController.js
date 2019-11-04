@@ -11,7 +11,7 @@
         vm.save = save;
         vm.customer = {};
         vm.id = $stateParams.id;
-        
+
         function back() {
             history.back();
         }
@@ -26,6 +26,8 @@
                 }).then(function (res) {
                     toastr["success"]("Chỉnh sửa thành công!")
                     vm.back()
+                }, function errorCallback() {
+                    toastr["error"]("Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
                 })
             }
             else {
@@ -38,6 +40,8 @@
                 }).then(function (response) {
                     toastr["success"]("Thêm thành công!")
                     vm.back()
+                }, function errorCallback() {
+                    toastr["error"]("Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
                 })
             }
         }

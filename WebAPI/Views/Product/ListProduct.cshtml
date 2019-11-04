@@ -9,7 +9,7 @@
     <div class="breadcrumb">
         <h3 class="text-success text-center">Danh sách sản phẩm</h3>
     </div>
-
+    
     <div ng-controller="listProductController as vm">
         @*<form class="form-group form-inline search pull-right">
             <div>
@@ -55,21 +55,21 @@
             <select id="customer" name="customer" kendo-combo-box
                     k-placeholder="'Search'"
                     k-data-text-field="'Name'"
-                    k-data-value-field="'Id'"
+                    k-data-value-field="'field'"
                     k-filter="'contains'"
                     k-auto-bind="true"
                     k-data-source="vm.dropdowns"
-                    ng-model="vm.dropdowns.Id"
-                    style="width:10%"
+                    ng-model="vm.dropdowns.field"
+                    style="width:15%"
                     ng-required="true">
             </select>
             <input type="search"
                    id="searchBox" class="k-textbox"
                    ng-model="vm.key" placeholder="Tìm kiếm..." style="width: 100%"
-                   ng-keydown="$event.keyCode === 13 && vm.search(vm.key,vm.dropdowns.Id)" />
+                   ng-keydown="$event.keyCode === 13 && vm.search(vm.key,vm.dropdowns.field)" />
             <button type="button" id="btnSearch"
                     class="btn btn-sm btn-default"
-                    ng-click="vm.search(vm.key,vm.dropdowns.Id)">
+                    ng-click="vm.search(vm.key,vm.dropdowns.field)">
                 <i class="fas fa-search"></i>
             </button>
         </div>
