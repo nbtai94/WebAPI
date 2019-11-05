@@ -1,0 +1,29 @@
+﻿
+@media print{
+    body {
+        margin: 0;
+        color: #000;
+        background-color: #fff;
+    }
+    .navbar{
+        display:none !important;
+    }
+    .sidebar {
+        display: none !important;
+    }
+    footer {
+        display: none !important;
+    }
+    .breadcrumb {
+        display: none !important;
+    }
+    .button {
+        display: none !important;
+    }
+    .info{
+        display:none !important;
+    }
+    .tmtsolution{
+        display:block !important;
+    }
+}

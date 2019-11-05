@@ -27,7 +27,7 @@
                     toastr["success"]("Chỉnh sửa thành công!")
                     vm.back()
                 }, function errorCallback() {
-                    toastr["error"]("Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
+                    toastr["error"]("Có biến rồi đại vương ơi! Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
                 })
             }
             else {
@@ -41,7 +41,7 @@
                     toastr["success"]("Thêm thành công!")
                     vm.back()
                 }, function errorCallback() {
-                    toastr["error"]("Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
+                        toastr["error"]("Có biến rồi đại vương ơi! Chưa đủ thông tin hoặc mã khách hàng bị trùng!")
                 })
             }
         }

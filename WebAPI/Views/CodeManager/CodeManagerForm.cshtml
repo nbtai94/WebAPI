@@ -1,0 +1,35 @@
+﻿
+@{ Layout = null;}
+
+<div class="container-fluid" ng-controller="codeManagerFormController as vm">
+    <div class="panel panel-primary">
+        <div ng-if="vm.code.Element==1" class="panel-heading">Mã khách hàng</div>
+        <div ng-if="vm.code.Element==2" class="panel-heading">Mã Danh mục</div>
+        <div ng-if="vm.code.Element==3" class="panel-heading">Mã Sản phẩm</div>
+        <div ng-if="vm.code.Element==4" class="panel-heading">Mã Đơn hàng</div>
+        <div class="panel-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Tiếp đầu ngữ(Nhập chữ) :<span class="text-danger">(ví dụ SO,KH,DH..)</span></label>
+                    <input  type="text" class="form-control" placeholder="Tiếp đầu ngữ..." ng-model="vm.code.Prefix">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Định dạng ngày tháng <span class="text-danger">(ví dụ dd/MM/yy...)</span></label>
+                    <input  type="text" class="form-control" placeholder="Định dạng ngày" ng-model="vm.code.DateFormat">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Số lượng số 0 trong Index (nhập số) <span class="text-danger">(ví dụ 1,2,3...)</span></label>
+                    <input  type="text" class="form-control" placeholder="First name" ng-model="vm.code.NumberOfZeroInNumber">
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" ng-click="vm.save()">
+                    Lưu
+                </button>
+                <button class="btn btn-danger" ng-click="vm.back()">
+                    Quay lại
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

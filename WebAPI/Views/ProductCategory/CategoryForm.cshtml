@@ -1,13 +1,15 @@
 ﻿@{
     Layout = null;
 }
+    <style>
+     
+    </style>
 <div ng-controller="categoryFormController as vm" class="container-fluid">
     <div class="breadcrumb text-success">
         <h3 ng-if="!vm.id">Thêm danh mục</h3>
         <h3 ng-if="vm.id">Sửa danh mục</h3>
     </div>
-
-    <form class="form-horizontal" novalidate id="frmAdd" name="frmAdd">
+    <form class="form-horizontal" novalidate id="frmCategory" name="frmCategory">
         <div class="form-group">
             <label class="col-sm-2 control-label">Tên danh mục</label>
             <div class="col-sm-4">
@@ -18,15 +20,27 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Mã danh mục</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" required name="categoryCode" id="categoryCode" placeholder="Để trống để tự phát sinh mã..." ng-model="vm.category.CategoryCode">
+                <input type="text" class="form-control"  name="categoryCode" id="categoryCode" placeholder="Để trống để tự phát sinh mã..." ng-model="vm.category.CategoryCode">
             </div>
 
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" ng-click="vm.save()" class="btn btn-sm btn-primary">Lưu</button>
+                <button type="submit" ng-click="vm.save()" class="btn btn-sm btn-primary" >Lưu</button>
                 <button type="button" ng-click="vm.back()" class="btn btn-sm btn-danger">Quay lại</button>
             </div>
         </div>
     </form>
 </div>
+<script>
+    $(document).ready(function () {
+    $("#frmCategory").validate({
+        rules: {
+            categoryName: "required",
+        },
+        messages: {
+            categoryName: "Vui lòng nhập tên danh mục",
+        }
+    });
+});
+</script>

@@ -11,30 +11,30 @@
             <h3 ng-if="vm.id" class="text-center">Sửa thông tin khách hàng</h3>
         </div>
 
-        <form class="form-horizontal" action="" method="post" id="frmAdd" name="frmAdd" novalidate>
+        <form class="form-horizontal" id="frmAdd" name="frmAdd" novalidate>
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">Tên khách hàng:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customer.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng" " required />
+                    <input type="text" ng-model="vm.customer.Name" name="name" id="name" class="form-control" placeholder="Tên khách hàng"  required  />
                 </div>
             </div>
             <div class="form-group">
                 <label for="code" class="col-sm-2 control-label">Mã khách hàng:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customer.CustomerCode" name="code" id="code" class="form-control" placeholder="Để trống để tự phát sinh mã..." " required />
+                    <input type="text" ng-model="vm.customer.CustomerCode" name="code" id="code" class="form-control" placeholder="Để trống để tự phát sinh mã..."  />
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">Email:</label>
                 <div class="col-sm-4">
-                    <input type="email" ng-model="vm.customer.Email" name="email" id="email" class="form-control" placeholder="Email" " required />
+                    <input type="text" ng-model="vm.customer.Email" name="email" id="email" class="form-control" placeholder="Email" required  />
                 </div>
 
             </div>
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">Địa chỉ:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customer.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ"required />
+                    <input type="text" ng-model="vm.customer.Address" name="address" id="address" class="form-control" placeholder="Địa chỉ" required />
                 </div>
 
             </div>
@@ -42,17 +42,34 @@
             <div class="form-group">
                 <label for="price" class="col-sm-2 control-label">Số điện thoại:</label>
                 <div class="col-sm-4">
-                    <input type="text" ng-model="vm.customer.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại"  required />
+                    <input type="text" ng-model="vm.customer.Phone" name="phone" id="phone" class="form-control" placeholder="Số điện thoại" required />
                 </div>
 
             </div>
-
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary">Lưu</button>
+                    <button ng-click="vm.save()" type="submit" class="btn btn-sm btn-primary">Lưu</button>
                     <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#frmAdd").validate({
+            rules: {
+                name: "required",
+                email: "required",
+                address: "required",
+                phone: "required"
+            },
+            messages: {
+                name: "Tên không được để trống",
+                email: "Email không được để trống",
+                address: "Địa chỉ không được để trống",
+                phone: "Điện thoại không được để trống"
+            }
+        });
+    });
+</script>

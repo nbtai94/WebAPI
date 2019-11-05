@@ -1,69 +1,41 @@
 ﻿@{
     Layout = null;
 }
-<div class="container-fluid">
-    <div class="row" style="border:1px solid;padding:50px;margin-bottom:10px;">
 
+<div class="container-fluid" ng-controller="codeManagerController as vm">
+    <h3 class="breadcrumb">Định dạng mã: Tiếp đầu ngữ / định dạng ngày tháng /số lượng số 0 / chỉ mục (<span class="text-danger">ví dụ :DH/2019/001...</span>)</h3>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>PREFIX</label>
-                <input class="form-control" type="text" name="prefix" />
+    <div class="panel-group" ng-repeat="item in vm.codemanager">
+        <div class="panel panel-primary">
+            <div ng-if="item.Element==1" class="panel-heading">Mã khách hàng</div>
+            <div ng-if="item.Element==2" class="panel-heading">Mã Danh mục</div>
+            <div ng-if="item.Element==3" class="panel-heading">Mã Sản phẩm</div>
+            <div ng-if="item.Element==4" class="panel-heading">Mã Đơn hàng</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Tiếp đầu ngữ(Nhập chữ) :<span class="text-danger">(ví dụ SO,KH,DH..)</span></label>
+                            <input readonly type="text" class="form-control" placeholder="Tiếp đầu ngữ..." ng-model="item.Prefix">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Định dạng ngày tháng <span class="text-danger">(ví dụ dd/MM/yy...)</span></label>
+                            <input readonly type="text" class="form-control" placeholder="Định dạng ngày" ng-model="item.DateFormat">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Số lượng số 0 trong Index (nhập số) <span class="text-danger">(ví dụ 1,2,3...)</span></label>
+                            <input readonly type="text" class="form-control" placeholder="First name" ng-model="item.NumberOfZeroInNumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" ng-click="vm.edit(item.Element)">
+                            Sửa
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="col-md-4">
-            <label>Format date</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-        <div class="col-md-4">
-            <label>Number of zero in number</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-
-
     </div>
-    <div class="row" style="border:1px solid;padding:50px;margin-bottom:10px;">
-
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>PREFIX</label>
-                <input class="form-control" type="text" name="prefix" />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label>Format date</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-        <div class="col-md-4">
-            <label>Number of zero in number</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-
-
-    </div> <div class="row" style="border:1px solid;padding:50px;margin-bottom:10px;">
-
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>PREFIX</label>
-                <input class="form-control" type="text" name="prefix" />
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label>Format date</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-        <div class="col-md-4">
-            <label>Number of zero in number</label>
-            <input class="form-control" type="text" name="prefix" />
-        </div>
-
-
-    </div>
-           <div class="form-group">
-               <button class="btn btn-success">
-                   Luu
-               </button>
-           </div>
+ 
 </div>
+

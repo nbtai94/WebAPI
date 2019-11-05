@@ -185,6 +185,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\OdataAPI\CodeManagersController.cs" />
     <Compile Include="API\OdataAPI\CustomersController.cs" />
     <Compile Include="API\OdataAPI\ProductCategoriesController.cs" />
     <Compile Include="API\OdataAPI\ProductsController.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\WebAPIContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CodeManagerViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -283,6 +285,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Controller\CodeManager\codeManagerController.js" />
+    <Content Include="App\Controller\CodeManager\codeManagerFormController.js" />
     <Content Include="App\Controller\Customer\listCustomerController.js" />
     <Content Include="App\Controller\Customer\customerFormController.js" />
     <Content Include="App\Controller\Order\orderDetailController.js" />
@@ -3286,6 +3290,7 @@
     <Content Include="Content\Images\11\product.jpg" />
     <Content Include="Content\Images\111\product.jpg" />
     <Content Include="Content\Images\banner.jpg" />
+    <Content Include="Content\print-style.css" />
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -6284,6 +6289,7 @@
     <Content Include="Views\ProductCategory\CategoryForm.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\CodeManager\CodeManager.cshtml" />
+    <Content Include="Views\CodeManager\CodeManagerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

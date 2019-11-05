@@ -71,10 +71,11 @@ namespace WebAPI.API.OdataAPI
             category.NormalizeCategoryName = Helper.Helper.ConvertToNormalize(model.CategoryName);
             if (string.IsNullOrEmpty(model.CategoryCode))
             {
-                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
-                if (db.ProductCategories.Where(i => i.CategoryCode == category.CategoryCode).FirstOrDefault() != null)
+                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
+                var exist = db.ProductCategories.Where(i => i.CategoryCode == category.CategoryCode).FirstOrDefault();
+                if (exist != null)
                 {
-                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
                 }
             }
             else
@@ -111,6 +112,10 @@ namespace WebAPI.API.OdataAPI
         // POST: odata/ProductCategories
         public IHttpActionResult Post(ProductCategoryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var category = new ProductCategory()
             {
                 Id = model.Id,
@@ -120,10 +125,10 @@ namespace WebAPI.API.OdataAPI
             };
             if (string.IsNullOrEmpty(model.CategoryCode))
             {
-                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now,3);
+                category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now,2);
                 if (db.ProductCategories.Where(i => i.CategoryCode == category.CategoryCode).FirstOrDefault() != null)
                 {
-                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                    category.CategoryCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
                 }
             }
             else

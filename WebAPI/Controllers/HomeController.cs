@@ -19,5 +19,9 @@ namespace WebAPI.Controllers
         {
             return View();
         }
+        public ActionResult Print()
+        {
+            return View();
+        }
     }
 }

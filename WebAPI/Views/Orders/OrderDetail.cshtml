@@ -2,41 +2,34 @@
 @{
     Layout = null;
 }
-
-<style>
-    .customer {
-        padding: 20px;
-
-    }
-
-    .pd-20{
-        padding:20px!important;
-    }
-    .box{
-        border:1px solid black;
-        margin-bottom:5px;
-    }
-    .mgb-20{
-        margin-bottom:20px;
-    }
-</style>
-
+<link href="~/Content/print-style.css" rel="stylesheet" media="print"/>
 <div ng-controller="OrderDetailController as vm" class="container-fluid">
     <div class="breadcrumb">
         <h3 class="text-success ">Đơn hàng</h3>
     </div>
 
     <div class="pd-20">
-        <div class="mgb-20">
-         @*   <button class="btn btn-sm btn-info" ng-click="vm.print()"><i class="fas fa-print"></i> In</button>*@
+        <div class="mgb-20 button">
+            <button class="btn btn-sm btn-info" ng-click="vm.print()"><i class="fas fa-print"></i> In</button>
             <button type="button" ng-click="vm.back()" class="btn btn-sm btn-default">Quay lại</button>
         </div>
+        <div class="tmtsolution" >
+            <div>
+                <h3>TMT SOLUTION</h3>
+                <h4>Design by Tai</h4>
+                <p>btkt.1412@gmail.com</p>
+                <p>036 741 1412</p>
+            </div>
+            <hr />
+            <h3 class="text-center">Đơn đặt hàng</h3>
+            <h4 class="text-primary text-center">Mã đơn hàng: <span class="text-danger">{{vm.order.OrderCode}}</span></h4>
+            <h4 class="text-primary text-center">Ngày đặt hàng: <span class="text-danger">{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</span></h4>
 
-        <div class="box pd-20">
+        </div>
+        <div class="box pd-20 info">
             <h4>Thông tin đơn hàng:</h4>
             <h4 class="text-primary">Mã đơn hàng: <span class="text-danger">{{vm.order.OrderCode}}</span></h4>
             <h4 class="text-primary">Ngày đặt hàng: <span class="text-danger">{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</span></h4>
-
             <hr />
         </div>
         <div class="box pd-20">
@@ -44,12 +37,11 @@
             <h4 class="text-primary">Tên: <span class="text-danger">{{vm.order.CustomerName}}</span></h4>
             <h4 class="text-primary">Số điện thoại: <span class="text-danger">{{vm.order.CustomerPhone}}</span></h4>
             <h4 class="text-primary"> Địa chỉ :<span class="text-danger">{{vm.order.CustomerAddress}}</span></h4>
-
             <hr />
         </div>
         <div class="box pd-20">
             <h4>Thông tin sản phẩm:</h4>
-            <table class="table table-hover table-striped table-bordered">
+            <table class="table table-hover table-striped text-center">
                 <tr class="active">
                     <th>STT</th>
                     <th>Tên sản phẩm</th>
@@ -58,7 +50,7 @@
                     <th>Thành tiền</th>
                 </tr>
                 <tr ng-repeat="item in vm.order.Items">
-                    <td>{{$index+1}}</td>
+                    <td >{{$index+1}}</td>
                     <td>{{item.ProductName}}</td>
                     <td>{{item.Quantity}}</td>
                     <td>{{(item.Price|number)+" VNĐ"}}</td>

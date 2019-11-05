@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Data.OData;
+using System;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.OData;
 using System.Web.OData.Query;
-using System.Web.Http.OData.Routing;
-using WebAPI.ViewModels;
-using Microsoft.Data.OData;
 using WebAPI.Models;
-using System.Data.Entity;
-using WebAPI.Helper;
+using WebAPI.ViewModels;
 
 namespace WebAPI.API.OdataAPI
 {
-
     public class ProductsController : ODataController
     {
         private static ODataValidationSettings _validationSettings = new ODataValidationSettings();
-        WebAPIContext db = new WebAPIContext();
+        private WebAPIContext db = new WebAPIContext();
+
         // GET: odata/Products
         [EnableQuery]
         public IHttpActionResult Get(ODataQueryOptions<ProductViewModel> queryOptions)
         {
-
             try
             {
                 queryOptions.Validate(_validationSettings);
@@ -36,13 +29,12 @@ namespace WebAPI.API.OdataAPI
                     Id = s.Id,
                     Name = s.Name,
                     ProductCode = s.ProductCode,
-                    ProductCategoryId=s.ProductCategory.Id,
+                    ProductCategoryId = s.ProductCategory.Id,
                     ProductCategoryName = s.ProductCategory.CategoryName,
                     Price = s.Price,
                     Description = s.Description,
                     NormalizeName = s.NormalizeName
                 });
-
 
                 return Ok(result);
             }
@@ -50,13 +42,9 @@ namespace WebAPI.API.OdataAPI
             {
                 return BadRequest(ex.Message);
             }
-
-
         }
-
         // GET: odata/Products(5)
         [EnableQuery]
-
         public IHttpActionResult Get([FromODataUri] int key, ODataQueryOptions<ProductViewModel> queryOptions)
         {
             var result = db.Products
@@ -73,7 +61,6 @@ namespace WebAPI.API.OdataAPI
                 }).FirstOrDefault();
             return Ok(result);
         }
-
         // PUT: odata/Products(5)
         public IHttpActionResult Put([FromODataUri] int key, ProductViewModel model)
         {
@@ -86,7 +73,12 @@ namespace WebAPI.API.OdataAPI
             product.NormalizeName = Helper.Helper.ConvertToNormalize(model.Name);
             if (string.IsNullOrEmpty(model.ProductCode))
             {
-                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
+                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                var exist = db.ProductCategories.Where(i => i.CategoryCode == product.ProductCode).FirstOrDefault();
+                if (exist != null)
+                {
+                    product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                }
             }
             else
             {
@@ -107,7 +99,6 @@ namespace WebAPI.API.OdataAPI
                     }
                 }
             }
-
             try
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -119,11 +110,9 @@ namespace WebAPI.API.OdataAPI
             }
             return Ok();
         }
-
         // POST: odata/Products
         public IHttpActionResult Post(ProductViewModel model)
         {
-
             Product product = new Product
             {
                 CategoryId = model.ProductCategoryId,
@@ -135,7 +124,12 @@ namespace WebAPI.API.OdataAPI
             };
             if (string.IsNullOrEmpty(model.ProductCode))
             {
-                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 2);
+                product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                var exist = db.ProductCategories.Where(i => i.CategoryCode == product.ProductCode).FirstOrDefault();
+                if (exist != null)
+                {
+                    product.ProductCode = Helper.Helper.GenerateCode(DateTime.Now, 3);
+                }
             }
             else
             {
@@ -160,7 +154,6 @@ namespace WebAPI.API.OdataAPI
             }
             return Ok();
         }
-
         // DELETE: odata/Products(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
@@ -176,7 +169,5 @@ namespace WebAPI.API.OdataAPI
             }
             return Ok();
         }
-
-
     }
 }

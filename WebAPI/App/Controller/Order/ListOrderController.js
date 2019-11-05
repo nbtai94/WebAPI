@@ -88,7 +88,6 @@
         $http({
             method: "DELETE",
             url: "/odata/Orders" + "(" + item + ")",
-
         }).then(function (res) {
             vm.grid.dataSource.read();
             toastr["success"]("Đã xóa đơn hàng!")

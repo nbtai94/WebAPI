@@ -16,7 +16,6 @@ using System.Web.OData.Routing;
 using WebAPI.Helper;
 namespace WebAPI.API.OdataAPI
 {
-
     public class CustomersController : ODataController
     {
 
@@ -71,8 +70,6 @@ namespace WebAPI.API.OdataAPI
             }
 
         }
-
-
         // PUT: odata/Customers(5)
         public IHttpActionResult Put([FromODataUri] int key, CustomerViewModel model)
         {
@@ -86,7 +83,7 @@ namespace WebAPI.API.OdataAPI
             if (string.IsNullOrEmpty(model.CustomerCode))
             {
                 customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
-                if (db.Customers.Where(i => i.CustomerCode == customer.CustomerCode).FirstOrDefault()!=null)
+                if (db.Customers.Where(i => i.CustomerCode == customer.CustomerCode).FirstOrDefault() != null)
                 {
                     customer.CustomerCode = Helper.Helper.GenerateCode(DateTime.Now, 1);
                 }
@@ -110,7 +107,6 @@ namespace WebAPI.API.OdataAPI
                     }
                 }
             }
-
             try
             {
                 db.Entry(customer).State = EntityState.Modified;
@@ -122,11 +118,13 @@ namespace WebAPI.API.OdataAPI
             }
             return Ok();
         }
-
         // POST: odata/Customers
         public IHttpActionResult Post(CustomerViewModel model)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             var customer = new Customer()
             {
                 Id = model.Id,

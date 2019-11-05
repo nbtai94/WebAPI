@@ -13,5 +13,9 @@ namespace WebAPI.Controllers
         {
             return View();
         }
+        public ActionResult CodeManagerForm()
+        {
+            return View();
+        }
     }
 }

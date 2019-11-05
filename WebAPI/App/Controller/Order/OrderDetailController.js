@@ -6,8 +6,10 @@
     vm.order = {
     };
     vm.getOrderDetail = getOrderDetail;
-    getOrderDetail();
     vm.back = back;
+    vm.print = print;
+    getOrderDetail();
+
     function back() {
         history.back();
     }
@@ -17,10 +19,8 @@
             url: "/odata/Orders" + "(" + vm.id + ")" + "?$expand=Items",
         }).then(function (res) {
             vm.order = res.data;
-
         })
     };
-    vm.print = print;
     function print() {
         window.print();
     }

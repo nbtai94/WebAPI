@@ -4,7 +4,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/Home',  //Tên hiển thị trên URL
-            template: '<div ui-view></div>',    
+            template: '<div ui-view></div>',
             templateUrl: '/home/index',
 
         })
@@ -38,7 +38,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             //template: '<div ui-view></div>',
             templateUrl: '/Customer/ListCustomer'
         })
-        .state('form', { 
+        .state('form', {
             url: '/Form?id',
             //template: '<div ui-view></div>',
             templateUrl: '/Product/ProductForm'
@@ -65,7 +65,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('codemanager', {
             url: '/CodeManager',
-            templateUrl:'CodeManager/CodeManager'
+            templateUrl: 'CodeManager/CodeManager'
+        })
+        .state('codemanagerform', {
+            url: '/CodeManager?key=',
+            templateUrl: 'CodeManager/CodeManagerForm'
         })
 });
 

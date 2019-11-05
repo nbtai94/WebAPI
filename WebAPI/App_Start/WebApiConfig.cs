@@ -17,10 +17,12 @@ namespace WebAPI
             builder.EntitySet<ProductViewModel>("Products");
             builder.EntitySet<CustomerViewModel>("Customers");
             builder.EntitySet<OrderViewModel>("Orders");
+            builder.EntitySet<CodeManagerViewModel>("CodeManagers");
 
 
 
             config.Expand();
+
             config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
             //Enable QUERY ODATA
             config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);

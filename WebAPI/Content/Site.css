@@ -39,7 +39,9 @@ th {
     vertical-align: middle;
 }
 
-
+.sidebar{
+    padding: 20px;
+}
 
 .mgt-20 {
     margin-top: 20px;
@@ -61,4 +63,27 @@ th {
 .table th {
     white-space: nowrap;
     width: 1%;
+}
+
+.customer {
+    padding: 20px;
+}
+
+.pd-20 {
+    padding: 20px !important;
+}
+
+.box {
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.mgb-20 {
+    margin-bottom: 20px;
+}
+.tmtsolution {
+    display: none;
+}
+.error {
+    color: red;
 }

@@ -91,7 +91,7 @@
                 vm.grid.dataSource.read();
                 toastr["success"]("Xóa thành công!");
             }, function errorCallback() {
-                toastr["error"]("Không thể xóa khách đã đặt hàng!")
+                    toastr["error"]("Có biến rồi đại vương ơi! Không thể xóa khách đã đặt hàng!")
             });
         }
         //SEARCH
