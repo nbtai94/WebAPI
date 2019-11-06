@@ -35,7 +35,8 @@ namespace WebAPI.API.OdataAPI
                     DateFormat = s.DateFormat,
                     NumberOfZeroInNumber = s.NumberOfZeroInNumber,
                     CodeDefine = s.CodeDefine, 
-                    Element = s.Element
+                    Element = s.Element,
+                    ResetIndex = s.ResetIndex
                 });
                 return Ok(result);
             }
@@ -58,7 +59,8 @@ namespace WebAPI.API.OdataAPI
                     DateFormat = s.DateFormat,
                     NumberOfZeroInNumber = s.NumberOfZeroInNumber,
                     CodeDefine=s.CodeDefine,
-                    Element = s.Element
+                    Element = s.Element,
+                    ResetIndex = s.ResetIndex,
                 }).FirstOrDefault();
                 return Ok(result);
             }
@@ -78,6 +80,7 @@ namespace WebAPI.API.OdataAPI
             code.DateFormat = model.DateFormat;
             code.NumberOfZeroInNumber = model.NumberOfZeroInNumber;
             code.Prefix = model.Prefix;
+            code.ResetIndex = model.ResetIndex;
             try
             {
                 db.Entry(code).State = EntityState.Modified;

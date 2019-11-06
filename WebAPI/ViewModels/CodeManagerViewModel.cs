@@ -14,5 +14,7 @@ namespace WebAPI.ViewModels
         public int Index { get; set; }
         public string CodeDefine { get; set; }
         public int Element { get; set; }
+        public int ResetIndex { get; set; }
+
     }
 }

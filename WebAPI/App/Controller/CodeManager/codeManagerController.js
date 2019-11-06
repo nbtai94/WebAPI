@@ -8,6 +8,11 @@
         var vm = this;
         vm.codemanager = [{}];
         vm.edit = edit;
+        vm.dropdowns = [
+            { field: 1, Name: "Theo tháng (reset ngày 1 hàng tháng)" },
+            { field: 2, Name: "Theo năm (reset ngày 1/1 hàng năm)" }
+        ]
+   
         $http({
             method: "GET",
             url: "/odata/CodeManagers",

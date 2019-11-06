@@ -1,0 +1,74 @@
+﻿
+@using WebAPI.Models;
+@model Order
+<div class="container" style="padding:20px;">
+    <h1 class="text-center font-weight-bold" style="margin-bottom:50px;">Phiếu mua hàng</h1>
+    <div class="row">
+        <div class="col-md-8 header-left">
+            <h3 class="font-weight-bold" style="margin-top:0px">TMT SOLUTION</h3>
+            <p><span class="font-weight-bold">Địa chỉ:</span> 54/35 Diệp Minh Châu, Tân Phú, HCM</p>
+            <p><span class="font-weight-bold">ADMIN:</span>Mr Tài</p>
+            <p><span class="font-weight-bold">Điện thoại:</span> 036 741 1412</p>
+            <p><span class="font-weight-bold">Email:</span> btkt.1412@gmail.com</p>
+        </div>
+        <div class="col-md-4 header-right">
+            <p><span class="font-weight-bold">Ngày đặt hàng:</span> @Model.DateOrder.ToString("dd/MM/yyyy")</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 body-left">
+            <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Chi tiết đơn hàng</h4>
+            <div>
+                <table class="table table-hover table-striped text-center">
+                    <tr class="active">
+                        <th class="text-left">Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th  class="text-right">Đơn giá</th>
+                        <th  class="text-right">Thành tiền</th>
+                    </tr>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td class="text-left">@item.Product.Name</td>
+                            <td>@item.Quantity</td>
+                            <td class="text-right">@string.Format("{0:N0} VNĐ", item.Price)</td>
+                            <td class="text-right">@string.Format("{0:N0} VNĐ", (item.Price * item.Quantity))</td>
+                        </tr>
+                        ViewBag.Sum = string.Format("{0:N0} VNĐ", (item.Price * item.Quantity));
+                    }
+                </table>
+                <hr />
+                <h4 class="text-right">
+                    Tổng tiền: <span class="text-danger">
+                        @ViewBag.Sum
+                    </span>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-4 body-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin đơn hàng</h4>
+                    <div style="border:2px solid #d1d1d1; padding:20px;">
+                        <p><span class="font-weight-bold">Mã đơn hàng:</span> @Model.OrderCode</p>
+                        <p><span class="font-weight-bold">Ngày đặt hàng:</span> @Model.DateOrder.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin mua hàng</h4>
+                    <div style="border:2px solid #d1d1d1; padding:20px;">
+                        <p><span class="font-weight-bold">Tên khách hàng:</span> @Model.Customer.Name</p>
+                        <p><span class="font-weight-bold">Địa chỉ:</span> @Model.Customer.Address</p>
+                        <p><span class="font-weight-bold">Số điện thoại:</span> @Model.Customer.Phone</p>
+                        <p><span class="font-weight-bold">Email:</span> @Model.Customer.Email</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="margin-top:50px;">
+        <p class="text-center">Nếu cần hỗ trợ vui lòng liên hệ qua Hotline : 036 741 1412</p>
+    </footer>
+</div>

@@ -24,9 +24,9 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Mã sản phẩm </label>
             <div class="col-sm-4">
-                <input type="text"  ng-model="vm.product.ProductCode" name="code" id="code" class="input k-textbox" placeholder="Để trống để tự phát sinh mã..." value="{{product.Code}}" width="100" />
+                <input type="text" ng-model="vm.product.ProductCode" name="code" id="code" class="input k-textbox" placeholder="Để trống để tự phát sinh mã..." value="{{product.Code}}" width="100" />
             </div>
-          
+
 
         </div>
         <div class="form-group">
@@ -39,7 +39,7 @@
                         k-filter="'contains'"
                         k-auto-bind="true"
                         k-data-source="vm.categories"
-                        k-value-primitive ="true"
+                        k-value-primitive="true"
                         k-ng-model="vm.product.ProductCategoryId"
                         style="width: 35%"
                         required>
@@ -51,7 +51,7 @@
             <div class="col-sm-6">
                 <input kendo-numeric-text-box
                        type="number" name="price" id="price"
-                       k-ng-model="vm.product.Price" required min="0" style="width: 35%;" k-options="vm.price"  k-placeholder="'Giá sản phẩm...'"/> &nbsp;VNĐ
+                       k-ng-model="vm.product.Price" required min="0" style="width: 35%;" k-options="vm.price" k-placeholder="'Giá sản phẩm...'" /> &nbsp;VNĐ
             </div>
 
         </div>
@@ -60,7 +60,7 @@
             <label for="price" class="col-sm-2 control-label">Mô tả sản phẩm</label>
             <div class="col-sm-6">
                 @*<textarea id="editor" name="editor" ng-model="vm.product.Description"></textarea>*@
-                <textarea placeholder="Mô tả sản phẩm..."  id="description" class="form-control" rows="4" ng-model="vm.product.Description"></textarea>
+                <textarea placeholder="Mô tả sản phẩm..." id="description" class="form-control" rows="4" ng-model="vm.product.Description"></textarea>
             </div>
 
         </div>
@@ -68,15 +68,12 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary")">Lưu</button>
+                <button ng-click="vm.save()" type="button" class="btn btn-sm btn-primary" )">Lưu</button>
                 <button ng-click="vm.back()" type="button" class="btn btn-sm btn-danger">Trở lại</button>
             </div>
         </div>
     </form>
 </div>
-@*<script>
-        CKEDITOR.replace('editor');
-
-
-
-    </script>*@
+<script>
+    CKEDITOR.replace('editor');
+</script>

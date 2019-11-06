@@ -267,6 +267,14 @@
     <Compile Include="Migrations\201911020755219_F7.Designer.cs">
       <DependentUpon>201911020755219_F7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911060453223_F8.cs" />
+    <Compile Include="Migrations\201911060453223_F8.Designer.cs">
+      <DependentUpon>201911060453223_F8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911060715280_F9.cs" />
+    <Compile Include="Migrations\201911060715280_F9.Designer.cs">
+      <DependentUpon>201911060715280_F9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CodeManager.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -6290,6 +6298,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\CodeManager\CodeManager.cshtml" />
     <Content Include="Views\CodeManager\CodeManagerForm.cshtml" />
+    <Content Include="Views\Home\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6347,6 +6356,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911020755219_F7.resx">
       <DependentUpon>201911020755219_F7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911060453223_F8.resx">
+      <DependentUpon>201911060453223_F8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911060715280_F9.resx">
+      <DependentUpon>201911060715280_F9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

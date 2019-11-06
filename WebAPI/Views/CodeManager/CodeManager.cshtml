@@ -26,7 +26,23 @@
                             <label>Số lượng số 0 trong Index (nhập số) <span class="text-danger">(ví dụ 1,2,3...)</span></label>
                             <input readonly type="text" class="form-control" placeholder="First name" ng-model="item.NumberOfZeroInNumber">
                         </div>
+                        <div class="form-group">
+                            <label>Tùy chỉnh reset chỉ mục :(<span class="text-danger">chỉ số hiện tại sẽ trở về 1</span>)</label>
+                            <select id="customer" name="customer" kendo-combo-box
+                                    k-data-text-field="'Name'"
+                                    k-data-value-field="'field'"
+                                    k-filter="'contains'"
+                                    k-auto-bind="true"
+                                    k-data-source="vm.dropdowns"
+                                    ng-model="item.ResetIndex" disabled
+                                    style="width:100%"
+                                    ng-required="true">
+                            </select>
+                        </div>
                     </div>
+                    
+
+
                     <div class="form-group">
                         <button class="btn btn-success" ng-click="vm.edit(item.Element)">
                             Sửa
@@ -36,6 +52,6 @@
             </div>
         </div>
     </div>
- 
+
 </div>
 

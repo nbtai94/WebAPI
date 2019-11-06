@@ -54,7 +54,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: '/Orders/ListOrder'
         })
         .state('orderform', {
-            url: '/OrderInfo?id',
+            url: '/OrderEdit?id',
             //template: '<div ui-view></div>',
             templateUrl: '/Orders/OrderForm'
         })

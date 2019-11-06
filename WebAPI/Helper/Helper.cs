@@ -21,11 +21,26 @@ namespace WebAPI.Helper
             }
             return words;
         }
-
         public static string GenerateCode(DateTime date,int element)
         {
             WebAPIContext db = new WebAPIContext();
             CodeManager manager = db.CodeManagers.Where(e => e.Element == element).SingleOrDefault();
+            if (manager.ResetIndex == 1)
+            {
+                if (date.Day == 1)
+                {
+                    manager.Index = 1;
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                if (date.Day == 1&&date.Month==1)
+                {
+                    manager.Index = 1;
+                    db.SaveChanges();
+                }
+            }
             var zeroNumber = string.Empty;
             for (int i = 0; i < manager.NumberOfZeroInNumber - manager.Index.ToString().Length; i++)
             {
@@ -36,6 +51,6 @@ namespace WebAPI.Helper
             db.SaveChanges();
             return Code;
         }
-      
     }
 }
+
