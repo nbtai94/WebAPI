@@ -144,7 +144,7 @@ namespace WebAPI.API.OdataAPI
                 }
             }
             try
-            {
+            { 
                 db.Products.Add(product);
                 db.SaveChanges();
             }

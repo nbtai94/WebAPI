@@ -21,7 +21,7 @@ namespace WebAPI.Helper
             }
             return words;
         }
-        public static string GenerateCode(DateTime date,int element)
+        public static string GenerateCode(DateTime date, int element)
         {
             WebAPIContext db = new WebAPIContext();
             CodeManager manager = db.CodeManagers.Where(e => e.Element == element).SingleOrDefault();
@@ -35,7 +35,7 @@ namespace WebAPI.Helper
             }
             else
             {
-                if (date.Day == 1&&date.Month==1)
+                if (date.Day == 1 && date.Month == 1)
                 {
                     manager.Index = 1;
                     db.SaveChanges();

@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Cors;
-using System.Web.OData.Extensions;
 using System.Web.OData.Builder;
+using System.Web.OData.Extensions;
 using WebAPI.Models;
 using WebAPI.ViewModels;
 
@@ -11,18 +10,15 @@ namespace WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-         //ODATA
+            //ODATA
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<ProductCategoryViewModel>("ProductCategories");
             builder.EntitySet<ProductViewModel>("Products");
             builder.EntitySet<CustomerViewModel>("Customers");
             builder.EntitySet<OrderViewModel>("Orders");
             builder.EntitySet<CodeManagerViewModel>("CodeManagers");
-
-
-
+            builder.EntitySet<CodeManagerViewModel>("CodeManagerViewModels");
             config.Expand();
-
             config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
             //Enable QUERY ODATA
             config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);

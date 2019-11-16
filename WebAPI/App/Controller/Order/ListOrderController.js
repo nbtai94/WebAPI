@@ -117,7 +117,6 @@
     }
     
 
-
     //KENDO GRID config
     vm.mainGridOptions = {
         dataSource: {
@@ -190,7 +189,10 @@
                     template: "<a class='k-button  k-grid-settings' ng-click='vm.remove(dataItem.Id)' title='Xóa đơn hàng!'><span class='k-icon k-i-delete'></span></a>",
 
                 },
-            ], title: "&nbsp;", width: "150px"
+                {
+                    template: '<a href="Home/Print/{{dataItem.Id}}" class="btn btn-sm btn-info"><i class="fa fa-print"></i ></a >',
+                },
+            ], title: "&nbsp;", width: "200px"
         },
         ]
     };

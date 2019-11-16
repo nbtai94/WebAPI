@@ -56,6 +56,7 @@ namespace WebAPI.API.OdataAPI
 
                 OrderViewModel result = new OrderViewModel
                 {
+                    Id=order.Id,
                     CustomerId = order.Customer.Id,
                     CustomerAddress = order.Customer.Address,
                     CustomerName = order.Customer.Name,

@@ -1,13 +1,11 @@
 ﻿
-/*@media print{
+@media print{
     body {
         margin: 0;
         color: #000;
         background-color: #fff;
     }
-    .navbar{
-        display:none !important;
-    }
+
     .sidebar {
         display: none !important;
     }
@@ -17,13 +15,13 @@
     .breadcrumb {
         display: none !important;
     }
-    .button {
+    button {
         display: none !important;
     }
     .info{
         display:none !important;
     }
-    .tmtsolution{
+    .info{
         display:block !important;
     }
-}*/
+}

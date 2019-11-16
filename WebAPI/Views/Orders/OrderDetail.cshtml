@@ -3,74 +3,81 @@
     Layout = null;
 }
 <link href="~/Content/print-style.css" rel="stylesheet" media="print" />
-    <div ng-controller="OrderDetailController as vm" class="container-fluid">
-        <h1 class="text-center font-weight-bold" style="margin-bottom:50px;">Phiếu mua hàng</h1>
 
-        <div class="container" style="padding:20px;">
-            <div class="row">
-                <div class="col-md-8 header-left">
-                    <h3 class="font-weight-bold" style="margin-top:0px">TMT SOLUTIONS</h3>
-                    <p><span class="font-weight-bold">Địa chỉ:</span> 54/35 Diệp Minh Châu, Tân Phú, HCM</p>
-                    <p><span class="font-weight-bold">ADMIN:</span>Mr Tài</p>
-                    <p><span class="font-weight-bold">Điện thoại:</span> 036 741 1412</p>
-                    <p><span class="font-weight-bold">Email:</span> btkt.1412@gmail.com</p>
-                </div>
-                <div class="col-md-4 header-right">
-                    <p><span class="font-weight-bold">Ngày đặt hàng:</span> {{vm.order.DateOrder|date:"dd/MM/yyyy"}}</p>
-                    <span kendo-barcode
-                          k-type="'code128'"
-                          ng-model="vm.order.OrderCode"
-                          style="width: 200px;height:100px;"></span>
+<div ng-controller="OrderDetailController as vm" class="container-fluid">
+    <div class="container-fluid">
+        @*<button class="btn btn-sm btn-info" ng-click="vm.print()"><i class="fa fa-print"></i> In</button>*@
+        <button class="btn btn-sm btn-danger" ng-click="vm.back()"> Quay lại</button>
+        <a href="@Url.Action("Print","Home")/{{vm.order.Id}}" class="btn btn-sm btn-info"><i class="fa fa-print"></i> In</a>
+    </div>
+    <h1 class="text-center font-weight-bold" style="margin-bottom:50px;">Phiếu mua hàng</h1>
+
+
+    <div class="container-fluid" style="padding:20px;">
+        <div class="row info" style="display:none">
+            <div class="col-xs-8 header-left ">
+                <h3 class="font-weight-bold" style="margin-top:0px">TMT SOLUTION</h3>
+                <p><span class="font-weight-bold">Địa chỉ:</span> 54/35 Diệp Minh Châu, Tân Phú, HCM</p>
+                <p><span class="font-weight-bold">ADMIN:</span>Mr Tài</p>
+                <p><span class="font-weight-bold">Điện thoại:</span> 036 741 1412</p>
+                <p><span class="font-weight-bold">Email:</span> btkt.1412@gmail.com</p>
+            </div>
+            <div class="col-xs-4 header-right">
+                <p><span class="font-weight-bold">Ngày đặt hàng:</span> {{vm.order.DateOrder|date:"dd/MM/yyyy"}}</p>
+                <span kendo-barcode
+                      k-type="'code128'"
+                      ng-model="vm.order.OrderCode"
+                      style="width: 200px;height:100px;"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 body-left">
+                <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Chi tiết đơn hàng</h4>
+                <div>
+                    <table class="table table-hover table-striped text-center">
+                        <tr class="active">
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                        <tr ng-repeat="item in vm.order.Items">
+                            <td>{{item.ProductName}}</td>
+                            <td>{{item.Quantity}}</td>
+                            <td>{{(item.Price|number)+" VNĐ"}}</td>
+                            <td>{{(item.Price*item.Quantity|number)+" VNĐ"}}</td>
+                        </tr>
+                    </table>
+                    <hr />
+                    <h4 class="text-right">
+                        Tổng tiền: <span class="text-danger">
+                            {{(vm.order.TotalMoney|number)+" VNĐ"}}
+                        </span>
+                    </h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-8 body-left">
-                    <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Chi tiết đơn hàng</h4>
-                    <div>
-                        <table class="table table-hover table-striped text-center">
-                            <tr class="active">
-                                <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Đơn giá</th>
-                                <th>Thành tiền</th>
-                            </tr>
-                            <tr ng-repeat="item in vm.order.Items">
-                                <td>{{item.ProductName}}</td>
-                                <td>{{item.Quantity}}</td>
-                                <td>{{(item.Price|number)+" VNĐ"}}</td>
-                                <td>{{(item.Price*item.Quantity|number)+" VNĐ"}}</td>
-                            </tr>
-                        </table>
-                        <hr />
-                        <h4 class="text-right">
-                            Tổng tiền: <span class="text-danger">
-                                {{(vm.order.TotalMoney|number)+" VNĐ"}}
-                            </span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-4 body-right">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin đơn hàng</h4>
-                            <div style="border:2px solid #d1d1d1; padding:20px;">
-                                <p><span class="font-weight-bold">Mã đơn hàng:</span>{{vm.order.OrderCode}}</p>
-                                <p><span class="font-weight-bold">Ngày đặt hàng:</span>{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</p>
-                            </div>
+            <div class="col-xs-4 body-right">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin đơn hàng</h4>
+                        <div style="border:2px solid #d1d1d1; padding:20px;">
+                            <p><span class="font-weight-bold">Mã đơn hàng:</span>{{vm.order.OrderCode}}</p>
+                            <p><span class="font-weight-bold">Ngày đặt hàng:</span>{{vm.order.DateOrder|date:"dd/MM/yyyy"}}</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin mua hàng</h4>
-                            <div style="border:2px solid #d1d1d1; padding:20px;">
-                                <p><span class="font-weight-bold">Tên khách hàng:</span>{{vm.order.CustomerName}}</p>
-                                <p><span class="font-weight-bold">Địa chỉ:</span>{{vm.order.CustomerAddress}}</p>
-                                <p><span class="font-weight-bold">Số điện thoại:</span>{{vm.order.CustomerPhone}}</p>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 class="font-weight-bold" style="border-bottom:2px solid #57b8f8;line-height:30px;">Thông tin mua hàng</h4>
+                        <div style="border:2px solid #d1d1d1; padding:20px;">
+                            <p><span class="font-weight-bold">Tên khách hàng:</span>{{vm.order.CustomerName}}</p>
+                            <p><span class="font-weight-bold">Địa chỉ:</span>{{vm.order.CustomerAddress}}</p>
+                            <p><span class="font-weight-bold">Số điện thoại:</span>{{vm.order.CustomerPhone}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="text-center">Nếu cần hỗ trợ vui lòng liên hệ qua Hotline : 036 741 1412</p>
     </div>
+    <p class="text-center">Nếu cần hỗ trợ vui lòng liên hệ qua Hotline : 036 741 1412</p>
+</div>
